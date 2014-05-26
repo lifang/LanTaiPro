@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LTProductViewController">
+            <connections>
+                <outlet property="cancelOrderButton" destination="XNe-Za-VoD" id="6Jy-2W-qLP"/>
+                <outlet property="cardButton" destination="KzS-g5-uQ3" id="tZt-1R-2WR"/>
+                <outlet property="confirmOrderButton" destination="p7r-pZ-2Gg" id="HcJ-sY-lNl"/>
+                <outlet property="productButton" destination="eVb-0A-TDT" id="foz-Ju-vvb"/>
+                <outlet property="productTable" destination="uyq-qJ-L1q" id="9hg-Vw-vOw"/>
+                <outlet property="searchButton" destination="hcS-e3-VrI" id="zBg-vZ-bIh"/>
+                <outlet property="searchText" destination="Grt-3l-hK7" id="uI7-J0-cHT"/>
+                <outlet property="serviceButton" destination="nbh-c5-7GC" id="VF4-Nz-Y7o"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="688" height="1024"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eVb-0A-TDT" userLabel="productButton">
+                    <rect key="frame" x="60" y="40" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="product-product.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="product-active.png"/>
+                    <connections>
+                        <action selector="classificationButtonPressed:" destination="-1" eventType="touchUpInside" id="rGh-5D-IJ9"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KzS-g5-uQ3" userLabel="cardButton">
+                    <rect key="frame" x="140" y="40" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="product-card.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="product-active.png"/>
+                    <connections>
+                        <action selector="classificationButtonPressed:" destination="-1" eventType="touchUpInside" id="Wku-ma-Ttp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nbh-c5-7GC" userLabel="serviceButton">
+                    <rect key="frame" x="220" y="40" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="product-service.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="product-active.png"/>
+                    <connections>
+                        <action selector="classificationButtonPressed:" destination="-1" eventType="touchUpInside" id="Bmw-Pc-uAx"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="Grt-3l-hK7">
+                    <rect key="frame" x="316" y="50" width="247" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="FhI-hB-j22"/>
+                    </connections>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hcS-e3-VrI" userLabel="searchButton">
+                    <rect key="frame" x="580" y="50" width="48" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="search-normal.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="searchButtonPressed:" destination="-1" eventType="touchUpInside" id="lvh-E7-jcf"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uyq-qJ-L1q">
+                    <rect key="frame" x="60" y="132" width="568" height="723"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="C5p-7f-E4b"/>
+                        <outlet property="delegate" destination="-1" id="MyI-VW-1qu"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XNe-Za-VoD">
+                    <rect key="frame" x="512" y="901" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="cancelOrder.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelOrderButtonPressed:" destination="-1" eventType="touchUpInside" id="Ee0-fE-tvs"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p7r-pZ-2Gg">
+                    <rect key="frame" x="588" y="901" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="confirmorder.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="confirmOrderButtonPressed:" destination="-1" eventType="touchUpInside" id="UJ5-Bq-zpf"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cancelOrder.png" width="40" height="40"/>
+        <image name="confirmorder.png" width="40" height="40"/>
+        <image name="product-active.png" width="40" height="40"/>
+        <image name="product-card.png" width="60" height="60"/>
+        <image name="product-product.png" width="60" height="60"/>
+        <image name="product-service.png" width="60" height="60"/>
+        <image name="search-normal.png" width="40" height="40"/>
+    </resources>
+</document>

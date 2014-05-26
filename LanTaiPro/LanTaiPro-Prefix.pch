@@ -1,0 +1,51 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+
+///数据解析赋值给数据模型
+#import "NSObject+Motis.h"
+#import "AppDelegate.h"
+#import "LTInterfaceBase.h"
+#import "LTDataShare.h"
+#import "MBProgressHUD.h"
+#import "LTDB.h"
+#import "Utility.h"
+#import "UIImageView+WebCache.h"
+
+#endif
+
+///系统版本
+#define Platform [[[UIDevice currentDevice] systemVersion] floatValue]
+
+///输出
+#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define DLog(...)
+#endif
+
+#define kLogIn @"/api/orders/login"//登录
+
+
+
+#define kUserInfo @"/api/orders/user_and_order"//用户信息
+
+
+
+#define kAppointmentInfo @"/api/orders/reservation_list"//预约信息
+#define kAppointmentButton @"/api/orders/reservation_isaccept"//拒绝,受理,取消预约
+
+
+#define kProduct @"/api/orders/products_list"//查询

@@ -1,0 +1,112 @@
+{
+    "status": "1",
+    "cards": [
+              {
+              "description": " null",
+              "id": "1",
+              "img_url": "null",
+              "name": "优惠处置",
+              "types": "2",
+              "price":"21",
+              "isSelected":"0"
+              },
+              {
+              "description": " null",
+              "id": "1",
+              "img_url": "null",
+              "name": "优惠处置",
+              "types": "2",
+              "price":"22",
+              "isSelected":"0"
+              },
+              {
+              "description": " null",
+              "id": "1",
+              "img_url": "null",
+              "name": "优惠处置",
+              "types": "2",
+              "price":"23",
+              "isSelected":"0"
+              },
+              {
+              "description": " null",
+              "id": "1",
+              "img_url": "null",
+              "name": "优惠处置",
+              "types": "2",
+              "price":"24",
+              "isSelected":"0"
+              }
+              ],
+    "services": [
+                 {
+                 "description": "清洗",
+                 "id": "3",
+                 "img_url": "null",
+                 "introduction": "洗车",
+                 "name": "清洗服务3",
+                 "status": "true",
+                 "types": "null",
+                 "sale_price":"1000",
+                 "isSelected":"0"
+                 },
+                 {
+                 "description": "清洗",
+                 "id": "3",
+                 "img_url": "null",
+                 "introduction": "洗车",
+                 "name": "清洗服务3",
+                 "status": "true",
+                 "types": "null",
+                 "sale_price":"1000",
+                 "isSelected":"0"
+                 },
+                 {
+                 "description": "清洗",
+                 "id": "3",
+                 "img_url": "null",
+                 "introduction": "洗车",
+                 "name": "清洗服务3",
+                 "status": "true",
+                 "types": "null",
+                 "sale_price":"1000",
+                 "isSelected":"0"
+                 }
+                 ],
+    "products": [
+                 {
+                 "description": "清洗",
+                 "id": "3",
+                 "img_url": "null",
+                 "introduction": "洗车",
+                 "name": "清洗服务1",
+                 "status": "true",
+                 "types": "null",
+                 "sale_price":"1000",
+                 "isSelected":"0"
+                 },
+                 {
+                 "description": "清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗",
+                 "id": "3",
+                 "img_url": "null",
+                 "introduction": "洗车",
+                 "name": "清洗服务2",
+                 "status": "true",
+                 "types": "null",
+                 "sale_price":"1000",
+                 "isSelected":"0"
+                 },
+                 {
+                 "description": "清洗",
+                 "id": "3",
+                 "img_url": "null",
+                 "introduction": "洗车",
+                 "name": "清洗服务3",
+                 "status": "true",
+                 "types": "null",
+                 "sale_price":"1000",
+                 "isSelected":"0"
+                 }
+                 ],
+    "types": "2"
+}

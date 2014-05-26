@@ -1,0 +1,193 @@
+{
+    "notice": "返回预约列表",
+    "reservations_normal": [
+                            {
+                            "car_model_name": "奥迪",
+                            "created_at": "2014-05-21T14:21:29+08:00",
+                            "customer_id": "1",
+                            "email": "329487152@qq.com",
+                            "id": "1",
+                            "is_vip": "1",
+                            "mobilephone": "18306219610",
+                            "name": "chen",
+                            "num": "京A001",
+                            "products": [
+                                         {
+                                         "base_price": "0.0",
+                                         "id": "1",
+                                         "is_service": "true",
+                                         "name": "精致洗车",
+                                         "reservation_id": "1",
+                                         "sale_price": "100.0",
+                                         "types": "1"
+                                         },
+                                         {
+                                         "base_price": "0.0",
+                                         "id": "2",
+                                         "is_service": "true",
+                                         "name": "澜泰水晶蜡",
+                                         "reservation_id": "1",
+                                         "sale_price": "10.0",
+                                         "types": "1"
+                                         }
+                                         ],
+                            "res_time": "2014-05-19T14: 20: 49+08: 00",
+                            "status": "0"
+                            },
+                            {
+                            "car_model_name": "奥迪",
+                            "created_at": "2014-05-21T14:21:29+08:00",
+                            "customer_id": "1",
+                            "email": "329487152@qq.com",
+                            "id": "2",
+                            "is_vip": "0",
+                            "mobilephone": "18306219610",
+                            "name": "sssss",
+                            "num": "京A001",
+                            "products": [
+                                         {
+                                         "base_price": "0.0",
+                                         "id": "1",
+                                         "is_service": "true",
+                                         "name": "精致洗车",
+                                         "reservation_id": "1",
+                                         "sale_price": "100.0",
+                                         "types": "1"
+                                         }
+                                         ],
+                            "res_time": "2014-05-19T14: 20: 49+08: 00",
+                            "status": "0"
+                            },
+                            {
+                            "car_model_name": "奥迪",
+                            "created_at": "2014-05-21T14:21:29+08:00",
+                            "customer_id": "1",
+                            "email": "329487152@qq.com",
+                            "id": "2",
+                            "is_vip": "0",
+                            "mobilephone": "18306219610",
+                            "name": "sssss",
+                            "num": "京A001",
+                            "products": [
+                                         {
+                                         "base_price": "0.0",
+                                         "id": "1",
+                                         "is_service": "true",
+                                         "name": "精致洗车",
+                                         "reservation_id": "1",
+                                         "sale_price": "100.0",
+                                         "types": "1"
+                                         }
+                                         ],
+                            "res_time": "2014-05-19T14: 20: 49+08: 00",
+                            "status": "0"
+                            },
+                            {
+                            "car_model_name": "奥迪",
+                            "created_at": "2014-05-21T14:21:29+08:00",
+                            "customer_id": "1",
+                            "email": "329487152@qq.com",
+                            "id": "2",
+                            "is_vip": "0",
+                            "mobilephone": "18306219610",
+                            "name": "sssss",
+                            "num": "京A001",
+                            "products": [
+                                         {
+                                         "base_price": "0.0",
+                                         "id": "1",
+                                         "is_service": "true",
+                                         "name": "精致洗车",
+                                         "reservation_id": "1",
+                                         "sale_price": "100.0",
+                                         "types": "1"
+                                         }
+                                         ],
+                            "res_time": "2014-05-19T14: 20: 49+08: 00",
+                            "status": "0"
+                            },
+                            {
+                            "car_model_name": "奥迪",
+                            "created_at": "2014-05-21T14:21:29+08:00",
+                            "customer_id": "1",
+                            "email": "329487152@qq.com",
+                            "id": "2",
+                            "is_vip": "0",
+                            "mobilephone": "18306219610",
+                            "name": "sssss",
+                            "num": "京A001",
+                            "products": [
+                                         {
+                                         "base_price": "0.0",
+                                         "id": "1",
+                                         "is_service": "true",
+                                         "name": "精致洗车",
+                                         "reservation_id": "1",
+                                         "sale_price": "100.0",
+                                         "types": "1"
+                                         }
+                                         ],
+                            "res_time": "2014-05-19T14: 20: 49+08: 00",
+                            "status": "0"
+                            }
+                            ],
+    "reservations_accepted": [
+                              {
+                              "car_model_name": "奥迪",
+                              "created_at": "2014-05-21T16: 49: 53+08: 00",
+                              "customer_id": "1",
+                              "email": "329487152@qq.com",
+                              "id": "3",
+                              "is_vip": "1",
+                              "mobilephone": "18306219610",
+                              "name": "chen",
+                              "num": "沪A001",
+                              "products": [
+                                           {
+                                           "base_price": "0.0",
+                                           "id": "1",
+                                           "is_service": "true",
+                                           "name": "精致洗车",
+                                           "reservation_id": "2",
+                                           "sale_price": "100.0",
+                                           "types": "1"
+                                           },
+                                           {
+                                           "base_price": "10.0",
+                                           "id": "1",
+                                           "is_service": "true",
+                                           "name": "精致洗车2",
+                                           "reservation_id": "2",
+                                           "sale_price": "200.0",
+                                           "types": "1"
+                                           }
+                                           ],
+                              "res_time": "2014-06-07T16: 49: 47+08: 00",
+                              "status": "4"
+                              },
+                              {
+                              "car_model_name": "奥迪dsfsdf",
+                              "created_at": "2014-05-21T16: 49: 53+08: 00",
+                              "customer_id": "1",
+                              "email": "329487152@qq.com",
+                              "id": "4",
+                              "is_vip": "0",
+                              "mobilephone": "18306219610",
+                              "name": "李平",
+                              "num": "沪A00s1",
+                              "products": [
+                                           {
+                                           "base_price": "0.0",
+                                           "id": "1",
+                                           "is_service": "true",
+                                           "name": "精致洗车",
+                                           "reservation_id": "2",
+                                           "sale_price": "100.0",
+                                           "types": "1"
+                                           }
+                                           ],
+                              "res_time": "2014-06-07T16: 49: 47+08: 00",
+                              "status": "4"
+                              }
+                              ]
+}

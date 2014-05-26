@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LTMainViewLeftBar">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="Lob-qK-Lzt" customClass="LTLeftBarItem">
+                    <rect key="frame" x="0.0" y="20" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gvQ-NP-Wq8">
+                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="userInfo-normal.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="userInfo-active.png"/>
+                            <connections>
+                                <action selector="userInfoItemPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="BY6-jt-lWH"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="itemBtn" destination="gvQ-NP-Wq8" id="6Vu-MP-FBt"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" id="ZJE-lv-ggm" customClass="LTLeftBarItem">
+                    <rect key="frame" x="0.0" y="144" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6dN-78-n4l">
+                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="station-normal.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="station-active.png"/>
+                            <connections>
+                                <action selector="stationItemPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="rzA-Io-YDi"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="itemBtn" destination="6dN-78-n4l" id="NIA-N1-Nc8"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" id="Dcd-Az-Bpc" customClass="LTLeftBarItem">
+                    <rect key="frame" x="0.0" y="232" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="U9h-50-gnU">
+                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="serviceBilling-normal.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="serviceBilling-active.png"/>
+                            <connections>
+                                <action selector="serviceBillingItemPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="OZZ-eL-D2u"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="itemBtn" destination="U9h-50-gnU" id="u41-mB-LKf"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" id="jDI-v3-fsY" customClass="LTLeftBarItem">
+                    <rect key="frame" x="0.0" y="320" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vrn-cx-iPK">
+                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="product-normal.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="product-active.png"/>
+                            <connections>
+                                <action selector="productItemPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="bzI-Fr-x2y"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="itemBtn" destination="Vrn-cx-iPK" id="kuo-QA-jgd"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" id="T2R-3S-Etq" customClass="LTLeftBarItem">
+                    <rect key="frame" x="0.0" y="408" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="31o-aw-N2K">
+                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="search-normal.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="search-active.png"/>
+                            <connections>
+                                <action selector="searchItemPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="K5c-kG-kG1"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="itemBtn" destination="31o-aw-N2K" id="Qrv-Cs-9ZY"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" id="RnR-XX-PaY" customClass="LTLeftBarItem">
+                    <rect key="frame" x="0.0" y="496" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Vk-vS-b0k">
+                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="appointment-normal.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="appointment-active.png"/>
+                            <connections>
+                                <action selector="appointmentItemPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xat-nZ-a0i"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="itemBtn" destination="2Vk-vS-b0k" id="c5F-b9-Ype"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" id="7Sq-Jg-kp6" customClass="LTLeftBarItem">
+                    <rect key="frame" x="0.0" y="897" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lfp-58-5um">
+                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="setting-normal.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="setting-active.png"/>
+                            <connections>
+                                <action selector="settingItemPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="gGS-uS-2k9"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="itemBtn" destination="Lfp-58-5um" id="5ZA-Ha-Bf0"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="appointmentItem" destination="RnR-XX-PaY" id="Bmj-AB-6ZC"/>
+                <outlet property="productItem" destination="jDI-v3-fsY" id="GWb-Ox-Xvx"/>
+                <outlet property="searchItem" destination="T2R-3S-Etq" id="2aa-5B-bqv"/>
+                <outlet property="serviceBillingItem" destination="Dcd-Az-Bpc" id="bf8-Aa-O46"/>
+                <outlet property="settingItem" destination="7Sq-Jg-kp6" id="dES-SJ-Iwx"/>
+                <outlet property="stationItem" destination="ZJE-lv-ggm" id="SvH-t6-sfI"/>
+                <outlet property="userInfoItem" destination="Lob-qK-Lzt" id="Id7-xv-k6t"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="appointment-active.png" width="40" height="40"/>
+        <image name="appointment-normal.png" width="40" height="40"/>
+        <image name="product-active.png" width="40" height="40"/>
+        <image name="product-normal.png" width="40" height="40"/>
+        <image name="search-active.png" width="40" height="40"/>
+        <image name="search-normal.png" width="40" height="40"/>
+        <image name="serviceBilling-active.png" width="40" height="40"/>
+        <image name="serviceBilling-normal.png" width="40" height="40"/>
+        <image name="setting-active.png" width="40" height="40"/>
+        <image name="setting-normal.png" width="40" height="40"/>
+        <image name="station-active.png" width="40" height="40"/>
+        <image name="station-normal.png" width="40" height="40"/>
+        <image name="userInfo-active.png" width="40" height="40"/>
+        <image name="userInfo-normal.png" width="40" height="40"/>
+    </resources>
+</document>
