@@ -195,6 +195,23 @@
 		0ED8B677192612BB00C8A9A6 /* userLogOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED8B676192612BB00C8A9A6 /* userLogOut.png */; };
 		0EDFCA5F192329D900FA8493 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFCA5D192329D900FA8493 /* cancel.png */; };
 		0EDFCA60192329D900FA8493 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFCA5E192329D900FA8493 /* confirm.png */; };
+		AC9F525719358AC6009A4802 /* CarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F525619358AC6009A4802 /* CarView.m */; };
+		ACA31C861936D46000A570CB /* Car.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C851936D46000A570CB /* Car.png */; };
+		ACA31C8A1936DA4100A570CB /* carCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA31C881936DA4100A570CB /* carCell.m */; };
+		ACA31C8B1936DA4100A570CB /* carCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C891936DA4100A570CB /* carCell.xib */; };
+		ACA31C8D1936DACC00A570CB /* station-showLab.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C8C1936DACC00A570CB /* station-showLab.png */; };
+		ACA31C961936ECA400A570CB /* station-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C941936ECA400A570CB /* station-btn.png */; };
+		ACA31C971936ECA400A570CB /* station-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C951936ECA400A570CB /* station-clock.png */; };
+		ACA31C9B19370A4E00A570CB /* StaffsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA31C9919370A4E00A570CB /* StaffsCell.m */; };
+		ACA31C9C19370A4E00A570CB /* StaffsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C9A19370A4E00A570CB /* StaffsCell.xib */; };
+		ACA31C9E193715EC00A570CB /* station-activePerson.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C9D193715EC00A570CB /* station-activePerson.png */; };
+		ACA31CA01937161300A570CB /* station-person.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C9F1937161300A570CB /* station-person.png */; };
+		ACA31CB419373EF000A570CB /* station-staff.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31CB319373EF000A570CB /* station-staff.png */; };
+		ACA31CB81937416100A570CB /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA31CB61937416100A570CB /* OrderCell.m */; };
+		ACA31CB91937416100A570CB /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACA31CB71937416100A570CB /* OrderCell.xib */; };
+		ACA3C784193316D8003EB1C3 /* reddivider.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA3C783193316D8003EB1C3 /* reddivider.png */; };
+		ACA3C78919331881003EB1C3 /* station-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA3C78819331881003EB1C3 /* station-divider.png */; };
+		ACA3C78B193328CE003EB1C3 /* station-fastOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA3C78A193328CE003EB1C3 /* station-fastOrder.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -483,6 +500,27 @@
 		0ED8B676192612BB00C8A9A6 /* userLogOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userLogOut.png; sourceTree = "<group>"; };
 		0EDFCA5D192329D900FA8493 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		0EDFCA5E192329D900FA8493 /* confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirm.png; sourceTree = "<group>"; };
+		AC9F525519358AC6009A4802 /* CarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarView.h; sourceTree = "<group>"; };
+		AC9F525619358AC6009A4802 /* CarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarView.m; sourceTree = "<group>"; };
+		ACA31C851936D46000A570CB /* Car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Car.png; sourceTree = "<group>"; };
+		ACA31C871936DA4100A570CB /* carCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = carCell.h; sourceTree = "<group>"; };
+		ACA31C881936DA4100A570CB /* carCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = carCell.m; sourceTree = "<group>"; };
+		ACA31C891936DA4100A570CB /* carCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = carCell.xib; sourceTree = "<group>"; };
+		ACA31C8C1936DACC00A570CB /* station-showLab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-showLab.png"; sourceTree = "<group>"; };
+		ACA31C941936ECA400A570CB /* station-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-btn.png"; sourceTree = "<group>"; };
+		ACA31C951936ECA400A570CB /* station-clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-clock.png"; sourceTree = "<group>"; };
+		ACA31C9819370A4E00A570CB /* StaffsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffsCell.h; sourceTree = "<group>"; };
+		ACA31C9919370A4E00A570CB /* StaffsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffsCell.m; sourceTree = "<group>"; };
+		ACA31C9A19370A4E00A570CB /* StaffsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StaffsCell.xib; sourceTree = "<group>"; };
+		ACA31C9D193715EC00A570CB /* station-activePerson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-activePerson.png"; sourceTree = "<group>"; };
+		ACA31C9F1937161300A570CB /* station-person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-person.png"; sourceTree = "<group>"; };
+		ACA31CB319373EF000A570CB /* station-staff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-staff.png"; sourceTree = "<group>"; };
+		ACA31CB51937416100A570CB /* OrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCell.h; sourceTree = "<group>"; };
+		ACA31CB61937416100A570CB /* OrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCell.m; sourceTree = "<group>"; };
+		ACA31CB71937416100A570CB /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
+		ACA3C783193316D8003EB1C3 /* reddivider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reddivider.png; sourceTree = "<group>"; };
+		ACA3C78819331881003EB1C3 /* station-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-divider.png"; sourceTree = "<group>"; };
+		ACA3C78A193328CE003EB1C3 /* station-fastOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-fastOrder.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -759,9 +797,17 @@
 			isa = PBXGroup;
 			children = (
 				0E08667F1932D92100354FDC /* product-shop-selected.png */,
+				ACA31C8C1936DACC00A570CB /* station-showLab.png */,
+				ACA31C851936D46000A570CB /* Car.png */,
+				ACA3C78A193328CE003EB1C3 /* station-fastOrder.png */,
 				0E541EFA192DE5B800C88A72 /* product-number.png */,
+				ACA3C78819331881003EB1C3 /* station-divider.png */,
+				ACA31CB319373EF000A570CB /* station-staff.png */,
+				ACA31C941936ECA400A570CB /* station-btn.png */,
+				ACA31C951936ECA400A570CB /* station-clock.png */,
 				0E541EE6192DBF0C00C88A72 /* product-order.png */,
 				0E541ED5192DB4EF00C88A72 /* cancelOrder.png */,
+				ACA3C783193316D8003EB1C3 /* reddivider.png */,
 				0E541ED6192DB4EF00C88A72 /* confirmorder.png */,
 				0E541ED7192DB4EF00C88A72 /* product-back.png */,
 				0E541ED8192DB4EF00C88A72 /* product-shop.png */,
@@ -792,6 +838,7 @@
 				0ED8B6721926120900C8A9A6 /* userAdd.png */,
 				0ED8B66E1926118300C8A9A6 /* showUser.png */,
 				0E9BA77D1925F0BF00DCB1FA /* deletbutton.png */,
+				ACA31C9D193715EC00A570CB /* station-activePerson.png */,
 				0E2285891924A5D400BF3380 /* arrow_down.png */,
 				0E22858A1924A5D400BF3380 /* arrow_up.png */,
 				0E2285301924652C00BF3380 /* appointment-active.png */,
@@ -810,6 +857,7 @@
 				0E22853D1924652C00BF3380 /* userInfo-normal.png */,
 				0EDFCA5D192329D900FA8493 /* cancel.png */,
 				0EDFCA5E192329D900FA8493 /* confirm.png */,
+				ACA31C9F1937161300A570CB /* station-person.png */,
 				0EAF9E26192210AB00789A8D /* log-button.png */,
 				0EAF9E24192206F000789A8D /* log-background.jpg */,
 				0EAF9E1A192204C700789A8D /* LoginView_background.png */,
@@ -882,6 +930,7 @@
 		0E959B061918AE050098E2E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AC9F525419358A29009A4802 /* Station */,
 				0E541ECB192D8CCF00C88A72 /* Products */,
 				0E92EDCE192B2D300006839B /* AppointmentView */,
 				0E9BA76C1925A33C00DCB1FA /* UserInfoView */,
@@ -1049,6 +1098,24 @@
 			path = BlockAlert;
 			sourceTree = "<group>";
 		};
+		AC9F525419358A29009A4802 /* Station */ = {
+			isa = PBXGroup;
+			children = (
+				AC9F525519358AC6009A4802 /* CarView.h */,
+				AC9F525619358AC6009A4802 /* CarView.m */,
+				ACA31C871936DA4100A570CB /* carCell.h */,
+				ACA31C881936DA4100A570CB /* carCell.m */,
+				ACA31C891936DA4100A570CB /* carCell.xib */,
+				ACA31C9819370A4E00A570CB /* StaffsCell.h */,
+				ACA31C9919370A4E00A570CB /* StaffsCell.m */,
+				ACA31C9A19370A4E00A570CB /* StaffsCell.xib */,
+				ACA31CB51937416100A570CB /* OrderCell.h */,
+				ACA31CB61937416100A570CB /* OrderCell.m */,
+				ACA31CB71937416100A570CB /* OrderCell.xib */,
+			);
+			name = Station;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1141,7 +1208,9 @@
 				0E2285551924691800BF3380 /* LTStationViewController.xib in Resources */,
 				0E2285451924652C00BF3380 /* serviceBilling-normal.png in Resources */,
 				0E2285491924652C00BF3380 /* station-normal.png in Resources */,
+				ACA31C8B1936DA4100A570CB /* carCell.xib in Resources */,
 				0E541EEC192DC2BC00C88A72 /* ProductOrderCell.xib in Resources */,
+				ACA31C971936ECA400A570CB /* station-clock.png in Resources */,
 				0E9BA7761925A33C00DCB1FA /* UserNowOrderOpenCell.xib in Resources */,
 				0E959ADC1918AD5C0098E2E8 /* InfoPlist.strings in Resources */,
 				0E541F00192ED83200C88A72 /* LTImageViewController.xib in Resources */,
@@ -1151,6 +1220,7 @@
 				0EAF9E21192205B800789A8D /* log-name-normal.png in Resources */,
 				0E541ED0192D8CF200C88A72 /* ProductCell.xib in Resources */,
 				0E541EC5192D890300C88A72 /* product-product.png in Resources */,
+				ACA31C8D1936DACC00A570CB /* station-showLab.png in Resources */,
 				0E541F09192F2F0500C88A72 /* CustomView.xib in Resources */,
 				0EDFCA60192329D900FA8493 /* confirm.png in Resources */,
 				0E541EE0192DB4EF00C88A72 /* product-status-selected.png in Resources */,
@@ -1173,17 +1243,22 @@
 				0E541EC4192D890300C88A72 /* product-card.png in Resources */,
 				0E92EDC9192B1CB60006839B /* set3.png in Resources */,
 				0EAF9E19192203B100789A8D /* alert-window@2x.png in Resources */,
+				ACA31C961936ECA400A570CB /* station-btn.png in Resources */,
+				ACA3C78B193328CE003EB1C3 /* station-fastOrder.png in Resources */,
 				0EAF9E13192203B100789A8D /* alert-black-button@2x.png in Resources */,
 				0E541EDC192DB4EF00C88A72 /* confirmorder.png in Resources */,
+				ACA31C9E193715EC00A570CB /* station-activePerson.png in Resources */,
 				0E92EDD3192B2D5D0006839B /* AppointmentCell.xib in Resources */,
 				0EAF9E12192203B100789A8D /* alert-black-button.png in Resources */,
 				0EAF9E15192203B100789A8D /* alert-gray-button@2x.png in Resources */,
+				ACA31C9C19370A4E00A570CB /* StaffsCell.xib in Resources */,
 				0E541EE5192DBE9B00C88A72 /* LTOrderViewController.xib in Resources */,
 				0E541EC0192CC61300C88A72 /* appoint-normal.png in Resources */,
 				0ED8B66F1926118300C8A9A6 /* showUser.png in Resources */,
 				0EAF9E25192206F000789A8D /* log-background.jpg in Resources */,
 				0E541ECA192D89FA00C88A72 /* product-reduce.png in Resources */,
 				0E2285401924652C00BF3380 /* product-active.png in Resources */,
+				ACA31C861936D46000A570CB /* Car.png in Resources */,
 				0E92EDCC192B29F80006839B /* appointment.json in Resources */,
 				0E22858C1924A5D400BF3380 /* arrow_up.png in Resources */,
 				0E22853E1924652C00BF3380 /* appointment-active.png in Resources */,
@@ -1194,6 +1269,7 @@
 				0E541EC9192D89FA00C88A72 /* product-add.png in Resources */,
 				0EAF9E20192205B800789A8D /* log-name-active.png in Resources */,
 				0E22856E1924698900BF3380 /* LTAppointmentViewController.xib in Resources */,
+				ACA3C784193316D8003EB1C3 /* reddivider.png in Resources */,
 				0E9BA76A19259FC900DCB1FA /* LTLocalUserViewController.xib in Resources */,
 				0EAF9E23192205B800789A8D /* log-password-normal.png in Resources */,
 				0E541EBE192CC5F400C88A72 /* appoint-accept.png in Resources */,
@@ -1215,9 +1291,13 @@
 				0E22854A1924652C00BF3380 /* userInfo-active.png in Resources */,
 				0E541EA9192C417500C88A72 /* arrangeOrder.png in Resources */,
 				0E92EDC7192B1CB60006839B /* set1.png in Resources */,
+				ACA31CB419373EF000A570CB /* station-staff.png in Resources */,
+				ACA31CB91937416100A570CB /* OrderCell.xib in Resources */,
 				0ED8B677192612BB00C8A9A6 /* userLogOut.png in Resources */,
+				ACA31CA01937161300A570CB /* station-person.png in Resources */,
 				0E541ED4192DB16200C88A72 /* productInfo.json in Resources */,
 				0E22858B1924A5D400BF3380 /* arrow_down.png in Resources */,
+				ACA3C78919331881003EB1C3 /* station-divider.png in Resources */,
 				0E92EDDB192B54590006839B /* appoint-cell.png in Resources */,
 				0E92EDD8192B4CD10006839B /* appoint-confirm.png in Resources */,
 				0E2285421924652C00BF3380 /* search-active.png in Resources */,
@@ -1280,17 +1360,20 @@
 				0E541ECF192D8CF200C88A72 /* ProductCell.m in Sources */,
 				0E959BBD1918B8950098E2E8 /* UserModel.m in Sources */,
 				0E959B751918AFA70098E2E8 /* NSData+ImageContentType.m in Sources */,
+				AC9F525719358AC6009A4802 /* CarView.m in Sources */,
 				0E959B9A1918B2B80098E2E8 /* FMDatabaseQueue.m in Sources */,
 				0E959B7C1918AFA70098E2E8 /* SDWebImagePrefetcher.m in Sources */,
 				0E959BAA1918B3C70098E2E8 /* BrandModel.m in Sources */,
 				0E959B9C1918B2B80098E2E8 /* FMDatabase.m in Sources */,
 				0E959BB61918B7D10098E2E8 /* ServiceModel.m in Sources */,
 				0E959B791918AFA70098E2E8 /* SDWebImageDownloader.m in Sources */,
+				ACA31C8A1936DA4100A570CB /* carCell.m in Sources */,
 				0E959B091918AE7A0098E2E8 /* UIImageView+Addition.m in Sources */,
 				0E541EFF192ED83200C88A72 /* LTImageViewController.m in Sources */,
 				0E959B801918AFA70098E2E8 /* UIImage+WebP.m in Sources */,
 				0E22856D1924698900BF3380 /* LTAppointmentViewController.m in Sources */,
 				0E959BB71918B7D10098E2E8 /* StationModel.m in Sources */,
+				ACA31CB81937416100A570CB /* OrderCell.m in Sources */,
 				0E541EF9192DC8B900C88A72 /* CardModel.m in Sources */,
 				0E959B891918B1F50098E2E8 /* SVSegmentedControl.m in Sources */,
 				0E2285681924697700BF3380 /* LTSearchViewController.m in Sources */,
@@ -1305,6 +1388,7 @@
 				0E959B771918AFA70098E2E8 /* SDWebImageCompat.m in Sources */,
 				0EAF9E081921F76D00789A8D /* BlockBackground.m in Sources */,
 				0E541EF3192DC5E300C88A72 /* ProductModel.m in Sources */,
+				ACA31C9B19370A4E00A570CB /* StaffsCell.m in Sources */,
 				0E22858219249D3000BF3380 /* UserNowOrderProductModel.m in Sources */,
 				0E92EDD2192B2D5D0006839B /* AppointmentCell.m in Sources */,
 				0E541EF6192DC85100C88A72 /* ProductAndServiceModel.m in Sources */,
