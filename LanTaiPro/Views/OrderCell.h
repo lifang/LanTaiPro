@@ -14,4 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *numLab;//数量
 @property (strong, nonatomic) IBOutlet UILabel *subTotalLab;//小计
 
+//给cell赋值
+-(void)initOrderCell:(NSDictionary *)orderPro;
 @end

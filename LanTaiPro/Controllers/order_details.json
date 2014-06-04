@@ -1,0 +1,76 @@
+{
+    "buy_year":2008,
+    "car_brand_name":"\u5b9d\u9a6c",
+    "car_model_name":"X5",
+    "code":"111112222",
+    "cons_staff_id_1":1,
+    "cons_staff_id_2":2,
+    "distance":0,
+    "property":0,
+    "vin_code": null,
+    "group_name":null,
+    "id":1,
+    "mobilephone":"12345678910",
+    "name":"\u8001\u738b",
+    "num":"\u6d59A1000",
+    "price":"100.0",
+    "sex":1,
+    "store_id":4,
+    "station_id": 1,
+    "store_id": 1,
+    "order_pro":
+    [
+     {
+      "name":"\u6e05\u6d17\u670d\u52a1",
+      "price":"1.0",
+      "pro_num":1,
+      "total_price":"5.0"
+      },
+     {
+      "name":"\u7cbe\u81f4\u6d17\u8f66",
+      "price":"100.0",
+      "pro_num":1,
+     "total_price":"100.0"
+     }
+    ],
+    
+   "staff_store":[
+                 {
+                "id": 1,
+                "name": "陈龙"
+                },
+                 {
+                "id": 2,
+                "name": "孟凡玲",
+                },
+                {
+                  "id": 3,
+                  "name": "1111"
+                },
+                {
+                  "id": 4,
+                  "name": "3333",
+                },
+                {
+                  "id": 5,
+                  "name": "9999",
+                }
+                  ,
+                  {
+                  "id": 6,
+                  "name": "黄小雪",
+                  }
+                ],
+
+  "used_staffs":[
+                 {
+                "id": 1,
+                "name": "陈龙"
+                },
+                {
+                "id": 2,
+                "name": "孟凡玲"
+                }
+                ]
+
+}

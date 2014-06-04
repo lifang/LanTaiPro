@@ -7,6 +7,7 @@
 //
 
 #import "OrderCell.h"
+#import "DataService.h"
 
 @implementation OrderCell
 
@@ -37,5 +38,19 @@
     return self;
 }
 
+-(void)initOrderCell:(NSDictionary *)orderPro
+{
+    self.serviceLab.text = [NSString stringWithFormat:@"%@",[orderPro objectForKey:@"name"]];
+    self.unitPriceLab.text = [NSString stringWithFormat:@"%@",[orderPro objectForKey:@"price"]];
+    self.numLab.text = [NSString stringWithFormat:@"%@",[orderPro objectForKey:@"pro_num"]];
+    self.subTotalLab.text = [NSString stringWithFormat:@"%@",[orderPro objectForKey:@"total_price"]];
+    
+    int sub = [self.subTotalLab.text intValue];
+    int total = [[DataService sharedService].stationTotal intValue] + sub;
+    //总计
+    [[DataService sharedService].stationTotal setString:[NSString stringWithFormat:@"%d",total]];
+    //添加通知，显示总计
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"showTotal" object:self];
+}
 
 @end
