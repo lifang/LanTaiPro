@@ -82,11 +82,11 @@
             if (![[DataService sharedService].staffIdArr containsObject:self.personId1]) {
                 [[DataService sharedService].staffIdArr addObject:self.personId1];
                 //判断是不是为空
-                if ([[DataService sharedService].staffNameStr isEqualToString:@" "]) {
-                    [[DataService sharedService].staffNameStr setString:@""];
-                    [[DataService sharedService].staffNameStr appendString:self.personNameLab1.text];
-                }
-                else
+//                if ([[DataService sharedService].staffNameStr isEqualToString:@" "]) {
+//                    [[DataService sharedService].staffNameStr setString:@""];
+//                    [[DataService sharedService].staffNameStr appendString:self.personNameLab1.text];
+//                }
+//                else
                 {
                     [[DataService sharedService].staffNameStr appendString:[NSString stringWithFormat:@" %@",self.personNameLab1.text]];
                 }
@@ -96,11 +96,11 @@
         else{
             if (![[DataService sharedService].staffIdArr containsObject:self.personId2]) {
                 [[DataService sharedService].staffIdArr addObject:self.personId2];
-                if ([[DataService sharedService].staffNameStr isEqualToString:@" "]) {
-                    [[DataService sharedService].staffNameStr setString:@""];
-                    [[DataService sharedService].staffNameStr appendString:self.personNameLab2.text];
-                }
-                else
+//                if ([[DataService sharedService].staffNameStr isEqualToString:@" "]) {
+//                    [[DataService sharedService].staffNameStr setString:@""];
+//                    [[DataService sharedService].staffNameStr appendString:self.personNameLab2.text];
+//                }
+//                else
                 {
                     [[DataService sharedService].staffNameStr appendString:[NSString stringWithFormat:@" %@",self.personNameLab2.text]];
                 }
@@ -130,6 +130,8 @@
     }
     //添加通知，显示已选择的技师
      [[NSNotificationCenter defaultCenter] postNotificationName:@"showSeletedStaffs" object:self];
+    NSLog(@"-----%@",[DataService sharedService].staffIdArr);
+    NSLog(@"======= %@",[DataService sharedService].staffNameStr);
  }
 //[DataService sharedService].staffNameStr 去掉没打勾的技师的name
 -(void)deleteUnseletedStaffs:(NSString *)unSeletedStaffsStr

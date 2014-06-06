@@ -11,6 +11,10 @@
 #import "StaffsCell.h"
 #import "OrderCell.h"
 #import "StationOrderModel.h"
+#import "CarView.h"
+#import "CarModel.h"
+#import "StationModel.h"
+#import "FastToOrderModel.h"
 /**
  * 现场管理页面
  * 等待施工，正在施工，等待确认付款
@@ -43,14 +47,25 @@
 //技师
 @property (strong, nonatomic) IBOutlet UILabel *seletedStaffs;
 
-@property (strong, nonatomic)  UITableView *staffTable;
-@property (strong, nonatomic)  UITableView *orderTable;
-@property (strong, nonatomic) NSString *id1;
-@property (strong, nonatomic) NSString *id2;
-@property (assign, nonatomic) BOOL isFirst;
+@property (strong, nonatomic)  UITableView *staffTable;//技师table
+@property (strong, nonatomic)  UITableView *orderTable;//订单页面中订单table
+
+@property (assign, nonatomic) BOOL isFirst;//是否第一次加载orderInfoView
 @property (strong, nonatomic) IBOutlet UILabel *total;//总计
 
 @property (strong, nonatomic) StationOrderModel *stationOrderModel;
+
+@property (strong, nonatomic) NSMutableArray *waitCarsArr;//等待施工的车辆
+@property (strong, nonatomic) NSMutableArray *inConstructionCarsArr;//正在施工的车辆
+@property (strong, nonatomic) NSMutableArray *finshedCarsArr;//等待确认付款的车辆
+@property (strong, nonatomic) NSArray *stationServiceArr;//工位信息;
+
+@property (strong, nonatomic) CarView *carView;
+@property (strong, nonatomic) CarModel *carModel;
+@property (strong, nonatomic) StationModel *stationModel;
+@property (strong, nonatomic) FastToOrderModel *fastToOrderModel;
+@property (strong, nonatomic) NSArray *serviceArr;//快速下单服务Arr
+
 
 - (IBAction)tapLeftViewCover:(UIControl *)sender;//点击回到现场管理
 

@@ -7,6 +7,7 @@
 //
 
 #import "carCell.h"
+#import "CarModel.h"
 
 @implementation carCell
 
@@ -41,6 +42,35 @@
 -(void)initCellWithValue:(NSInteger)type
 {
     
+}
+
+//给cell中除工位以为的，赋值
+-(void)initCarCellWithCarModel:(CarModel *)carModel
+{
+    self.carImg.hidden = NO;
+    self.stationNameLab.hidden = NO;
+    self.carNumLab.hidden = NO;
+    self.checkOrderBtn.hidden = NO;
+    self.serviceNameLab.hidden = NO;
+    
+    NSString *startTime = carModel.serviceStartTime;
+    NSString *endrtTime = carModel.serviceEndTime;
+    self.serviceNameLab.text = carModel.serviceName;
+    self.carNumLab.text = carModel.carPlateNumber;
+    self.stationId = carModel.station_id;
+    self.orderId = carModel.order_id;
+}
+
+//给工位赋值
+-(void)initcarcellStation:(StationModel *)carModel
+{
+    self.carImg.hidden = YES;
+    self.stationTimeLab.hidden = YES;
+    self.carNumLab.hidden = YES;
+    self.checkOrderBtn.hidden = YES;
+    self.serviceNameLab.hidden = YES;
+    self.stationId = carModel.station_id;
+    self.stationNameLab.text = carModel.name;
 }
 
 @end

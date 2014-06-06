@@ -7,8 +7,15 @@
 //
 
 #import "LTStationViewController.h"
+#import "CarModel.h"
+
 #define SELETED 100
 #define UNSELETED 1000
+#define CARVIEWWIDTH 125
+#define CARVIEWHIGHT 30
+#define LEFTVIEW_WIDTH 538
+#define WAITSCROLLVIEW_HEIGHT 80
+#define FINSHSCROLLVIEW_HEIGHT 90
 
 @interface LTStationViewController ()
 
@@ -20,28 +27,39 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
     self.fastToOrderTable.backgroundColor = [UIColor clearColor];
     
     self.orderInfoView.frame = CGRectMake(-1024, 45, 588, 1003);
     self.leftViewCover.frame = CGRectMake(-1024, 45, 100, 1003);
+//    self.orderInfoView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"userBackground"]];
     self.isFirst = YES;
     
-    [DataService sharedService].staffIdArr = [[NSMutableArray alloc]init];
+    for (int i = 0; i < 3; i++) {
+           [self testConstruction:i];
+    }
+    [self setCarviewWithCarsArr:self.waitCarsArr andWorkOrderFlag:0];
+    [self setCarviewWithCarsArr:self.finshedCarsArr andWorkOrderFlag:2];
+    
+    [self.waitScrollView setShowsHorizontalScrollIndicator:NO];
+    [self.finshScrollView setShowsHorizontalScrollIndicator:NO];
+    
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSeletedStaffs:) name:@"showSeletedStaffs" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTotal:) name:@"showTotal" object:nil];
     
 }
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPat
@@ -55,12 +73,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
     if ([tableView isEqual:self.constructionTable]) {
-        return 3;
+        return self.stationServiceArr.count;
     }
-    if ([tableView isEqual:self.orderTable]) {
+    else if ([tableView isEqual:self.orderTable]) {
         return self.stationOrderModel.order_pro.count;
     }
-    if ([tableView isEqual:self.staffTable]) {
+    else if ([tableView isEqual:self.staffTable]) {
         if (self.stationOrderModel.staff_store.count%2 == 0) {
             return self.stationOrderModel.staff_store.count/2;
         }
@@ -68,6 +86,10 @@
         {
             return self.stationOrderModel.staff_store.count/2 + 1;
         }
+    }
+    else if([tableView isEqual:self.fastToOrderTable])
+    {
+        return self.serviceArr.count;
     }
     else
     {
@@ -83,7 +105,10 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
-        cell.textLabel.text = @"洗车服务";
+         NSDictionary *serviceDic = [[NSDictionary alloc]initWithDictionary:[self.serviceArr objectAtIndex:indexPath.row]];
+        [self.fastToOrderModel mts_setValuesForKeysWithDictionary:serviceDic];
+        
+        cell.textLabel.text = self.fastToOrderModel.serviceName;
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont fontWithName:@"HiraginoSansGB-W3" size:17];
         cell.textLabel.textColor = [UIColor whiteColor];
@@ -100,6 +125,16 @@
         }
         [tableView setSeparatorColor:[UIColor clearColor]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSDictionary *stationServiceDic = [[NSDictionary alloc]initWithDictionary:[self.stationServiceArr objectAtIndex:indexPath.row]];
+        [self.stationModel mts_setValuesForKeysWithDictionary:stationServiceDic];
+        [cell initcarcellStation:self.stationModel];
+       
+        if (indexPath.row < self.inConstructionCarsArr.count) {
+             NSDictionary *inConstructionCarsDic = [[NSDictionary alloc]initWithDictionary:[self.inConstructionCarsArr objectAtIndex:indexPath.row]];
+             [self.carModel mts_setValuesForKeysWithDictionary:inConstructionCarsDic];
+            [cell initCarCellWithCarModel:self.carModel];
+        }
         [cell.checkOrderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
         return  cell;
     }
@@ -173,11 +208,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    [self performSelector:@selector(deselect) withObject:nil afterDelay:0.5f];
+    if ([tableView isEqual:self.fastToOrderTable]) {
+         [self performSelector:@selector(deselect) withObject:nil afterDelay:0.5f];
+        //快速下单选择的服务Dic
+        NSDictionary *seletedServiceDic = [[NSDictionary alloc]initWithDictionary:[self.serviceArr objectAtIndex:indexPath.row]];
+        NSLog(@"----%@",seletedServiceDic);
+    }
+    if ([tableView isEqual:self.constructionTable]) {
+        if (self.inConstructionCarsArr.count >indexPath.row) {
+            [self checkOrder];
+        }
+    }
 }
 
 //点击正在施工中的按钮，查看订单详情
--(void)checkOrder:(UIButton *)sender
+-(void)checkOrder
 {
     [self testGetorderInfo];
     self.orderInfoView.frame = CGRectMake(100, 45, 588, 1003);
@@ -187,6 +232,7 @@
     [self initInfoView];
     [DataService sharedService].staffNameStr = [[NSMutableString alloc]init];
     [DataService sharedService].stationTotal = [[NSMutableString alloc]init];
+    [DataService sharedService].staffIdArr = [[NSMutableArray alloc]init];
 
     [self getUsedStaff:self.stationOrderModel.used_staffs];
     if (self.isFirst) {
@@ -224,12 +270,79 @@
 {
     self.total.text = [DataService sharedService].stationTotal;
 }
-
+//测试infoview
 - (void)testGetorderInfo{
     NSDictionary *aDic = [Utility initWithJSONFile:@"order_details"];
     [self.stationOrderModel mts_setValuesForKeysWithDictionary:aDic];
 
 }
+//测试现场管理主界面,给waitCarsArr，stationServiceArr，inConstructionCarsArr，finshedCarsArr赋值
+//workOrderFlag:0等待施工，1正在施工，2等待确认付款
+-(void)testConstruction:(NSInteger)workOrderFlag
+{
+    NSDictionary *constrDic = [Utility initWithJSONFile:@"construction"];
+    NSDictionary *workOrdersDic = [[NSDictionary alloc]initWithDictionary:[constrDic objectForKey:@"work_orders"]];
+    NSLog(@"%@",constrDic);
+    if (workOrderFlag == 0) {
+        self.waitCarsArr = [[NSMutableArray alloc]initWithArray:[workOrdersDic objectForKey:[NSString stringWithFormat:@"%d",workOrderFlag]]];
+        
+       self.stationServiceArr = [[NSArray alloc]initWithArray:[constrDic objectForKey:@"station_ids"]];
+        
+        self.serviceArr = [[NSArray alloc]initWithArray:[constrDic objectForKey:@"services"]];
+    }
+
+    else if(workOrderFlag == 1)
+    {
+        self.inConstructionCarsArr = [[NSMutableArray alloc]initWithArray:[workOrdersDic objectForKey:[NSString stringWithFormat:@"%d",workOrderFlag]]];
+    }
+    else
+    {
+        self.finshedCarsArr = [[NSMutableArray alloc]initWithArray:[workOrdersDic objectForKey:[NSString stringWithFormat:@"%d",workOrderFlag]]];
+    }
+}
+
+//对等待施工，等待确认付款的车辆赋值
+-(void)setCarviewWithCarsArr:(NSMutableArray *)carsArr andWorkOrderFlag:(NSInteger)workOrderFlag
+{
+    self.carModel = [[CarModel alloc]init];
+    if (workOrderFlag == 0) {
+        if (self.waitCarsArr.count > 4) {
+            self.waitScrollView.contentSize = CGSizeMake(self.waitCarsArr.count*CARVIEWWIDTH, WAITSCROLLVIEW_HEIGHT);
+        }
+        else
+        {
+            self.waitScrollView.contentSize = CGSizeMake(LEFTVIEW_WIDTH, WAITSCROLLVIEW_HEIGHT);
+        }
+        for (int i = 0; i<self.waitCarsArr.count; i++) {
+            NSDictionary *waitCarsDic = [[NSDictionary alloc]initWithDictionary:[self.waitCarsArr objectAtIndex:i]];
+            [self.carModel mts_setValuesForKeysWithDictionary:waitCarsDic];
+            self.carView = [[CarView alloc]init];
+            [self.carView initCarViewWithCarModel:self.carModel];
+            self.carView.frame = CGRectMake(10+i*CARVIEWWIDTH, 5, CARVIEWWIDTH, CARVIEWHIGHT);
+            [self.waitScrollView addSubview:self.carView];
+        }
+    }
+    if (workOrderFlag == 2) {
+            if (self.finshedCarsArr.count > 4) {
+                self.finshScrollView.contentSize = CGSizeMake(self.finshedCarsArr.count*CARVIEWWIDTH, FINSHSCROLLVIEW_HEIGHT);
+            }
+            else
+            {
+                self.finshScrollView.contentSize = CGSizeMake(LEFTVIEW_WIDTH, FINSHSCROLLVIEW_HEIGHT);
+            }
+
+        for (int i = 0; i < self.finshedCarsArr.count; i++) {
+            NSDictionary *finshedCarsDic = [[NSDictionary alloc]initWithDictionary:[self.finshedCarsArr objectAtIndex:i]];
+             [self.carModel mts_setValuesForKeysWithDictionary:finshedCarsDic];
+            self.carView = [[CarView alloc]init];
+            [self.carView initCarViewWithCarModel:self.carModel];
+            self.carView.frame = CGRectMake(10+i*CARVIEWWIDTH, 10, CARVIEWWIDTH, CARVIEWHIGHT);
+            [self.finshScrollView addSubview:self.carView];
+
+
+        }
+    }
+   }
 
 //消除cell选择痕迹
 - (void)deselect
@@ -240,7 +353,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)tapLeftViewCover:(UIControl *)sender {
@@ -254,6 +366,30 @@
         _stationOrderModel = [[StationOrderModel alloc]init];
     }
     return _stationOrderModel;
+}
+
+-(CarModel *)carModel
+{
+    if (!_carModel) {
+        _carModel = [[CarModel alloc]init];
+    }
+    return _carModel;
+}
+
+-(StationModel*)stationModel
+{
+    if (!_stationModel) {
+        _stationModel = [[StationModel alloc]init];
+    }
+    return _stationModel;
+}
+
+-(FastToOrderModel *)fastToOrderModel
+{
+    if (!_fastToOrderModel) {
+        _fastToOrderModel = [[FastToOrderModel alloc]init];
+    }
+    return _fastToOrderModel;
 }
 
 -(AppDelegate *)appDel {

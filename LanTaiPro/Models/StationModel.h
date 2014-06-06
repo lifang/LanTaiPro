@@ -18,5 +18,7 @@
 @property (nonatomic, strong) NSString *station_id;
 ///工位名称
 @property (nonatomic, strong) NSString *name;
+//工位支持的service
+@property (nonatomic, strong) NSArray *stationServiceArr;
 
 @end

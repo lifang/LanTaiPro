@@ -51,15 +51,12 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HF8-Hb-jvj">
-                        <rect key="frame" x="473" y="25" width="31" height="33"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" backgroundImage="station-btn.png">
-                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="station-clock.png" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-LX-EL6">
                         <rect key="frame" x="20" y="55" width="21" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="station-btn.png" translatesAutoresizingMaskIntoConstraints="NO" id="PRB-3p-zLx">
+                        <rect key="frame" x="473" y="25" width="31" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
@@ -67,7 +64,6 @@
             <connections>
                 <outlet property="carImg" destination="Uqy-dK-tCd" id="gmy-jb-veV"/>
                 <outlet property="carNumLab" destination="uvz-1u-SLM" id="ulP-pX-duG"/>
-                <outlet property="checkOrderBtn" destination="HF8-Hb-jvj" id="Uik-Po-V1T"/>
                 <outlet property="clockImg" destination="5oU-LX-EL6" id="li4-py-wDW"/>
                 <outlet property="serviceNameLab" destination="J7H-0m-ToR" id="yVc-VL-eI8"/>
                 <outlet property="stationNameLab" destination="x0Y-iD-DTS" id="j5f-4x-Je4"/>

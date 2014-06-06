@@ -7,6 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+/**
+ orderInfoView的数据模型，
+ 保存对应订单客户信息
+ */
 
 @interface StationOrderModel : NSObject
 ///订单对应门店id

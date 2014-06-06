@@ -9,6 +9,9 @@
 #import "ServiceModel.h"
 
 @implementation ServiceModel
-
+// + (NSDictionary *)mts_mapping
+//{
+//    return @{@"id":mts_key(st)}
+//}
 
 @end

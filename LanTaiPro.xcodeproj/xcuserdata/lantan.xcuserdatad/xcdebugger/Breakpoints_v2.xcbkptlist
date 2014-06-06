@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LanTaiPro/Controllers/LTStationViewController.m"
-            timestampString = "423558295.745417"
+            timestampString = "423720062.12463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "-checkOrder:"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "-checkOrder"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LanTaiPro/Controllers/LTStationViewController.m"
+            timestampString = "423720062.12463"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
+            landmarkName = "-testConstruction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

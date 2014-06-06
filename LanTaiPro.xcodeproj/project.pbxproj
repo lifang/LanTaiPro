@@ -213,8 +213,13 @@
 		ACA5D49B193EA9F500087F87 /* DataService.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA5D49A193EA9F500087F87 /* DataService.m */; };
 		ACA5D49E193EF8EA00087F87 /* station-activePerson.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA5D49C193EF8EA00087F87 /* station-activePerson.png */; };
 		ACA5D49F193EF8EA00087F87 /* station-person.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA5D49D193EF8EA00087F87 /* station-person.png */; };
+		ACA5D4A3193F1D9600087F87 /* fastOrderServiceList.json in Resources */ = {isa = PBXBuildFile; fileRef = ACA5D4A2193F1D9600087F87 /* fastOrderServiceList.json */; };
+		ACA62CA1194150B2004B1203 /* FastToOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62CA0194150B2004B1203 /* FastToOrderModel.m */; };
 		ACA69F8F193D9968000D6C1A /* StationOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA69F8E193D9968000D6C1A /* StationOrderModel.m */; };
 		ACA69F94193DA40D000D6C1A /* order_details.json in Resources */ = {isa = PBXBuildFile; fileRef = ACA69F93193DA40D000D6C1A /* order_details.json */; };
+		ACAB1B01194019BB00378612 /* construction.json in Resources */ = {isa = PBXBuildFile; fileRef = ACAB1B00194019BB00378612 /* construction.json */; };
+		ACAB1B0519405B0C00378612 /* FastToOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACAB1B0319405B0C00378612 /* FastToOrderCell.m */; };
+		ACAB1B0619405B0C00378612 /* FastToOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACAB1B0419405B0C00378612 /* FastToOrderCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -526,9 +531,16 @@
 		ACA5D49A193EA9F500087F87 /* DataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataService.m; sourceTree = "<group>"; };
 		ACA5D49C193EF8EA00087F87 /* station-activePerson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-activePerson.png"; sourceTree = "<group>"; };
 		ACA5D49D193EF8EA00087F87 /* station-person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-person.png"; sourceTree = "<group>"; };
+		ACA5D4A2193F1D9600087F87 /* fastOrderServiceList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fastOrderServiceList.json; sourceTree = "<group>"; };
+		ACA62C9F194150B2004B1203 /* FastToOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastToOrderModel.h; sourceTree = "<group>"; };
+		ACA62CA0194150B2004B1203 /* FastToOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastToOrderModel.m; sourceTree = "<group>"; };
 		ACA69F8D193D9968000D6C1A /* StationOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationOrderModel.h; sourceTree = "<group>"; };
 		ACA69F8E193D9968000D6C1A /* StationOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationOrderModel.m; sourceTree = "<group>"; };
 		ACA69F93193DA40D000D6C1A /* order_details.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = order_details.json; sourceTree = "<group>"; };
+		ACAB1B00194019BB00378612 /* construction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = construction.json; sourceTree = "<group>"; };
+		ACAB1B0219405B0C00378612 /* FastToOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastToOrderCell.h; sourceTree = "<group>"; };
+		ACAB1B0319405B0C00378612 /* FastToOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastToOrderCell.m; sourceTree = "<group>"; };
+		ACAB1B0419405B0C00378612 /* FastToOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FastToOrderCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -767,10 +779,12 @@
 				0E228522192459C100BF3380 /* LTMainViewController.h */,
 				ACA69F93193DA40D000D6C1A /* order_details.json */,
 				0E228523192459C100BF3380 /* LTMainViewController.m */,
+				ACA5D4A2193F1D9600087F87 /* fastOrderServiceList.json */,
 				0E228574192499DA00BF3380 /* userInfo.json */,
 				0E2285561924692D00BF3380 /* LTUserInfoViewController.h */,
 				0E2285571924692D00BF3380 /* LTUserInfoViewController.m */,
 				0E2285581924692D00BF3380 /* LTUserInfoViewController.xib */,
+				ACAB1B00194019BB00378612 /* construction.json */,
 				0E9BA76619259FC900DCB1FA /* LTLocalUserViewController.h */,
 				0E9BA76719259FC900DCB1FA /* LTLocalUserViewController.m */,
 				0E9BA76819259FC900DCB1FA /* LTLocalUserViewController.xib */,
@@ -1124,6 +1138,9 @@
 				ACA31CB51937416100A570CB /* OrderCell.h */,
 				ACA31CB61937416100A570CB /* OrderCell.m */,
 				ACA31CB71937416100A570CB /* OrderCell.xib */,
+				ACAB1B0219405B0C00378612 /* FastToOrderCell.h */,
+				ACAB1B0319405B0C00378612 /* FastToOrderCell.m */,
+				ACAB1B0419405B0C00378612 /* FastToOrderCell.xib */,
 			);
 			name = Station;
 			sourceTree = "<group>";
@@ -1133,6 +1150,8 @@
 			children = (
 				ACA69F8D193D9968000D6C1A /* StationOrderModel.h */,
 				ACA69F8E193D9968000D6C1A /* StationOrderModel.m */,
+				ACA62C9F194150B2004B1203 /* FastToOrderModel.h */,
+				ACA62CA0194150B2004B1203 /* FastToOrderModel.m */,
 			);
 			name = "现场管理";
 			sourceTree = "<group>";
@@ -1233,6 +1252,7 @@
 				ACA31C8B1936DA4100A570CB /* carCell.xib in Resources */,
 				0E541EEC192DC2BC00C88A72 /* ProductOrderCell.xib in Resources */,
 				ACA5D49E193EF8EA00087F87 /* station-activePerson.png in Resources */,
+				ACA5D4A3193F1D9600087F87 /* fastOrderServiceList.json in Resources */,
 				ACA31C971936ECA400A570CB /* station-clock.png in Resources */,
 				0E9BA7761925A33C00DCB1FA /* UserNowOrderOpenCell.xib in Resources */,
 				0E959ADC1918AD5C0098E2E8 /* InfoPlist.strings in Resources */,
@@ -1270,6 +1290,7 @@
 				ACA3C78B193328CE003EB1C3 /* station-fastOrder.png in Resources */,
 				0EAF9E13192203B100789A8D /* alert-black-button@2x.png in Resources */,
 				0E541EDC192DB4EF00C88A72 /* confirmorder.png in Resources */,
+				ACAB1B01194019BB00378612 /* construction.json in Resources */,
 				0E92EDD3192B2D5D0006839B /* AppointmentCell.xib in Resources */,
 				0EAF9E12192203B100789A8D /* alert-black-button.png in Resources */,
 				0EAF9E15192203B100789A8D /* alert-gray-button@2x.png in Resources */,
@@ -1289,6 +1310,7 @@
 				0EAF9E17192203B100789A8D /* alert-red-button@2x.png in Resources */,
 				0ED8B671192611CE00C8A9A6 /* userCancel.png in Resources */,
 				0E92EDAA192B02FB0006839B /* HiraginoSansGB-W6.otf in Resources */,
+				ACAB1B0619405B0C00378612 /* FastToOrderCell.xib in Resources */,
 				0E541EC9192D89FA00C88A72 /* product-add.png in Resources */,
 				0EAF9E20192205B800789A8D /* log-name-active.png in Resources */,
 				0E22856E1924698900BF3380 /* LTAppointmentViewController.xib in Resources */,
@@ -1376,6 +1398,7 @@
 				0E959B7D1918AFA70098E2E8 /* UIButton+WebCache.m in Sources */,
 				0E9BA7751925A33C00DCB1FA /* UserNowOrderOpenCell.m in Sources */,
 				0E959BB11918B7A70098E2E8 /* CarModel.m in Sources */,
+				ACA62CA1194150B2004B1203 /* FastToOrderModel.m in Sources */,
 				0E959BC31918BB920098E2E8 /* LTDB.m in Sources */,
 				0E959BBA1918B8710098E2E8 /* OrderModel.m in Sources */,
 				0E959BCA1918BE4C0098E2E8 /* LTInterfaceBase.m in Sources */,
@@ -1404,6 +1427,7 @@
 				0E959B711918AFA70098E2E8 /* MBProgressHUD.m in Sources */,
 				0E228525192459C100BF3380 /* LTMainViewController.m in Sources */,
 				0EAF9E091921F76D00789A8D /* BlockTextPromptAlertView.m in Sources */,
+				ACAB1B0519405B0C00378612 /* FastToOrderCell.m in Sources */,
 				0E541EBC192CB5F300C88A72 /* AppointButton.m in Sources */,
 				0E541EB6192C831A00C88A72 /* AppointModel.m in Sources */,
 				0E9BA76919259FC900DCB1FA /* LTLocalUserViewController.m in Sources */,

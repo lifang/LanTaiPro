@@ -20,7 +20,7 @@
                 <outlet property="customerSex" destination="iRn-n8-Rvc" id="sRg-bt-LWL"/>
                 <outlet property="fastToOrderTable" destination="hNC-UV-K0t" id="9uz-f0-P7K"/>
                 <outlet property="finshScrollView" destination="0hn-Yl-QAF" id="82V-5G-9hX"/>
-                <outlet property="leftViewCover" destination="FnH-0U-5WG" id="OWW-Iy-534"/>
+                <outlet property="leftViewCover" destination="boR-D3-WLy" id="fXh-DA-5r5"/>
                 <outlet property="orderCode" destination="v04-67-ezt" id="39e-fo-Yms"/>
                 <outlet property="orderInfoView" destination="xue-EZ-zM0" id="M8K-H3-IKn"/>
                 <outlet property="seletedStaffs" destination="36S-2K-p7O" id="7xb-VK-Rnj"/>
@@ -61,27 +61,26 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="WQB-HH-P58" userLabel="waitScrollView">
-                            <rect key="frame" x="0.0" y="19" width="538" height="120"/>
+                            <rect key="frame" x="0.0" y="32" width="538" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </scrollView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在施工" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lQ4-26-yrD">
-                            <rect key="frame" x="23" y="168" width="64" height="21"/>
+                            <rect key="frame" x="23" y="109" width="64" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="station-divider.png" id="1ur-Ml-5bW">
-                            <rect key="frame" x="0.0" y="196" width="538" height="1"/>
+                            <rect key="frame" x="0.0" y="136" width="538" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reddivider.png" id="ATJ-PJ-xLX">
-                            <rect key="frame" x="20" y="196" width="70" height="1"/>
+                            <rect key="frame" x="20" y="136" width="70" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Uhu-mZ-6ks" userLabel="constructionTableView">
-                            <rect key="frame" x="0.0" y="206" width="538" height="616"/>
+                            <rect key="frame" x="0.0" y="146" width="538" height="715"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="0ls-om-mfL"/>
                                 <outlet property="delegate" destination="-1" id="iCm-JS-LdN"/>
@@ -102,8 +101,18 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0hn-Yl-QAF" userLabel="finishScrollView">
-                            <rect key="frame" x="0.0" y="876" width="538" height="160"/>
+                            <rect key="frame" x="0.0" y="890" width="538" height="90"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" id="FnH-0U-5WG" userLabel="leftViewCover" customClass="UIControl">
+                                    <rect key="frame" x="0.0" y="-901" width="100" height="1003"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <action selector="tapLeftViewCover:" destination="-1" eventType="touchUpInside" id="0UG-Ce-E8N"/>
+                                    </connections>
+                                </view>
+                            </subviews>
                         </scrollView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -409,12 +418,12 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.13537795097969996" blue="0.27974269701086951" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" id="FnH-0U-5WG" userLabel="leftViewCover" customClass="UIControl">
+                <view contentMode="scaleToFill" id="boR-D3-WLy" userLabel="leftViewCover" customClass="UIControl">
                     <rect key="frame" x="5" y="45" width="100" height="1003"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <action selector="tapLeftViewCover:" destination="-1" eventType="touchUpInside" id="0UG-Ce-E8N"/>
+                        <action selector="tapLeftViewCover:" destination="-1" eventType="touchUpInside" id="9SP-YJ-j9n"/>
                     </connections>
                 </view>
             </subviews>

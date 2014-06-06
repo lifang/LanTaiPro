@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSString *workOrder_id;
 @property (nonatomic, strong) NSString *serviceStartTime;
 @property (nonatomic, strong) NSString *serviceEndTime;
-@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *work_status;
+@property (nonatomic, strong) NSString *cost_time;
 
 @end
