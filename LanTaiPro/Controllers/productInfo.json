@@ -8,7 +8,9 @@
               "name": "优惠处置",
               "types": "2",
               "price":"21",
-              "isSelected":"0"
+              "isSelected":"0",
+              "products":"0,0,0,0,00,0,0,0,0",
+              "brand":"1,1,1,1,1,1,1,1,1"
               },
               {
               "description": " null",
@@ -17,7 +19,9 @@
               "name": "优惠处置",
               "types": "2",
               "price":"22",
-              "isSelected":"0"
+              "isSelected":"0",
+              "products":"0,0,0,0,00,0,0,0,0",
+              "brand":"1,1,1,1,1,1,1,1,1"
               },
               {
               "description": " null",
@@ -26,7 +30,9 @@
               "name": "优惠处置",
               "types": "2",
               "price":"23",
-              "isSelected":"0"
+              "isSelected":"0",
+              "products":"0,0,0,0,00,0,0,0,0",
+              "brand":"1,1,1,1,1,1,1,1,1"
               },
               {
               "description": " null",
@@ -35,7 +41,9 @@
               "name": "优惠处置",
               "types": "2",
               "price":"24",
-              "isSelected":"0"
+              "isSelected":"0",
+              "products":"0,0,0,0,00,0,0,0,0",
+              "brand":"1,1,1,1,1,1,1,1,1"
               }
               ],
     "services": [
@@ -48,7 +56,8 @@
                  "status": "true",
                  "types": "null",
                  "sale_price":"1000",
-                 "isSelected":"0"
+                 "isSelected":"0",
+                 "several_times":"99"
                  },
                  {
                  "description": "清洗",
@@ -59,7 +68,8 @@
                  "status": "true",
                  "types": "null",
                  "sale_price":"1000",
-                 "isSelected":"0"
+                 "isSelected":"0",
+                 "several_times":"99"
                  },
                  {
                  "description": "清洗",
@@ -70,7 +80,8 @@
                  "status": "true",
                  "types": "null",
                  "sale_price":"1000",
-                 "isSelected":"0"
+                 "isSelected":"0",
+                 "several_times":"99"
                  }
                  ],
     "products": [
@@ -83,7 +94,8 @@
                  "status": "true",
                  "types": "null",
                  "sale_price":"1000",
-                 "isSelected":"0"
+                 "isSelected":"0",
+                 "several_times":"-1"
                  },
                  {
                  "description": "清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗清洗",
@@ -94,7 +106,8 @@
                  "status": "true",
                  "types": "null",
                  "sale_price":"1000",
-                 "isSelected":"0"
+                 "isSelected":"0",
+                 "several_times":"3"
                  },
                  {
                  "description": "清洗",
@@ -105,7 +118,8 @@
                  "status": "true",
                  "types": "null",
                  "sale_price":"1000",
-                 "isSelected":"0"
+                 "isSelected":"0",
+                 "several_times":"99"
                  }
                  ],
     "types": "2"

@@ -1,0 +1,238 @@
+{
+    "status": "1",
+    "customer": [
+                 {
+                 "birth": "2014-05-07T11:23:15+08:00",
+                 "brand_name": "ooxx2",
+                 "car_num_id": "1",
+                 "customer_id": "1",
+                 "distance": "0",
+                 "email": "329487152@qq.com",
+                 "mobilephone": "18306219610",
+                 "model_name": "156",
+                 "name": "chen",
+                 "num": "京A001",
+                 "sex": "1",
+                 "year": "1900",
+                 "property":"0",
+                 "company":"ooxx2",
+                 "vin":"ooxx",
+                 "old_order": [
+                               {
+                               "car_num_id": "1",
+                               "code": "23232",
+                               "created_at": "2014-05-20T11: 06: 23+08: 00",
+                               "id": "2sdfasfdsfklj",
+                               "name": "陈龙",
+                               "price": "111.0",
+                               "staff_name": "孟凡玲,陈龙",
+                               "products": [
+                                            {
+                                            "name": "清洗服务",
+                                            "price": "11",
+                                            "pro_num": "1",
+                                            "total_price": "11"
+                                            },
+                                            {
+                                            "name": "清洗服务",
+                                            "price": "100",
+                                            "pro_num": "1",
+                                            "total_price": "100"
+                                            }
+                                            ],
+                               "status": "1"
+                               },
+                               {
+                               "car_num_id": "1",
+                               "code": "11111122222",
+                               "created_at": "2014-05-16T16: 49: 33+08: 00",
+                               "id": "1",
+                               "name": "陈龙",
+                               "price": "100.0",
+                               "staff_name": "孟凡玲,陈龙",
+                               "products": [
+                                            {
+                                            "name": "清洗服务",
+                                            "price": "0.0",
+                                            "pro_num": "1",
+                                            "total_price": "0.0"
+                                            },
+                                            {
+                                            "name": "清洗服务",
+                                            "price": "0.0",
+                                            "pro_num": "1",
+                                            "total_price": "0.0"
+                                            }
+                                            ],
+                               "status": "1"
+                               }
+                               ],
+                 "working_order": [
+                                   {
+                                   "car_num_id": "1",
+                                   "code": "23232",
+                                   "created_at": "2014-05-20T11: 06: 23+08: 00",
+                                   "id": "2",
+                                   "name": "陈龙",
+                                   "price": "111.0",
+                                   "staff_name": "孟凡玲,陈龙",
+                                   "products": [
+                                                {
+                                                "name": "清洗服务",
+                                                "price": "111",
+                                                "pro_num": "1",
+                                                "total_price": "111"
+                                                }
+                                                ],
+                                   "status": "1"
+                                   },
+                                   {
+                                   "car_num_id": "1",
+                                   "code": "11111122222",
+                                   "created_at": "2014-05-16T16: 49: 33+08: 00",
+                                   "id": "1",
+                                   "name": "陈龙",
+                                   "price": "100.0",
+                                   "staff_name": "孟凡玲,陈龙",
+                                   "products": [
+                                                {
+                                                "name": "清洗服务",
+                                                "price": "100",
+                                                "pro_num": "1",
+                                                "total_price": "100"
+                                                },
+                                                {
+                                                "name": "清洗服务",
+                                                "price": "0.0",
+                                                "pro_num": "1",
+                                                "total_price": "0.0"
+                                                }
+                                                ],
+                                   "status": "1"
+                                   }
+                                   ]
+                 
+                 },
+                 {
+                 "birth": "2014-05-07T11: 23: 15+08: 00",
+                 "brand_name": "A6",
+                 "car_num_id": "2",
+                 "customer_id": "1",
+                 "distance": "0",
+                 "email": "329487152@qq.com",
+                 "mobilephone": "18306219610",
+                 "model_name": "奥迪",
+                 "name": "chen",
+                 "num": "沪A001",
+                 "property":"1",
+                 "company":"ooxx",
+                 "vin":"ooxx",
+                 "old_order": [],
+                 "sex": "1",
+                 "working_order": [],
+                 "year": "2000"
+                 }
+                 ],
+    "customer_cards": [
+                       {
+                       "id": "3",
+                       "name": "优惠处置",
+                       "ended_at": "2014-06-07T13: 19: 58+08: 00",
+                       "products": [
+                                    {
+                                    "id": "1",
+                                    "name": "清洗服务",
+                                    "product_num": "10",
+                                    "unused_num": "9"
+                                    },
+                                    {
+                                    "id": "2",
+                                    "name": "打蜡服务",
+                                    "product_num": "10",
+                                    "unused_num": "8"
+                                    }
+                                    ]
+                       },
+                       {
+                       "id": "4",
+                       "name": "优惠处置4",
+                       "ended_at": "2014-06-07T13: 19: 58+08: 00",
+                       "products": [
+                                    {
+                                    "id": "2",
+                                    "name": "清洗服务2",
+                                    "product_num": "10",
+                                    "unused_num": "5"
+                                    },
+                                    {
+                                    "id": "5",
+                                    "name": "打蜡服务5",
+                                    "product_num": "10",
+                                    "unused_num": "8"
+                                    }
+                                    ]
+                       }
+                       ],
+    "discount_cards": [
+                       {
+                       "apply_content": "1,2",
+                       "description": "1",
+                       "date_month":"1",
+                       "discount": "8.0",
+                       "id": "2",
+                       "ended": "2014-06-07",
+                       "name": "ka",
+                       "products": [
+                                    {
+                                    "id": "1",
+                                    "name": "清洗服务",
+                                    "sale_price": "100.0"
+                                    },
+                                    {
+                                    "id": "2",
+                                    "name": "打蜡服务",
+                                    "sale_price": "200.0"
+                                    }
+                                    ],
+                       "totle_price": "0.0"
+                       }
+                       ],
+    "stored_cards": [
+                     {
+                     "apply_content": "1,2",
+                     "last_time": "2014-05-22",
+                     "description": "1",
+                     "id": "1",
+                     "name": "ka2",
+                     "products": [
+                                  {
+                                  "id": "1",
+                                  "name": "清洗服务",
+                                  "sale_price": "100.0"
+                                  },
+                                  {
+                                  "id": "2",
+                                  "name": "打蜡服务",
+                                  "sale_price": "200.0"
+                                  }
+                                  ],
+                     "records": [
+                                 {
+                                 "created_at": "2014-05-22T15: 00: 07+08: 00",
+                                 "customer_card_id": "1",
+                                 "left_price": "90",
+                                 "types": "1",
+                                 "use_price": "10"
+                                 },
+                                 {
+                                 "created_at": "2014-05-22T15: 00: 37+08: 00",
+                                 "customer_card_id": "1",
+                                 "left_price": "80",
+                                 "types": "1",
+                                 "use_price": "10"
+                                 }
+                                 ],
+                     "totle_price": "100.0"
+                     }
+                     ]
+}

@@ -14,6 +14,7 @@
  */
 
 #import "UserModel.h"
+#import "CarModel.h"
 
 @interface LTDB : LTDataBase
 
@@ -24,4 +25,9 @@
 //删除用户信息
 - (BOOL)deleteLocalUser:(UserModel *)user;
 
+
+//保存车辆品牌、模型信息
+-(void)saveCarModelToLocal:(CarModel *)carModel;
+//获取本地车品牌、型号
+-(CarModel *)getLocalCarModel;
 @end

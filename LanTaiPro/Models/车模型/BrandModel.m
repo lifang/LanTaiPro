@@ -13,10 +13,10 @@
 + (NSDictionary *)mts_mapping
 {
     return  @{
-              @"specified_time": mts_key(capital_id),
-              @"questions": mts_key(name),
-              @"questions": mts_key(brand_id),
-              @"questions": mts_key(modelList)
+              @"capital_id": mts_key(capital_id),
+              @"name": mts_key(name),
+              @"id": mts_key(brand_id),
+              @"models": mts_key(modelList)
               };
 }
 

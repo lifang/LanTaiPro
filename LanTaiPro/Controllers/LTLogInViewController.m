@@ -10,6 +10,8 @@
 #import "BlockTextPromptAlertView.h"
 #import "UserModel.h"
 
+#import "CarModel.h"
+
 @interface LTLogInViewController ()
 
 @end
@@ -33,10 +35,22 @@
     }
     return _appDel;
 }
+#pragma mark - 车模型
+-(void)getCarModelData
+{
+    NSDictionary *aDic = [Utility initWithJSONFile:@"carInfo"];
+    CarModel *carModel = [[CarModel alloc]init];
+    [carModel mts_setValuesForKeysWithDictionary:aDic];
+    [LTDataShare sharedService].carModel = carModel;
+    
+    LTDB *local = [[LTDB alloc]init];
+    [local saveCarModelToLocal:carModel];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self getCarModelData];
     //界面
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"log-background.jpg"]];
     self.LoginView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"LoginView_background"]];
@@ -101,7 +115,7 @@
     }
     
     if (msgStr.length > 0){
-        [Utility errorAlert:msgStr];
+        [Utility errorAlert:msgStr dismiss:YES];
         return FALSE;
     }
     return TRUE;
@@ -119,7 +133,7 @@
         [params setObject:_passWordText.text forKey:@"user_password"];
         
         if (self.appDel.isReachable==NO) {
-            [Utility errorAlert:@"请检查网络"];
+            [Utility errorAlert:@"请检查网络" dismiss:NO];
         }else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [LTInterfaceBase request:params requestUrl:urlString method:@"POST" completeBlock:^(NSDictionary *dictionary){
@@ -151,7 +165,7 @@
             }errorBlock:^(NSString *notice){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    [Utility errorAlert:notice];
+                    [Utility errorAlert:notice dismiss:YES];
                 });
             }];
         }

@@ -13,9 +13,9 @@
 + (NSDictionary *)mts_mapping
 {
     return  @{
-              @"questions": mts_key(name),
-              @"questions": mts_key(brand_id),
-              @"questions": mts_key(model_id)
+              @"name": mts_key(name),
+              @"car_brand_id": mts_key(brand_id),
+              @"id": mts_key(model_id)
               };
 }
 

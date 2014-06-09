@@ -1,0 +1,66 @@
+{
+    "capital_arr":[
+                   {
+                   "brands":[
+                             {
+                             "capital_id":"1",
+                             "id":"1",
+                             "models":[
+                                       {
+                                       "car_brand_id":"1",
+                                       "id":"957",
+                                       "name":"156"
+                                       },
+                                       {
+                                       "car_brand_id":"1",
+                                       "id":"960",
+                                       "name":"ooxx"
+                                       }
+                                       ],
+                             "name":"ooxx"
+                             },
+                             {
+                             "capital_id":"1",
+                             "id":"2",
+                             "models":[
+                                       {
+                                       "car_brand_id":"2",
+                                       "id":"5",
+                                       "name":"C63 AMG"
+                                       }
+                                       ],
+                             "name":"ooxx1"
+                             }
+                             ],
+                   "id":"1",
+                   "name":"A"
+                   },
+                   {
+                   "brands":[
+                             {
+                             "capital_id":"2",
+                             "id":"1",
+                             "models":[
+                             
+                                       ],
+                             "name":"ooxx3"
+                             },
+                             {
+                             "capital_id":"2",
+                             "id":"2",
+                             "models":[
+                                       {
+                                       "car_brand_id":"2",
+                                       "id":"5",
+                                       "name":"C63 AMG"
+                                       }
+                                       ],
+                             "name":"ooxx2"
+                             }
+                             ],
+                   "id":"2",
+                   "name":"B"
+                   }
+                   ]
+    
+}

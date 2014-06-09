@@ -12,6 +12,7 @@
 #import "SVPullToRefresh.h"
 #import <objc/runtime.h>
 
+#import "UIViewController+MJPopupViewController.h"
 
 static const char productkey;
 static const char serivicekey;
@@ -20,9 +21,6 @@ static const char cardkey;
 static const char productselectedkey;
 static const char seriviceselectedkey;
 static const char cardselectedkey;
-
-
-static NSIndexPath *selectedIndex = nil;
 
 @implementation LTProductViewController
 
@@ -99,6 +97,7 @@ static NSIndexPath *selectedIndex = nil;
     self.serviceButton.selected = NO;
     self.cardButton.selected = NO;
     
+    self.mainViewControl = (LTMainViewController *)self.parentViewController;
 //    //下拉刷新
 //    __block LTProductViewController *productViewControl = self;
 //    __block UITableView *table = self.productTable;
@@ -113,37 +112,35 @@ static NSIndexPath *selectedIndex = nil;
 -(void)shoppingNotification:(NSNotification *)notification
 {
     NSDictionary *aDic = [notification object];
-    
     int isSelected = [[aDic objectForKey:@"isSelected"]integerValue];
     int index = [[aDic objectForKey:@"index"]integerValue];
-    NSString *tagString = [aDic objectForKey:@"index"];
+    
     if (isSelected==0) {
-        [self.selectedArray removeObject:tagString];
-        
         if (self.classifyType==0) {
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[index];
             psModel.p_selected = @"0";
+            psModel.p_count -= 1;
             [self.productModel.productList replaceObjectAtIndex:index withObject:psModel];
         }else if (self.classifyType==1){
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[index];
             psModel.p_selected = @"0";
+            psModel.p_count -= 1;
             [self.productModel.serviceList replaceObjectAtIndex:index withObject:psModel];
         }else{
             CardModel *cardModel = (CardModel *)self.productModel.cardList[index];
             cardModel.c_selected = @"0";
             [self.productModel.cardList replaceObjectAtIndex:index withObject:cardModel];
         }
-        
     }else {
-        [self.selectedArray addObject:tagString];
-        
         if (self.classifyType==0) {
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[index];
             psModel.p_selected = @"1";
+            psModel.p_count += 1;
             [self.productModel.productList replaceObjectAtIndex:index withObject:psModel];
         }else if (self.classifyType==1){
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[index];
             psModel.p_selected = @"1";
+            psModel.p_count += 1;
             [self.productModel.serviceList replaceObjectAtIndex:index withObject:psModel];
         }else{
             CardModel *cardModel = (CardModel *)self.productModel.cardList[index];
@@ -238,17 +235,17 @@ static NSIndexPath *selectedIndex = nil;
     }else {
         self.cancelOrderButton.hidden=YES;
         self.confirmOrderButton.hidden=YES;
-        [Utility errorAlert:@"暂未查找到您需要的产品"];
+        [Utility errorAlert:@"暂未查找到您需要的产品" dismiss:YES];
     }
 }
 
 -(void)getProductData {
     if (self.searchText.text.length==0) {
-        [Utility errorAlert:@"请填写您要搜索的产品"];
+        [Utility errorAlert:@"请填写您要搜索的产品" dismiss:YES];
     }else {
         [self.searchText resignFirstResponder];
         if (self.appDel.isReachable==NO) {
-            [Utility errorAlert:@"请检查网络"];
+            [Utility errorAlert:@"请检查网络" dismiss:NO];
         }else{
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
@@ -289,7 +286,7 @@ static NSIndexPath *selectedIndex = nil;
             }errorBlock:^(NSString *notice){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    [Utility errorAlert:notice];
+                    [Utility errorAlert:notice dismiss:YES];
                 });
             }];
         }
@@ -359,6 +356,10 @@ static NSIndexPath *selectedIndex = nil;
 {
     return 130;
 }
+
+
+
+
 #pragma mark - cell代理
 -(void)selectedProduct:(UIButton *)btn cell:(ProductCell *)cell isSelected:(BOOL)animated
 {
@@ -371,10 +372,12 @@ static NSIndexPath *selectedIndex = nil;
         if (cell.type==0) {
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[btn.tag];
             psModel.p_selected = @"1";
+            psModel.p_count += 1;
             [self.productModel.productList replaceObjectAtIndex:btn.tag withObject:psModel];
         }else if (cell.type==1){
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[btn.tag];
             psModel.p_selected = @"1";
+            psModel.p_count += 1;
             [self.productModel.serviceList replaceObjectAtIndex:btn.tag withObject:psModel];
         }else{
             CardModel *cardModel = (CardModel *)self.productModel.cardList[btn.tag];
@@ -387,10 +390,12 @@ static NSIndexPath *selectedIndex = nil;
         if (cell.type==0) {
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[btn.tag];
             psModel.p_selected = @"0";
+            psModel.p_count -= 1;
             [self.productModel.productList replaceObjectAtIndex:btn.tag withObject:psModel];
         }else if (cell.type==1){
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[btn.tag];
             psModel.p_selected = @"0";
+            psModel.p_count -= 1;
             [self.productModel.serviceList replaceObjectAtIndex:btn.tag withObject:psModel];
         }else{
             CardModel *cardModel = (CardModel *)self.productModel.cardList[btn.tag];
@@ -416,10 +421,12 @@ static NSIndexPath *selectedIndex = nil;
         if (self.classifyType==0) {
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[aRow];
             psModel.p_selected = @"0";
+            psModel.p_count -= 1;
             [self.productModel.productList replaceObjectAtIndex:aRow withObject:psModel];
         }else if (self.classifyType==1){
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[aRow];
             psModel.p_selected = @"0";
+            psModel.p_count -= 1;
             [self.productModel.serviceList replaceObjectAtIndex:aRow withObject:psModel];
         }else{
             CardModel *cardModel = (CardModel *)self.productModel.cardList[aRow];
@@ -433,6 +440,48 @@ static NSIndexPath *selectedIndex = nil;
 }
 -(IBAction)confirmOrderButtonPressed:(id)sender
 {
-    DLog(@"selected = %@",self.selectedArray);
+    if (self.selectedArray.count==0) {
+        [Utility errorAlert:@"请选择至少1件产品" dismiss:YES];
+    }else {
+        NSMutableArray *orderArray = [[NSMutableArray alloc]init];
+        if (self.classifyType==0) {
+            for (int i=0; i<self.selectedArray.count; i++) {
+                ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[[self.selectedArray[i]integerValue]];
+                [orderArray addObject:psModel];
+            }
+        }else if (self.classifyType==1){
+            for (int i=0; i<self.selectedArray.count; i++) {
+                ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[[self.selectedArray[i]integerValue]];
+                [orderArray addObject:psModel];
+            }
+        }else{
+            for (int i=0; i<self.selectedArray.count; i++) {
+                CardModel *psModel = (CardModel *)self.productModel.cardList[[self.selectedArray[i]integerValue]];
+                [orderArray addObject:psModel];
+            }
+        }
+
+        LTOrderViewController *orderViewControl = [[LTOrderViewController alloc]initWithNibName:@"LTOrderViewController" bundle:nil];
+        orderViewControl.delegate = self;
+
+        [orderViewControl loadData:orderArray type:self.classifyType];
+        [orderViewControl willMoveToParentViewController:self.mainViewControl];
+        [self.mainViewControl addChildViewController:orderViewControl];
+        [orderViewControl didMoveToParentViewController:self.mainViewControl];
+        
+        [self.mainViewControl presentPopupViewController:orderViewControl animationType:MJPopupViewAnimationSlideBottomTop width:140];
+        orderArray = nil;
+    }
+}
+
+#pragma mark - LTOrderViewControlDelegate
+- (void)disMissOrderViewControl:(LTOrderViewController *)viewControl
+{
+    __block LTOrderViewController *orderViewControl = viewControl;
+    [self.mainViewControl dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop dismissBlock:^(BOOL isFinish){
+        
+        [orderViewControl removeFromParentViewController];
+        orderViewControl = nil;
+    }];
 }
 @end

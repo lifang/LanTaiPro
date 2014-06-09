@@ -14,6 +14,7 @@
 
 #import "UserModel.h"
 #import "LTMainViewLeftBar.h"
+#import "CarModel.h"
 
 @interface LTDataShare : NSObject
 
@@ -22,6 +23,18 @@
 @property (nonatomic, strong) NSString *hostString;
 ///记录点击设置标签之前的标签
 @property (nonatomic, assign) LTLeftBarItemTypes leftBarType;
+
+///匹配车牌号前2位数组
+@property (nonatomic, strong) NSMutableArray *matchArray;
+@property (nonatomic, strong) NSMutableArray *sectionArray;
+
+///车辆品牌、型号
+@property (nonatomic, strong) CarModel *carModel;
+
+
+///套餐卡选择产品下单  
+@property (nonatomic, strong) NSMutableArray *packageOrderArray;
+
 
 + (LTDataShare *)sharedService;
 

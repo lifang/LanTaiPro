@@ -52,7 +52,7 @@
         cell.textLabel.font = [UIFont fontWithName:@"HiraginoSansGB-W3" size:14];
         cell.textLabel.textColor = [UIColor whiteColor];
     }
-    NSString *imageName = [NSString stringWithFormat:@"set%d",indexPath.row];
+    NSString *imageName = [NSString stringWithFormat:@"set%ld",(long)indexPath.row];
     cell.imageView.image = [UIImage imageNamed:imageName];
     
     NSInteger fileSize = [[SDImageCache sharedImageCache] getSize];
