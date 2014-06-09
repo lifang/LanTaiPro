@@ -54,7 +54,7 @@
 }
 - (void)getOrderInfos {
     if (self.appDel.isReachable==NO) {
-        [Utility errorAlert:@"请检查网络"];
+        [Utility errorAlert:@"请检查网络" dismiss:NO];
     }else {
         NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kUserInfo];
         NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
@@ -78,7 +78,7 @@
         }errorBlock:^(NSString *notice){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [Utility errorAlert:notice];
+                [Utility errorAlert:notice dismiss:YES];
             });
         }];
     }

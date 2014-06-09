@@ -34,26 +34,26 @@
             return nil;
         }
         self = [arrayOfViews objectAtIndex:0];
+        
+        self.backgroundColor = [UIColor clearColor];
+        self.objectModel = object;
+        
+        self.type = type;
+        if (type==0 || type==1) {
+            ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.objectModel;
+            self.titlelabel.text = psModel.p_name;
+            self.detailLabel.text = psModel.p_description;
+            [self.headerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,psModel.p_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
+            self.statusButton.selected = [psModel.p_selected boolValue];
+        }else {
+            CardModel *cardModel = (CardModel *)self.objectModel;
+            self.titlelabel.text = cardModel.c_name;
+            self.detailLabel.text = cardModel.c_description;
+            [self.headerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,cardModel.c_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
+            self.statusButton.selected = [cardModel.c_selected boolValue];
+        }
+        self.numberImageView.hidden = !self.statusButton.selected;
     }
-    self.backgroundColor = [UIColor clearColor];
-    self.objectModel = object;
-    
-    self.type = type;
-    if (type==0 || type==1) {
-        ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.objectModel;
-        self.titlelabel.text = psModel.p_name;
-        self.detailLabel.text = psModel.p_description;
-        [self.headerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,psModel.p_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
-        self.statusButton.selected = [psModel.p_selected boolValue];
-    }else {
-        CardModel *cardModel = (CardModel *)self.objectModel;
-        self.titlelabel.text = cardModel.c_name;
-        self.detailLabel.text = cardModel.c_description;
-        [self.headerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,cardModel.c_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
-        self.statusButton.selected = [cardModel.c_selected boolValue];
-    }
-    self.numberImageView.hidden = !self.statusButton.selected;
-    
     return self;
 }
 

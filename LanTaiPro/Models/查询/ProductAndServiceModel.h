@@ -23,4 +23,8 @@
 @property (nonatomic, strong) NSString *p_types;
 @property (nonatomic, strong) NSString *p_price;
 @property (nonatomic, strong) NSString *p_selected;
+
+@property (nonatomic, strong) NSString *p_num;//库存
+@property (nonatomic, assign) NSInteger p_count;//选择产品数量
 @end
+

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ProductModel.h"
+
 @interface ProductOrderCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLab;
@@ -17,4 +19,10 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *addButton;
 @property (nonatomic, weak) IBOutlet UIButton *reduceButton;
+
+@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, strong) id objectModel;
+@property (nonatomic, strong) NSIndexPath *idxPath;
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier object:(id)object type:(NSInteger)type;
 @end

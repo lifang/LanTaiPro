@@ -15,8 +15,10 @@
 #import "ProductCell.h"
 #import "ProductModel.h"
 #import "LTImageViewController.h"
+#import "LTOrderViewController.h"
+#import "LTMainViewController.h"
 
-@interface LTProductViewController : UIViewController<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,ProductCellDelegate>
+@interface LTProductViewController : UIViewController<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,ProductCellDelegate,LTOrderViewControlDelegate>
 
 @property (nonatomic, strong) AppDelegate *appDel;
 //分类
@@ -39,4 +41,7 @@
 @property (nonatomic, strong) NSMutableArray *selectedArray;
 ///大图
 @property (nonatomic, strong) LTImageViewController *productImgViewControl;
+
+@property (nonatomic, strong) LTMainViewController *mainViewControl;
+
 @end

@@ -21,7 +21,6 @@ static CGFloat startWidth = 0;
 
 @interface UIViewController (MJPopupViewControllerPrivate)
 - (UIView*)topView;
-- (void)presentPopupView:(UIView*)popupView;
 @end
 
 ////////////////////////////////////////////////////////////////////////////
@@ -83,28 +82,18 @@ static CGFloat startWidth = 0;
     backgroundView.alpha = 0.0f;
     [overlayView addSubview:backgroundView];
     
-    // Make the Background Clickable
-    UIButton * dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    dismissButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    dismissButton.backgroundColor = [UIColor clearColor];
-    dismissButton.frame = sourceView.bounds;
-    [overlayView addSubview:dismissButton];
-    
     popupView.alpha = 0.0f;
     [overlayView addSubview:popupView];
+    
     [sourceView addSubview:overlayView];
     
     if(animationType == MJPopupViewAnimationSlideBottomTop) {
-//        [dismissButton addTarget:self action:@selector(dismissPopupViewControllerWithanimationTypeSlideBottomTop) forControlEvents:UIControlEventTouchUpInside];
         [self slideViewIn:popupView sourceView:sourceView overlayView:overlayView withAnimationType:animationType];
     } else if (animationType == MJPopupViewAnimationSlideRightLeft) {
-        [dismissButton addTarget:self action:@selector(dismissPopupViewControllerWithanimationTypeSlideRightLeft) forControlEvents:UIControlEventTouchUpInside];
         [self slideViewIn:popupView sourceView:sourceView overlayView:overlayView withAnimationType:animationType];
     } else if (animationType == MJPopupViewAnimationSlideBottomBottom) {
-        [dismissButton addTarget:self action:@selector(dismissPopupViewControllerWithanimationTypeSlideBottomBottom) forControlEvents:UIControlEventTouchUpInside];
         [self slideViewIn:popupView sourceView:sourceView overlayView:overlayView withAnimationType:animationType];
     } else {
-        [dismissButton addTarget:self action:@selector(dismissPopupViewControllerWithanimationTypeFade) forControlEvents:UIControlEventTouchUpInside];
         [self fadeViewIn:popupView sourceView:sourceView overlayView:overlayView];
     }    
 }
@@ -118,7 +107,7 @@ static CGFloat startWidth = 0;
     return recentView.view;
 }
 
-// TODO: find a better way to do this, thats horrible
+
 - (void)dismissPopupViewControllerWithanimationTypeSlideBottomTop
 {
     DismissCallBack block;

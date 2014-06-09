@@ -11,6 +11,7 @@
 
 @interface Utility : NSObject
 
-+ (void)errorAlert:(NSString *)message;
++ (void)errorAlert:(NSString *)message dismiss:(BOOL)animated;
 + (NSDictionary *)initWithJSONFile:(NSString *)jsonPath;
++(NSMutableArray *)matchArray;
 @end

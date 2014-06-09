@@ -18,8 +18,9 @@
               @"type": mts_key(c_type),
               @"description": mts_key(c_description),
               @"price": mts_key(c_price),
-              @"isSelected": mts_key(c_selected),
-              
+              @"isseleted": mts_key(c_selected),
+              @"products": mts_key(c_product),
+              @"brand": mts_key(c_brand),
               };
 }
 

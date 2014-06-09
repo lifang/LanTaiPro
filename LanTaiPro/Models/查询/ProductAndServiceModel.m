@@ -20,7 +20,8 @@
               @"status": mts_key(p_status),
               @"types": mts_key(p_types),
               @"sale_price":mts_key(p_price),
-              @"isSelected": mts_key(p_selected),
+              @"isseleted": mts_key(p_selected),
+              @"several_times": mts_key(p_num),
               };
 }
 

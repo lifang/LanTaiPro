@@ -33,13 +33,14 @@
     }
     return self;
 }
-
+#warning !!!
 -(void)initCarViewWithCarModel:(CarModel *)carModel
 {
-    self.carNumberLab.text = carModel.carPlateNumber;
-    self.stationId =carModel.station_id;
-    self.orderId = carModel.order_id;
-    self.workId = carModel.workOrder_id;
+    
+//    self.carNumberLab.text = carModel.carPlateNumber;
+//    self.stationId =carModel.station_id;
+//    self.orderId = carModel.order_id;
+//    self.workId = carModel.workOrder_id;
 }
 
 - (void)layoutSubviews

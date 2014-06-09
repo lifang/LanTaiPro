@@ -52,13 +52,13 @@
     self.carNumLab.hidden = NO;
     self.checkOrderBtn.hidden = NO;
     self.serviceNameLab.hidden = NO;
-    
-    NSString *startTime = carModel.serviceStartTime;
-    NSString *endrtTime = carModel.serviceEndTime;
-    self.serviceNameLab.text = carModel.serviceName;
-    self.carNumLab.text = carModel.carPlateNumber;
-    self.stationId = carModel.station_id;
-    self.orderId = carModel.order_id;
+#warning !!!
+//    NSString *startTime = carModel.serviceStartTime;
+//    NSString *endrtTime = carModel.serviceEndTime;
+//    self.serviceNameLab.text = carModel.serviceName;
+//    self.carNumLab.text = carModel.carPlateNumber;
+//    self.stationId = carModel.station_id;
+//    self.orderId = carModel.order_id;
 }
 
 //给工位赋值

@@ -38,7 +38,6 @@ static UIFont *buttonFont = nil;
     return [[[BlockAlertView alloc] initWithTitle:title message:message] autorelease];
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - NSObject
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message 

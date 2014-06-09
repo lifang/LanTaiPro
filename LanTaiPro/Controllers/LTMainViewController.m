@@ -92,6 +92,8 @@
 -(void)dismissSettingViewControl:(LTSettingViewController *)viewControl
 {
     [self.leftTabBar defaultSelected];
+    
+    __block LTSettingViewController *setViewControl = viewControl;
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop dismissBlock:^(BOOL isFinish) {
         
         LTLeftBarItemTypes itemType = [LTDataShare sharedService].leftBarType;
@@ -118,6 +120,10 @@
             default:
                 break;
         }
+        
+        
+        [setViewControl removeFromParentViewController];
+        setViewControl = nil;
     }];
 }
 #pragma mark - progerty
