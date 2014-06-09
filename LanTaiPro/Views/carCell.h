@@ -10,7 +10,7 @@
 #import "CarModel.h"
 #import "StationModel.h"
 
-@interface carCell : UITableViewCell
+@interface carCell : UITableViewCell<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *stationNameLab;
 @property (strong, nonatomic) IBOutlet UILabel *stationTimeLab;

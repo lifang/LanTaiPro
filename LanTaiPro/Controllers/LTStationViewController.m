@@ -135,7 +135,7 @@
              [self.carModel mts_setValuesForKeysWithDictionary:inConstructionCarsDic];
             [cell initCarCellWithCarModel:self.carModel];
         }
-        [cell.checkOrderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
+//        [cell.checkOrderBtn addTarget:self action:@selector(checkOrder:) forControlEvents:UIControlEventTouchUpInside];
         return  cell;
     }
     //选择技师table
@@ -433,6 +433,11 @@
     self.customerGroup.text = self.stationOrderModel.customer_group;
     self.carVIN.text = self.stationOrderModel.car_vin;
    
+    
+}
+
+- (IBAction)moveInconstructionCarView:(UIPanGestureRecognizer *)sender
+{
     
 }
 @end

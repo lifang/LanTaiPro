@@ -59,6 +59,7 @@
 @property (strong, nonatomic) NSMutableArray *inConstructionCarsArr;//正在施工的车辆
 @property (strong, nonatomic) NSMutableArray *finshedCarsArr;//等待确认付款的车辆
 @property (strong, nonatomic) NSArray *stationServiceArr;//工位信息;
+@property (strong, nonatomic) IBOutlet UIView *leftView;
 
 @property (strong, nonatomic) CarView *carView;
 @property (strong, nonatomic) CarModel *carModel;
@@ -68,5 +69,6 @@
 
 
 - (IBAction)tapLeftViewCover:(UIControl *)sender;//点击回到现场管理
+- (IBAction)moveInconstructionCarView:(UIPanGestureRecognizer *)sender;
 
 @end

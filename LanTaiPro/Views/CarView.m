@@ -19,6 +19,7 @@
         
         self.carImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
         [self.carImageView setImage:[UIImage imageNamed:@"Car"]];
+        self.carImageView.userInteractionEnabled = YES;
         [self addSubview:self.carImageView];
         
         self.carNumberLab = [[UILabel alloc]initWithFrame:CGRectZero];

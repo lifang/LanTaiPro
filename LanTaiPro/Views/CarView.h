@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CarModel.h"
 
-@interface CarView : UIView
+@interface CarView : UIView<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic)UILabel *carNumberLab;//车牌
 @property (strong, nonatomic)UIImageView *carImageView;
