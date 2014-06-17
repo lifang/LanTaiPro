@@ -15,7 +15,7 @@
     return  @{
               @"id": mts_key(productId),
               @"name": mts_key(name),
-              @"products": mts_key(products),
+              @"prod": mts_key(products),
               };
 }
 

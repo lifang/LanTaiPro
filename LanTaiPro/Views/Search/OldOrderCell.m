@@ -47,7 +47,7 @@
         self.salePeopleLabel.text = oldOrder.name;
         self.techLabel.text = oldOrder.staff_name;
         self.timeLabel.text = oldOrder.created_at;
-        self.totalPriceLabel.text = oldOrder.price;
+        self.totalPriceLabel.text = [NSString stringWithFormat:@"总计:%@",oldOrder.price];
         
         CGRect frame = CGRectMake(0, 70, 248, 30);
         for (int i=0; i<oldOrder.productList.count; i++) {

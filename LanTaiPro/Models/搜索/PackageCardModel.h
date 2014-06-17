@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *packageId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *ended_at;
+@property (nonatomic, strong) NSString *isNew;
 @property (nonatomic, strong) NSMutableArray *productList;
 
 @end

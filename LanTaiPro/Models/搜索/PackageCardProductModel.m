@@ -16,6 +16,9 @@
               @"name": mts_key(name),
               @"product_num": mts_key(product_num),
               @"unused_num": mts_key(unused_num),
+              @"selected_num": mts_key(selected_num),
+              @"several_times": mts_key(several_times),
+              @"types": mts_key(types),
               };
 }
 

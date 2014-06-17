@@ -13,5 +13,7 @@
 @property (nonatomic, strong) NSString *productId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *price;
-
+@property (nonatomic, strong) NSString *several_times;
+@property (nonatomic, strong) NSString *types;
+@property (nonatomic, strong) NSString *selected;
 @end

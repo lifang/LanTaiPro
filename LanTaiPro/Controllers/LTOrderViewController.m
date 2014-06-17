@@ -109,5 +109,45 @@
         [self.delegate disMissOrderViewControl:self];
     }
 }
-
+///跳转到开单页面
+-(IBAction)orderToConfirmButtonPressed:(id)sender
+{
+    NSMutableArray *orderArray = [[NSMutableArray alloc]init];
+    for (ProductAndServiceModel *psModel in self.orderArray){
+        
+        OrderProductModel *product = [[OrderProductModel alloc]init];
+        product.productId = psModel.p_id;
+        product.price = psModel.p_price;
+        product.name = psModel.p_name;
+        product.number = psModel.p_count;
+        product.validNumber = psModel.p_count;
+        //0 为产品 1 为服务 2 为卡类
+        
+        switch (self.classifyType) {
+            case 0:
+                product.types=@"0";
+                break;
+            case 1:
+                product.types=@"1";
+                break;
+            case 2:
+                
+                if ([psModel.p_types intValue]==1) {//储值卡
+                    product.types=@"4";
+                }else {
+                    product.types = psModel.p_types;
+                }
+                product.c_isNew = @"1";
+                break;
+                
+            default:
+                break;
+        }
+        [orderArray addObject:product];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(disMissOrderViewControl:withArray:)]) {
+        [self.delegate disMissOrderViewControl:self withArray:orderArray];
+    }
+}
 @end

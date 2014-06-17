@@ -47,4 +47,8 @@
 
 @property (nonatomic, strong) NSMutableArray *oldOrderList;
 @property (nonatomic, strong) NSMutableArray *workingOrderList;
+
+@property (nonatomic, strong) NSMutableArray *orderList;
+
++(NSMutableDictionary *)dictionaryFromModel:(SearchCustomerModel *)customerModel;
 @end

@@ -15,6 +15,7 @@
     return  @{@"id": mts_key(packageId),
               @"name": mts_key(name),
               @"ended_at": mts_key(ended_at),
+              @"is_new": mts_key(isNew),
               @"products": mts_key(productList),
               };
 }

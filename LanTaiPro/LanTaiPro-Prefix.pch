@@ -51,4 +51,13 @@
 #define kProduct @"/api/orders/products_list"//查询
 
 
-#define kSearch @"/api/orders/search_car"//搜索
+#define kSearch @"/api/orders/search_car"//搜索－－－－0:查询   1:开单
+
+
+#define kServiceBillingProduct @"/api/orders/enter_order"//业务开单获取右侧快速下单
+#define kServiceBillingMakeOrder @"/api/orders/make_order"//业务开单生成订单
+
+
+
+
+

@@ -14,6 +14,7 @@
 
 #import "ProductOrderCell.h"
 #import "ProductModel.h"
+#import "OrderProductModel.h"
 
 @protocol LTOrderViewControlDelegate;
 
@@ -33,5 +34,5 @@
 @protocol LTOrderViewControlDelegate <NSObject>
 
 - (void)disMissOrderViewControl:(LTOrderViewController *)viewControl;
-
+- (void)disMissOrderViewControl:(LTOrderViewController *)viewControl withArray:(NSMutableArray *)orderArray;
 @end

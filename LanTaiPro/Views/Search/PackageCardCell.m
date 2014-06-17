@@ -9,6 +9,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PackageCardCell.h"
 
+#define LeftBtnTag 100
+#define RightBtnTag 1000
+
+#define LabelTag  85478
+
 @implementation PackageCardCell
 
 - (void)awakeFromNib
@@ -66,8 +71,8 @@
             leftLab.attributedText = attributedString;
             leftLab.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:16];
             
-            frame.origin.x = 0;
-            frame.size.width = 168;
+            frame.origin.x = 10;
+            frame.size.width = 158;
             frame.origin.y = 58+30*i;
             leftLab.frame = frame;
         
@@ -80,7 +85,7 @@
             nameLab.text = packageProduct.name;
             
             frame.origin.x = 169;
-            frame.size.width = 200;
+            frame.size.width = 180;
             frame.origin.y = 78+30*i;
             nameLab.frame = frame;
             [self.contentView addSubview:nameLab];
@@ -90,8 +95,8 @@
             useLab.textColor = [UIColor whiteColor];
             useLab.text = [NSString stringWithFormat:@"%d",[packageProduct.product_num integerValue]-[packageProduct.unused_num integerValue]];
             
-            frame.origin.x = 369;
-            frame.size.width = 100;
+            frame.origin.x = 349;
+            frame.size.width = 80;
             frame.origin.y = 78+30*i;
             useLab.frame = frame;
             [self.contentView addSubview:useLab];
@@ -101,28 +106,44 @@
             unuseLab.textColor = [UIColor whiteColor];
             unuseLab.text = packageProduct.unused_num;
             
-            frame.origin.x = 469;
-            frame.size.width = 100;
+            frame.origin.x = 429;
+            frame.size.width = 80;
             frame.origin.y = 78+30*i;
             unuseLab.frame = frame;
             [self.contentView addSubview:unuseLab];
             
             //选择框
             if ([packageProduct.unused_num integerValue]>0) {//还有未使用
-                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-                btn.tag = [packageProduct.productId integerValue];
                 
-                [btn setImage:[UIImage imageNamed:@"cb_mono_off"] forState:UIControlStateNormal];
-                [btn setImage:[UIImage imageNamed:@"cb_mono_on"] forState:UIControlStateSelected];
-                
-                [btn addTarget:self action:@selector(checkboxButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                
-                frame.origin.x = 592;
-                frame.size.width = 22;
-                frame.size.height = 22;
+                frame.origin.x = 509;
+                frame.size.width = 30;
+                frame.size.height = 30;
                 frame.origin.y = 78+30*i;
-                btn.frame = frame;
-                [self.contentView addSubview:btn];
+                
+                UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                leftBtn.frame =frame;
+                leftBtn.tag = LeftBtnTag+i;
+                [leftBtn setImage:[UIImage imageNamed:@"product-add.png"] forState:UIControlStateNormal];
+                [leftBtn addTarget:self action:@selector(leftButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [self.contentView addSubview:leftBtn];
+                
+                frame.origin.x = 539;
+                UILabel *label = [self returnlabel];
+                label.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:20];
+                label.textColor = [UIColor whiteColor];
+                label.frame = frame;
+                label.tag = LabelTag +i;
+                label.text = [NSString stringWithFormat:@"%@",packageProduct.selected_num];
+                [self.contentView addSubview:label];
+                
+                frame.origin.x = 569;
+                UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                rightBtn.frame =frame;
+                rightBtn.tag = RightBtnTag+i;
+                [rightBtn setImage:[UIImage imageNamed:@"product-reduce"] forState:UIControlStateNormal];
+                [rightBtn addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [self.contentView addSubview:rightBtn];
+                
             }
         }
         
@@ -131,29 +152,106 @@
     }
     return self;
 }
-
--(NSString *)returnStringWith:(NSString *)packageId productId:(int)productId
+//row_btnTag_套餐卡id_产品id_数量
+-(NSString *)returnStringWith:(int)btnTag
 {
-    NSString *str = [NSString stringWithFormat:@"%@_%d",self.packageModel.packageId,productId];
-    
-    return str;
+    PackageCardProductModel *packageProduct = (PackageCardProductModel *)self.packageModel.productList[btnTag];
+    NSString *string = [NSString stringWithFormat:@"%d_%d_%@_%@_%@",self.idxPath.row,btnTag,self.packageModel.packageId,packageProduct.productId,packageProduct.selected_num];
+    return string;
 }
 
--(void)checkboxButtonPressed:(id)sender
-{
+//加
+-(void)leftButtonPressed:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    btn.selected = !btn.selected;
     
-    NSString *string = [self returnStringWith:self.packageModel.packageId productId:btn.tag];
-    if (btn.selected) {//选中
-        if (![LTDataShare sharedService].packageOrderArray) {
-            [LTDataShare sharedService].packageOrderArray = [[NSMutableArray alloc]init];
+    PackageCardProductModel *packageProduct = (PackageCardProductModel *)self.packageModel.productList[btn.tag-LeftBtnTag];
+    
+    UILabel *label = (UILabel *)[self.contentView viewWithTag:(btn.tag-LeftBtnTag+LabelTag)];
+    int count = [label.text intValue];
+    //判断库存
+    if ((count+1)>[packageProduct.several_times intValue]) {
+        NSString *message = [NSString stringWithFormat:@"%@ 库存不足",packageProduct.name];
+        [Utility errorAlert:message dismiss:YES];
+    }
+    else
+    {
+        if ((count+1)>[packageProduct.unused_num intValue]) {
+            NSString *message = [NSString stringWithFormat:@"最多只能选择:%@",packageProduct.unused_num];
+            [Utility errorAlert:message dismiss:YES];
         }
-        [[LTDataShare sharedService].packageOrderArray addObject:string];
-    }else {//取消选中
-        [[LTDataShare sharedService].packageOrderArray removeObject:string];
+        else
+        {
+            packageProduct.selected_num = [NSString stringWithFormat:@"%d",count+1];
+            [self.packageModel.productList replaceObjectAtIndex:(btn.tag-LeftBtnTag) withObject:packageProduct];
+            label.text = [NSString stringWithFormat:@"%d",count+1];
+            
+            
+            if (![LTDataShare sharedService].packageOrderArray) {
+                [LTDataShare sharedService].packageOrderArray = [[NSMutableArray alloc]init];
+                
+                NSString *string = [self returnStringWith:(btn.tag-LeftBtnTag)];
+                [[LTDataShare sharedService].packageOrderArray addObject:string];
+            }else {
+                BOOL isExit = NO;
+                if ([LTDataShare sharedService].packageOrderArray.count>0){
+                    for (int i=0; i<[LTDataShare sharedService].packageOrderArray.count; i++) {
+                        NSString *string = [LTDataShare sharedService].packageOrderArray[i];
+                        NSArray *array = [string componentsSeparatedByString:@"_"];
+                        if ([array[2] intValue]==[self.packageModel.packageId intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
+                            NSString *string2 = [self returnStringWith:(btn.tag-LeftBtnTag)];
+                            [[LTDataShare sharedService].packageOrderArray replaceObjectAtIndex:i withObject:string2];
+                            isExit = YES;
+                            break;
+                        }
+                    }
+                }
+                
+                if (isExit == NO) {
+                    NSString *string = [self returnStringWith:(btn.tag-LeftBtnTag)];
+                    [[LTDataShare sharedService].packageOrderArray addObject:string];
+                }
+            }
+            
+            DLog(@"##  %@",[LTDataShare sharedService].packageOrderArray)
+            
+        }
     }
     
-    DLog(@"%@",[LTDataShare sharedService].packageOrderArray);
+}
+//减
+-(void)rightButtonPressed:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+
+    PackageCardProductModel *packageProduct = (PackageCardProductModel *)self.packageModel.productList[btn.tag-RightBtnTag];
+    
+    UILabel *label = (UILabel *)[self.contentView viewWithTag:(btn.tag-RightBtnTag+LabelTag)];
+    int count = [label.text intValue];
+    
+    if ((count-1)<0) {
+        
+    }else {
+        label.text = [NSString stringWithFormat:@"%d",count-1];
+        
+        packageProduct.selected_num = [NSString stringWithFormat:@"%d",count-1];
+        [self.packageModel.productList replaceObjectAtIndex:(btn.tag-RightBtnTag) withObject:packageProduct];
+        
+        for (int i=0; i<[LTDataShare sharedService].packageOrderArray.count; i++) {
+            NSString *string = [LTDataShare sharedService].packageOrderArray[i];
+            NSArray *array = [string componentsSeparatedByString:@"_"];
+            if ([array[2] intValue]==[self.packageModel.packageId intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
+                if ((count-1)==0) {
+                    [[LTDataShare sharedService].packageOrderArray removeObject:string];
+                }else {
+                    NSString *string2 = [self returnStringWith:(btn.tag-RightBtnTag)];
+                    [[LTDataShare sharedService].packageOrderArray replaceObjectAtIndex:i withObject:string2];
+                }
+                
+                break;
+            }
+        }
+        
+        DLog(@"##!!  %@",[LTDataShare sharedService].packageOrderArray)
+    }
+    
 }
 @end

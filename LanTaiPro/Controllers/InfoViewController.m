@@ -52,39 +52,43 @@
     [self.selectedView removeFromSuperview];
     self.selectedView = nil;
     
-    self.capitalModel=nil;self.brandModel=nil;self.modelModel=nil;
+    self.firstArray=nil;self.secondArray=nil;self.thirdArray=nil;
     if (tag==100){
         self.brandView.hidden=NO;
-        [self.brandView reloadAllComponents];
-        
         if ([LTDataShare sharedService].carModel.carList.count>0) {
+            self.firstArray = [NSMutableArray arrayWithArray:[LTDataShare sharedService].carModel.carList];
+            [self.brandView reloadAllComponents];
+            
             for (int i=0; i<[LTDataShare sharedService].carModel.carList.count; i++) {
                 BOOL isOut = NO;
+                
                 CapitalModel *capital = (CapitalModel *)[LTDataShare sharedService].carModel.carList[i];
                 if (capital.barndList.count>0) {
                     for (int j=0; j<capital.barndList.count; j++) {
                         BrandModel *brand = (BrandModel *)capital.barndList[j];
-                        
                         if ([brand.name isEqualToString:self.brandName]) {
-                            self.capitalModel = capital;////////////////////////////////
-                            self.brandModel = brand;////////////////////////////////
+                            self.secondArray = [NSMutableArray arrayWithArray:capital.barndList];
+                            
                             [self.brandView selectRow:i inComponent:0 animated:YES];
                             [self.brandView reloadComponent:1];
                             [self.brandView selectRow:j inComponent:1 animated:YES];
                             [self.brandView reloadComponent:2];
                             
                             if (brand.modelList.count>0) {
+                                self.thirdArray = [NSMutableArray arrayWithArray:brand.modelList];
+                                
                                 for (int k=0; k<brand.modelList.count; k++){
                                     ModelModel *model = (ModelModel *)brand.modelList[k];
-                                    
                                     if ([model.name isEqualToString:self.modelName]) {
-                                        self.modelModel = model;////////////////////////////////
                                         isOut = YES;
                                         [self.brandView selectRow:k inComponent:2 animated:YES];
                                         break;
                                     }
                                 }
                             }
+                        }
+                        if (isOut) {
+                            break;
                         }
                     }
                 }
@@ -93,9 +97,11 @@
                 }
             }
         }else {
-            self.capitalModel = (CapitalModel *)[LTDataShare sharedService].carModel.carList[0];
-            self.brandModel = (BrandModel *)self.capitalModel.barndList[0];
-            self.modelModel = (ModelModel *)self.brandModel.modelList[0];
+            self.firstArray = [NSMutableArray arrayWithArray:[LTDataShare sharedService].carModel.carList];
+            CapitalModel *capital = (CapitalModel *)self.firstArray[0];
+            self.secondArray = [NSMutableArray arrayWithArray:capital.barndList];
+            BrandModel *brand = (BrandModel *)capital.barndList[0];
+            self.thirdArray = [NSMutableArray arrayWithArray:brand.modelList];
             
             [self.brandView selectRow:0 inComponent:0 animated:YES];
             [self.brandView selectRow:0 inComponent:1 animated:YES];
@@ -183,53 +189,57 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerVieww numberOfRowsInComponent:(NSInteger)component{
-    
     switch (component) {
         case 0:
-            return [LTDataShare sharedService].carModel.carList.count;
+            if (self.firstArray.count == 0) {
+                return 1;
+            }
+            return self.firstArray.count;
             break;
             
         case 1:
-            if (self.capitalModel && self.capitalModel.barndList.count>0){
-                return self.capitalModel.barndList.count;
+            if (self.secondArray.count == 0) {
+                return 1;
             }
-            return 0;
+            return self.secondArray.count;
             break;
             
         case 2:
-            if (self.brandModel && self.brandModel.modelList.count>0){
-                return self.brandModel.modelList.count;
+            if (self.thirdArray.count == 0) {
+                return 1;
             }
-            return 0;
+            return self.thirdArray.count;
             break;
             
         default:
-            return 0;
+            return 1;
             break;
     }
 }
-
 - (NSString *)pickerView:(UIPickerView *)pickerVieww titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     switch (component) {
         case 0:
-            self.capitalModel = (CapitalModel *)[LTDataShare sharedService].carModel.carList[row];
-            return self.capitalModel.name;
+            if (self.firstArray.count>0) {
+                CapitalModel*capital = (CapitalModel *)[self.firstArray objectAtIndex:row];
+                return capital.name;
+            }
+            return @"";
             break;
             
         case 1:
-            if (self.capitalModel && self.capitalModel.barndList.count>0) {
-                self.brandModel = (BrandModel *)self.capitalModel.barndList[row];
-                return self.brandModel.name;
-            }else
-                return @"";
+            if (self.secondArray.count>0) {
+                BrandModel *brand = (BrandModel *)[self.secondArray objectAtIndex:row];
+                return brand.name;
+            }
+            return @"";
             break;
             
         case 2:
-            if (self.brandModel && self.brandModel.modelList.count>0) {
-                self.modelModel = (ModelModel *)self.brandModel.modelList[row];
-                return self.modelModel.name;
-            }else
-                return @"";
+            if (self.thirdArray.count>0) {
+                ModelModel *model = (ModelModel *)[self.thirdArray objectAtIndex:row];
+                return model.name;
+            }
+            return @"";
             break;
             
         default:
@@ -237,42 +247,63 @@
             break;
     }
 }
-
 - (void)pickerView:(UIPickerView *)pickerVieww didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    NSMutableString *brandStr = nil;
     switch (component) {
         case 0:
-            self.capitalModel = (CapitalModel *)[LTDataShare sharedService].carModel.carList[row];
-            [self.brandView reloadComponent:1];
-            [self.brandView selectRow:0 inComponent:1 animated:YES];
-            
-            if (self.capitalModel.barndList.count>0) {
-                self.brandModel = (BrandModel *)self.capitalModel.barndList[0];
-            }else {
-                self.brandModel = nil;
-            }
-            [self.brandView reloadComponent:2];
-            [self.brandView selectRow:0 inComponent:2 animated:YES];
-            break;
-            
-        case 1:
-            if (self.capitalModel && self.capitalModel.barndList.count>0){
-                self.brandModel = (BrandModel *)self.capitalModel.barndList[row];
+            if (self.firstArray.count>0) {
+                brandStr = [NSMutableString string];
+                CapitalModel *capital = [self.firstArray objectAtIndex:row];
+                self.secondArray = [NSMutableArray arrayWithArray:capital.barndList];
+                [self.brandView reloadComponent:1];
+                [self.brandView selectRow:0 inComponent:1 animated:YES];
                 
-                
+                if (self.secondArray.count > 0) {
+                    BrandModel *brand = [self.secondArray objectAtIndex:0];
+                    self.brandName = brand.name;
+                    if (brand.modelList!=nil) {
+                        self.thirdArray = [NSMutableArray arrayWithArray:brand.modelList];
+                        ModelModel *model = (ModelModel *)[self.thirdArray objectAtIndex:0];
+                        self.modelName = model.name;
+                    }else {
+                        self.thirdArray = nil;
+                    }
+                }else {
+                    self.thirdArray = nil;
+                }
                 [self.brandView reloadComponent:2];
                 [self.brandView selectRow:0 inComponent:2 animated:YES];
             }
+            break;
             
+        case 1:
+            if (self.secondArray.count>0) {
+                BrandModel *brand = [self.secondArray objectAtIndex:row];
+                self.brandName = brand.name;
+                if (brand.modelList!=nil) {
+                    self.thirdArray = [NSMutableArray arrayWithArray:brand.modelList];
+                    ModelModel *model = (ModelModel *)[self.thirdArray objectAtIndex:0];
+                    self.modelName = model.name;
+                }else {
+                    self.thirdArray = nil;
+                }
+                [self.brandView reloadComponent:2];
+                [self.brandView selectRow:0 inComponent:2 animated:YES];
+                
+            }
             break;
             
         case 2:
+            if (self.secondArray.count>0) {
+                ModelModel *model = (ModelModel *)[self.thirdArray objectAtIndex:row];
+                self.modelName = model.name;
+            }
             break;
             
         default:
             break;
             
     }
-    
 }
 
 @end

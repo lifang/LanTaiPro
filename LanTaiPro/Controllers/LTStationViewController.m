@@ -100,7 +100,7 @@
 {
   //快速下单中table
     if ([tableView isEqual:self.fastToOrderTable]) {
-        NSString *identifier = @"fastToOrderCell";
+        static NSString *identifier = @"fastToOrderCell";
         UITableViewCell *cell= [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -118,7 +118,7 @@
        }
     //正在施工的中的table
     if ([tableView isEqual:self.constructionTable]) {
-        NSString *identifier = @"carCell";
+        static NSString *identifier = @"carCell";
         carCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
             cell = [[carCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -140,7 +140,7 @@
     }
     //选择技师table
     if ([tableView isEqual:self.staffTable]) {
-        NSString *identifier = @"staffCell";
+        static NSString *identifier = @"staffCell";
         StaffsCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
             cell = [[StaffsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -156,7 +156,7 @@
     //订单界面中显示订单的包含的项目或产品的table
     if ([tableView isEqual:self.orderTable]) {
         
-        NSString *identifier = @"orderCell";
+        static NSString *identifier = @"orderCell";
         OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
              cell = [[OrderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];

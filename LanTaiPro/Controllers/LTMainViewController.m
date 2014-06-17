@@ -35,8 +35,8 @@
     self.leftTabBar.delegate = self;
     self.leftTabBar.frame = (CGRect){0,0,80,1024};
     [self.view addSubview:self.leftTabBar];
-    [self.leftTabBar defaultSelected];
     
+    [self.leftTabBar defaultSelected];
     self.leftTabBar.userInfoItem.isSelected = YES;
     //设置子controller
     self.currentViewController = [self.childenControllerArray objectAtIndex:self.currentPage];
@@ -46,6 +46,37 @@
     }
 }
 
+-(void)setCurrentPage:(NSInteger)currentPage
+{
+    _currentPage = currentPage;
+    
+    [self.leftTabBar defaultSelected];
+    switch (currentPage) {
+        case 0:
+            self.leftTabBar.userInfoItem.isSelected = YES;
+            break;
+        case 1:
+            self.leftTabBar.stationItem.isSelected = YES;
+            break;
+        case 2:
+            self.leftTabBar.serviceBillingItem.isSelected = YES;
+            break;
+        case 3:
+            self.leftTabBar.productItem.isSelected = YES;
+            break;
+        case 4:
+            self.leftTabBar.searchItem.isSelected = YES;
+            break;
+        case 5:
+            self.leftTabBar.appointmentItem.isSelected = YES;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self changeFromController:self.currentViewController toController:[self.childenControllerArray objectAtIndex:_currentPage]];
+}
 #pragma mark - 子controller之间切换
 -(void)changeFromController:(UIViewController*)fromViewControl toController:(UIViewController*)toViewControl
 {

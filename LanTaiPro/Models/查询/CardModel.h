@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSString *c_description;
 @property (nonatomic, strong) NSString *c_price;
 @property (nonatomic, strong) NSString *c_selected;
-
+@property (nonatomic, strong) NSString *c_isNew;
 @property (nonatomic, strong) NSString *c_product;
 @property (nonatomic, strong) NSString *c_brand;
 

@@ -13,7 +13,7 @@
 + (NSDictionary *)mts_mapping
 {
     return  @{
-              @"productList": mts_key(productList),
+              @"products": mts_key(productList),
               };
 }
 

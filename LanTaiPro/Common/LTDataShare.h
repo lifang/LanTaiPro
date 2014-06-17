@@ -35,6 +35,8 @@
 ///套餐卡选择产品下单  
 @property (nonatomic, strong) NSMutableArray *packageOrderArray;
 
+///业务开单-右侧边栏选择
+@property (nonatomic, strong) NSMutableArray *billingProductArray;
 
 + (LTDataShare *)sharedService;
 

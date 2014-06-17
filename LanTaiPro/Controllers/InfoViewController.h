@@ -35,9 +35,7 @@
 @property (nonatomic, strong) NSString *brandName;
 @property (nonatomic, strong) NSString *modelName;
 
-@property (nonatomic, strong) CapitalModel *capitalModel;
-@property (nonatomic, strong) BrandModel *brandModel;
-@property (nonatomic, strong) ModelModel *modelModel;
+@property (nonatomic, strong) NSMutableArray *firstArray,*secondArray,*thirdArray;
 
 -(void)buildUIWithTag:(NSInteger)tag;
 @end

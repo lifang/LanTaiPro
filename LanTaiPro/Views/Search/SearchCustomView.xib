@@ -37,32 +37,32 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="美女丢发挥" minimumFontSize="17" id="xZ2-3p-QFb">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="xZ2-3p-QFb">
                     <rect key="frame" x="110" y="20" width="164" height="21"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="iN0-l3-epB" id="TFd-Rz-ESz"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="苏E UYRD8" minimumFontSize="17" id="KFA-60-byj">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="KFA-60-byj">
                     <rect key="frame" x="332" y="20" width="106" height="21"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="iN0-l3-epB" id="qSn-g3-F5O"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13402648654" minimumFontSize="17" id="EVc-dg-Ugz">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="EVc-dg-Ugz">
                     <rect key="frame" x="508" y="19" width="135" height="21"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="iN0-l3-epB" id="BMB-C0-NoJ"/>
                     </connections>
@@ -209,49 +209,49 @@
                         <action selector="orderClassifyButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Z0T-TE-uSR"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="长安 奔奔" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oov-iL-rfj">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oov-iL-rfj">
                     <rect key="frame" x="108" y="60" width="246" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单位" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g68-rP-6o5">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g68-rP-6o5">
                     <rect key="frame" x="108" y="98" width="246" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HGFHFJHGKHL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TCp-2J-WFD">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TCp-2J-WFD">
                     <rect key="frame" x="108" y="136" width="246" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1106" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="考试的结果卡上考试的结果卡上考试的结果卡上" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hx4-0N-6LO">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1106" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hx4-0N-6LO">
                     <rect key="frame" x="108" y="174" width="520" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2013年11月11日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hZP-Es-nRl">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hZP-Es-nRl">
                     <rect key="frame" x="414" y="60" width="214" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="女" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S1y-Fz-0Vr">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S1y-Fz-0Vr">
                     <rect key="frame" x="414" y="98" width="214" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1985" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0f5-32-YQ1">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1105" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0f5-32-YQ1">
                     <rect key="frame" x="414" y="136" width="214" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>

@@ -21,6 +21,8 @@
               @"isseleted": mts_key(c_selected),
               @"products": mts_key(c_product),
               @"brand": mts_key(c_brand),
+              @"is_new": mts_key(c_isNew),
+              
               };
 }
 

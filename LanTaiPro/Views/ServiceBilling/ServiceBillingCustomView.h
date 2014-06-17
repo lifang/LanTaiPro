@@ -11,9 +11,13 @@
 #import "InfoViewController.h"
 
 #import "SearchModel.h"
-#import "PackageCardCell.h"
+#import "ServiceBillingPackageCellTableViewCell.h"
+#import "ServiceBillingOrderCell.h"
+#import "OrderProductModel.h"
 
-@interface ServiceBillingCustomView : UIView<UITextFieldDelegate,WYPopoverControllerDelegate,InfoViewControlDelegate,UITableViewDelegate,UITableViewDataSource,PackageCardCellDelegate>
+
+
+@interface ServiceBillingCustomView : UIView<UITextFieldDelegate,WYPopoverControllerDelegate,InfoViewControlDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextField *nameField;
 @property (nonatomic, weak) IBOutlet UITextField *carNumField;
@@ -23,10 +27,11 @@
 @property (nonatomic, strong) InfoViewController *infoViewControl;
 
 @property (nonatomic, strong) SearchCustomerModel *customerModel;
+///车辆品牌
+@property (nonatomic, strong) NSString *carBrand;
+///车辆型号
+@property (nonatomic, strong) NSString *carModel;
 
-@property (nonatomic, strong) UITableView *packageTable;
-///套餐卡
-@property (nonatomic, strong) NSMutableArray *packageCardList;
-
+- (id)initWithFrame:(CGRect)frame;
 + (WYPopoverController *)popVC;
 @end

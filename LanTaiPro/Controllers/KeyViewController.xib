@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyViewController">
+            <connections>
+                <outlet property="btn" destination="ltK-uP-fIr" id="W1n-Hu-D6u"/>
+                <outlet property="btnReset" destination="Oep-Cz-S8O" id="t2V-ER-6aX"/>
+                <outlet property="subview" destination="teI-R2-OyS" id="u1I-T5-hCX"/>
+                <outlet property="sureBtn" destination="frp-Nu-0YR" id="tco-bn-Mxg"/>
+                <outlet property="txtField" destination="kyJ-rj-nx3" id="4cE-QU-VD4"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="358"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="teI-R2-OyS">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="358"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="bJ9-GQ-oa3">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请设置储值卡密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aVw-MD-sJ4">
+                                    <rect key="frame" x="70" y="4" width="181" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.84506158760000005" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="设置6位数密码" textAlignment="center" minimumFontSize="17" id="kyJ-rj-nx3">
+                            <rect key="frame" x="66" y="51" width="189" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="js1-Ih-Wjd"/>
+                            </connections>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="frp-Nu-0YR">
+                            <rect key="frame" x="114" y="95" width="84" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                            <state key="normal" title="确认" backgroundImage="arrangeOrder.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="surePressed:" destination="-1" eventType="touchUpInside" id="dx3-5m-GQS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eI3-Se-yfI">
+                            <rect key="frame" x="31" y="146" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="1.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="1-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="w6F-CQ-uoU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AVM-Xk-fAq">
+                            <rect key="frame" x="122" y="146" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="2.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="2-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="jvz-ax-c5l"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yFR-bE-kpB">
+                            <rect key="frame" x="214" y="146" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="3.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="3-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="sSZ-om-7Gr"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dyd-bS-4bv">
+                            <rect key="frame" x="31" y="196" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="4.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="4-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="4d1-q5-Mkp"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GZL-lY-eoR">
+                            <rect key="frame" x="122" y="196" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="5.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="5-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="048-mm-Anl"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9L7-21-k6r">
+                            <rect key="frame" x="214" y="196" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="6.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="6-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="ELt-8N-0EM"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8to-Cr-roL">
+                            <rect key="frame" x="31" y="246" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="7.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="7-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="zGr-ZA-DMd"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="g3i-tK-Dtn">
+                            <rect key="frame" x="122" y="246" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="8.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="8-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="7i3-H8-PSJ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Ua-6W-qbI">
+                            <rect key="frame" x="214" y="246" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="9.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="9-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="P6s-5G-3n6"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="121" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Oep-Cz-S8O">
+                            <rect key="frame" x="31" y="296" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="重新输入" backgroundImage="blank.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" title="重新输入" backgroundImage="blank-selected.png"/>
+                            <connections>
+                                <action selector="resetPressed:" destination="-1" eventType="touchUpInside" id="eoB-hu-3wN"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="32115" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ltK-uP-fIr">
+                            <rect key="frame" x="214" y="296" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="clear.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="clear-selected.png"/>
+                            <connections>
+                                <action selector="canclePressed:" destination="-1" eventType="touchUpInside" id="ziN-rp-lxx"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="blI-tU-XkO">
+                            <rect key="frame" x="122" y="296" width="76" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" backgroundImage="0.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="0-selected.png"/>
+                            <connections>
+                                <action selector="btnPressed:" destination="-1" eventType="touchUpInside" id="9B2-7H-pqA"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="0-selected.png" width="109" height="53"/>
+        <image name="0.png" width="109" height="53"/>
+        <image name="1-selected.png" width="106" height="55"/>
+        <image name="1.png" width="106" height="55"/>
+        <image name="2-selected.png" width="109" height="54"/>
+        <image name="2.png" width="109" height="55"/>
+        <image name="3-selected.png" width="105" height="54"/>
+        <image name="3.png" width="105" height="55"/>
+        <image name="4-selected.png" width="106" height="53"/>
+        <image name="4.png" width="106" height="53"/>
+        <image name="5-selected.png" width="109" height="54"/>
+        <image name="5.png" width="109" height="53"/>
+        <image name="6-selected.png" width="109" height="54"/>
+        <image name="6.png" width="109" height="54"/>
+        <image name="7-selected.png" width="106" height="54"/>
+        <image name="7.png" width="106" height="54"/>
+        <image name="8-selected.png" width="109" height="54"/>
+        <image name="8.png" width="109" height="54"/>
+        <image name="9-selected.png" width="105" height="54"/>
+        <image name="9.png" width="105" height="54"/>
+        <image name="arrangeOrder.png" width="88" height="33"/>
+        <image name="blank-selected.png" width="105" height="53"/>
+        <image name="blank.png" width="106" height="53"/>
+        <image name="clear-selected.png" width="105" height="53"/>
+        <image name="clear.png" width="105" height="53"/>
+    </resources>
+</document>
