@@ -21,7 +21,7 @@
 
 
 @property (nonatomic, strong) PackageCardModel *packageModel;
-
+@property (nonatomic, strong) NSIndexPath *idxPath;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier packageCardModel:(PackageCardModel *)package;
 @end

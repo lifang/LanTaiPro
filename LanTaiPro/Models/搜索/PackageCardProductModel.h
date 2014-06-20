@@ -14,5 +14,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *product_num;
 @property (nonatomic, strong) NSString *unused_num;
-
+@property (nonatomic, strong) NSString *selected_num;
+@property (nonatomic, strong) NSString *several_times;
+@property (nonatomic, strong) NSString *types;
 @end

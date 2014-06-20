@@ -53,51 +53,61 @@ static WYPopoverController *popVC;
 
 - (void)setCustomerModel:(SearchCustomerModel *)customerModel
 {
-    _customerModel = customerModel;
-    
-    self.nameField.text = _customerModel.customer_name;
-    self.carNumField.text = _customerModel.customer_carNum;
-    self.phoneField.text = _customerModel.customer_phone;
-    
-    for (int i=100; i<107; i++) {
-        UILabel *label = (UILabel *)[self viewWithTag:i+LabelTag];
+    if (customerModel != nil){
+        _customerModel = customerModel;
         
-        switch (i) {
-            case 100:
-                label.text = [NSString stringWithFormat:@"%@  %@",_customerModel.customer_brandName,_customerModel.customer_modelName];
-                break;
-            case 101:
-                label.text = _customerModel.customer_carYear;
-                break;
-            case 102:
-                if ([_customerModel.customer_property intValue]==0) {
-                    label.text = @"个人";
-                }else {
-                    label.text = @"单位";
-                }
-                break;
-            case 103:
-                
-                if ([_customerModel.customer_sex intValue]==0) {
-                    label.text = @"男";
-                }else {
-                    label.text = @"女";
-                }
-                
-                break;
-            case 104:
-                label.text = _customerModel.customer_vin;
-                break;
-            case 105:
-                label.text = _customerModel.customer_distance;
-                break;
-            case 106:
-                label.text = _customerModel.customer_company;
-                break;
-                
-            default:
-                break;
+        self.nameField.text = _customerModel.customer_name;
+        self.carNumField.text = _customerModel.customer_carNum;
+        self.phoneField.text = _customerModel.customer_phone;
+        
+        for (int i=100; i<107; i++) {
+            UILabel *label = (UILabel *)[self viewWithTag:i+LabelTag];
+            
+            switch (i) {
+                case 100:
+                    label.text = [NSString stringWithFormat:@"%@  %@",_customerModel.customer_brandName,_customerModel.customer_modelName];
+                    break;
+                case 101:
+                    label.text = _customerModel.customer_carYear;
+                    break;
+                case 102:
+                    if ([_customerModel.customer_property intValue]==0) {
+                        label.text = @"个人";
+                    }else {
+                        label.text = @"单位";
+                    }
+                    break;
+                case 103:
+                    
+                    if ([_customerModel.customer_sex intValue]==0) {
+                        label.text = @"男";
+                    }else {
+                        label.text = @"女";
+                    }
+                    
+                    break;
+                case 104:
+                    label.text = _customerModel.customer_vin;
+                    break;
+                case 105:
+                    label.text = _customerModel.customer_distance;
+                    break;
+                case 106:
+                    label.text = _customerModel.customer_company;
+                    break;
+                    
+                default:
+                    break;
+            }
         }
+        
+        [self.orderTable reloadData];
+    }else{
+        for (int i=100; i<107; i++){
+            UILabel *label = (UILabel *)[self viewWithTag:i+LabelTag];
+            label.text = @"";
+        }
+        _customerModel = [[SearchCustomerModel alloc]init];
     }
 }
 
@@ -155,10 +165,17 @@ static WYPopoverController *popVC;
     
     switch (tempTag) {
         case 100:
+            self.carBrand = self.infoViewControl.brandName;
+            self.carModel = self.infoViewControl.modelName;
             
+            self.customerModel.customer_brandName=self.infoViewControl.brandName;
+            self.customerModel.customer_modelName=self.infoViewControl.modelName;
+            
+            label.text = [NSString stringWithFormat:@"%@  %@",self.carBrand,self.carModel];
             break;
         case 101:
             label.text = [self.infoViewControl.dateFormatter stringFromDate:self.infoViewControl.pickerView.date];
+            self.customerModel.customer_carYear = label.text;
             break;
         case 102:
             if (self.infoViewControl.selectedTag==0) {
@@ -166,6 +183,7 @@ static WYPopoverController *popVC;
             }else {
                 label.text = @"单位";
             }
+            self.customerModel.customer_property = [NSString stringWithFormat:@"%d",self.infoViewControl.selectedTag];
             break;
         case 103:
             if (self.infoViewControl.selectedTag==0) {
@@ -173,6 +191,7 @@ static WYPopoverController *popVC;
             }else {
                 label.text = @"女";
             }
+            self.customerModel.customer_sex = [NSString stringWithFormat:@"%d",self.infoViewControl.selectedTag];
             break;
             
         default:
@@ -186,34 +205,24 @@ static WYPopoverController *popVC;
     UILabel *label = (UILabel *)[self viewWithTag:tempTag+LabelTag];
     switch (tempTag) {
         case 100:
-            
             break;
         case 101:
-            
             break;
         case 102:
-            if (self.infoViewControl.selectedTag==0) {
-                label.text = @"个人";
-            }else {
-                label.text = @"单位";
-            }
             break;
         case 103:
-            if (self.infoViewControl.selectedTag==0) {
-                label.text = @"男";
-            }else {
-                label.text = @"女";
-            }
             break;
         case 104:
             label.text = self.infoViewControl.infoTextField.text;
+            self.customerModel.customer_vin = label.text;
             break;
         case 105:
             label.text = self.infoViewControl.infoTextField.text;
+            self.customerModel.customer_distance = label.text;
             break;
         case 106:
             label.text = self.infoViewControl.infoTextField.text;
-            
+            self.customerModel.customer_company = label.text;
             break;
             
         default:
@@ -227,7 +236,11 @@ static WYPopoverController *popVC;
     _orderType = orderType;
     UIButton *btn = (UIButton *)[self viewWithTag:(_orderType+OrderClassifyButtomTag)];
     btn.selected = YES;
+}
 
+-(void)setPackageCardList:(NSMutableArray *)packageCardList
+{
+    _packageCardList = packageCardList;
 }
 #pragma mark - 订单类型点击
 -(IBAction)orderClassifyButtonClicked:(id)sender
@@ -243,6 +256,21 @@ static WYPopoverController *popVC;
         
         if (self.orderType==OrderTypePackage) {
             [LTDataShare sharedService].packageOrderArray = nil;
+            if (self.orderType==OrderTypePackage && self.packageCardList.count>0){
+                UIView *footerView = [[UIView alloc]initWithFrame:(CGRect){0,0,648,44}];
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [btn setBackgroundImage:[UIImage imageNamed:@"arrangeOrder"] forState:UIControlStateNormal];
+                [btn setTitle:@"下单" forState:UIControlStateNormal];
+                btn.frame = (CGRect){550,5,88,33};
+                [btn addTarget:self action:@selector(packageToOrder) forControlEvents:UIControlEventTouchUpInside];
+                [footerView addSubview:btn];
+                [self.orderTable setTableFooterView:footerView];
+                
+                btn = nil;
+                footerView = nil;
+            }
+        }else {
+            [self.orderTable setTableFooterView:nil];
         }
         [self.orderTable reloadData];
     }
@@ -317,7 +345,7 @@ static WYPopoverController *popVC;
             cell = [[PackageCardCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier packageCardModel:package];
         }
         cell.delegate = self;
-        
+        cell.idxPath = indexPath;
         return cell;
     }else if (self.orderType==OrderTypeSvCard){
         static NSString * identifier = @"svCardOrderCell";
@@ -365,32 +393,6 @@ static WYPopoverController *popVC;
         return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    if (self.orderType==OrderTypePackage && self.packageCardList.count>0){
-        return 44;
-    }else
-        return 0;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    if (self.orderType==OrderTypePackage && self.packageCardList.count>0){
-        UIView *footerView = [[UIView alloc]initWithFrame:(CGRect){0,0,CGRectGetWidth(tableView.bounds),44}];
-//        footerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"log-background.jpg"]];
-        
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setBackgroundImage:[UIImage imageNamed:@"arrangeOrder"] forState:UIControlStateNormal];
-        [btn setTitle:@"下单" forState:UIControlStateNormal];
-        btn.frame = (CGRect){550,5,88,33};
-        [btn addTarget:self action:@selector(packageToOrder) forControlEvents:UIControlEventTouchUpInside];
-        [footerView addSubview:btn];
-        btn = nil;
-        return footerView;
-        
-    }else
-        return nil;
-}
 #pragma mark - 正在进行中的订单的代理
 -(void)cancelWorkingOrder:(WorkingOrderCell *)cell
 {
@@ -410,10 +412,37 @@ static WYPopoverController *popVC;
 -(void)packageToOrder
 {
     if ([LTDataShare sharedService].packageOrderArray.count>0) {
-        
+        //TODO:切换到开单页面
+        if ([self.delegate respondsToSelector:@selector(dismisSearchCustomView:)]) {
+            [self.delegate dismisSearchCustomView:self];
+        }
     }else {
         [Utility errorAlert:@"至少选择一项产品" dismiss:YES];
     }
 }
 
+#pragma mark - UITextField代理
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([textField isEqual:self.nameField]) {
+        self.customerModel.customer_name = textField.text;
+    }else if ([textField isEqual:self.carNumField]){
+        self.customerModel.customer_carNum = textField.text;
+    }else if ([textField isEqual:self.phoneField]){
+        self.customerModel.customer_phone = textField.text;
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    if ([textField isEqual:self.nameField]) {
+        self.customerModel.customer_name = textField.text;
+    }else if ([textField isEqual:self.carNumField]){
+        self.customerModel.customer_carNum = textField.text;
+    }else if ([textField isEqual:self.phoneField]){
+        self.customerModel.customer_phone = textField.text;
+    }
+    return YES;
+}
 @end

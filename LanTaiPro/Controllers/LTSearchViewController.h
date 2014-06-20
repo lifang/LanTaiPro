@@ -12,9 +12,13 @@
 #import "ShaixuanView.h"
 #import "XLCycleScrollView.h"
 #import "SearchCustomView.h"
+#import "LTMainViewController.h"
+#import "LTServiceBillingViewController.h"
 
+@interface LTSearchViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate,SearchCustomViewDelegate>
 
-@interface LTSearchViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate>
+@property (nonatomic, strong) LTMainViewController *mainViewControl;
+@property (nonatomic, strong) LTServiceBillingViewController *serviceViewControl;
 
 @property (nonatomic, strong) AppDelegate *appDel;
 

@@ -18,6 +18,8 @@
 #import "LTOrderViewController.h"
 #import "LTMainViewController.h"
 
+#import "LTServiceBillingViewController.h"
+
 @interface LTProductViewController : UIViewController<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,ProductCellDelegate,LTOrderViewControlDelegate>
 
 @property (nonatomic, strong) AppDelegate *appDel;
@@ -43,5 +45,5 @@
 @property (nonatomic, strong) LTImageViewController *productImgViewControl;
 
 @property (nonatomic, strong) LTMainViewController *mainViewControl;
-
+@property (nonatomic, strong) LTServiceBillingViewController *serviceViewControl;
 @end

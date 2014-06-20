@@ -89,9 +89,16 @@
                     }
                 }
             }else {
-                if (completeBlock_) {
-                    completeBlock_(jsonData);
+                if ([[jsonData objectForKey:@"status"]intValue]==1){
+                    if (completeBlock_) {
+                        completeBlock_(jsonData);
+                    }
+                }else {
+                    if (errorBlock_) {
+                        errorBlock_(@"");
+                    }
                 }
+                
             }
         }
     }

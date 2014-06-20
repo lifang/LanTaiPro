@@ -27,7 +27,7 @@
  */
 
 
-@interface LTStationViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,FastDelegate>
+@interface LTStationViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) AppDelegate *appDel;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *waitScrollView;//等待施工

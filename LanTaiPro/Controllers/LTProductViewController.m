@@ -54,6 +54,13 @@ static const char cardselectedkey;
     }
     return _selectedArray;
 }
+-(LTMainViewController *)mainViewControl
+{
+    if (!_mainViewControl) {
+        _mainViewControl = (LTMainViewController *)self.parentViewController;
+    }
+    return _mainViewControl;
+}
 
 -(LTImageViewController *)productImgViewControl{
     if (!_productImgViewControl) {
@@ -96,8 +103,7 @@ static const char cardselectedkey;
     self.productButton.selected = YES;
     self.serviceButton.selected = NO;
     self.cardButton.selected = NO;
-    
-    self.mainViewControl = (LTMainViewController *)self.parentViewController;
+
 //    //下拉刷新
 //    __block LTProductViewController *productViewControl = self;
 //    __block UITableView *table = self.productTable;
@@ -479,6 +485,43 @@ static const char cardselectedkey;
 {
     __block LTOrderViewController *orderViewControl = viewControl;
     [self.mainViewControl dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop dismissBlock:^(BOOL isFinish){
+        
+        [orderViewControl removeFromParentViewController];
+        orderViewControl = nil;
+    }];
+}
+
+- (void)disMissOrderViewControl:(LTOrderViewController *)viewControl withArray:(NSMutableArray *)orderArray
+{
+    for (int i=0; i<self.selectedArray.count; i++) {
+        int aRow = [self.selectedArray[i] integerValue];
+        if (self.classifyType==0) {
+            ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[aRow];
+            psModel.p_selected = @"0";
+            psModel.p_count = 0;
+            [self.productModel.productList replaceObjectAtIndex:aRow withObject:psModel];
+        }else if (self.classifyType==1){
+            ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[aRow];
+            psModel.p_selected = @"0";
+            psModel.p_count = 0;
+            [self.productModel.serviceList replaceObjectAtIndex:aRow withObject:psModel];
+        }else{
+            CardModel *cardModel = (CardModel *)self.productModel.cardList[aRow];
+            cardModel.c_selected = @"0";
+            [self.productModel.cardList replaceObjectAtIndex:aRow withObject:cardModel];
+        }
+        NSIndexPath *idxPath = [NSIndexPath indexPathForRow:aRow inSection:0];
+        [self.productTable reloadRowsAtIndexPaths:@[idxPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    self.selectedArray = nil;
+    
+    __block LTOrderViewController *orderViewControl = viewControl;
+    [self.mainViewControl dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop dismissBlock:^(BOOL isFinish){
+        
+        self.serviceViewControl = (LTServiceBillingViewController *)self.mainViewControl.childViewControllers[2];
+        
+        self.mainViewControl.currentPage = 2;
+        self.serviceViewControl.orderArray = orderArray;
         
         [orderViewControl removeFromParentViewController];
         orderViewControl = nil;

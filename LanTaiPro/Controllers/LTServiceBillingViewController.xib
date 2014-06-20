@@ -7,8 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LTServiceBillingViewController">
             <connections>
+                <outlet property="cancelOrderButton" destination="47E-Lt-cmJ" id="3DW-Qa-qSe"/>
+                <outlet property="confirmOrderButton" destination="H1v-4V-DUc" id="vd3-z4-8Mu"/>
                 <outlet property="fastTable" destination="Qwe-Fm-NHv" id="mAe-cp-Zsb"/>
                 <outlet property="leftView" destination="68H-gH-Lnh" id="Mq2-6V-vKu"/>
+                <outlet property="orderTable" destination="PHe-xV-nNE" id="hhE-Ai-E4V"/>
+                <outlet property="packageBtn" destination="TcB-25-AsA" id="JQ9-W8-rZt"/>
+                <outlet property="packageTable" destination="gle-RW-gal" id="SmM-qB-gLV"/>
                 <outlet property="productSearchTextField" destination="vjR-MR-bIi" id="DD5-X3-gbq"/>
                 <outlet property="searchTextField" destination="gOb-zL-zfC" id="mbw-Dj-K9R"/>
                 <outlet property="searchView" destination="OHf-ln-xdM" id="wA2-4C-Ph6"/>
@@ -100,6 +105,53 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PHe-xV-nNE" userLabel="orderTable">
+                            <rect key="frame" x="0.0" y="599" width="526" height="302"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="cYm-lz-xEv"/>
+                                <outlet property="delegate" destination="-1" id="d0M-Js-re9"/>
+                            </connections>
+                        </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="47E-Lt-cmJ">
+                            <rect key="frame" x="390" y="909" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="cancelOrder.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelToOrder:" destination="-1" eventType="touchUpInside" id="T4s-ty-nf4"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="H1v-4V-DUc">
+                            <rect key="frame" x="466" y="909" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="confirmorder.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="sureToOrder:" destination="-1" eventType="touchUpInside" id="TTM-dH-EAp"/>
+                            </connections>
+                        </button>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gle-RW-gal" userLabel="packageTable">
+                            <rect key="frame" x="0.0" y="305" width="526" height="286"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="WZR-zQ-Flp"/>
+                                <outlet property="delegate" destination="-1" id="eRj-iU-hcT"/>
+                            </connections>
+                        </tableView>
+                        <button opaque="NO" tag="98765336" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TcB-25-AsA">
+                            <rect key="frame" x="10" y="254" width="108" height="43"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
+                            <state key="normal" title="套餐卡" backgroundImage="orderClassSelected.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" backgroundImage="orderClassSelected.png"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -110,8 +162,11 @@
         </view>
     </objects>
     <resources>
+        <image name="cancelOrder.png" width="40" height="40"/>
+        <image name="confirmorder.png" width="40" height="40"/>
         <image name="eeee.png" width="163" height="1003"/>
         <image name="fast.png" width="163" height="38"/>
+        <image name="orderClassSelected.png" width="108" height="43"/>
         <image name="product-search.png" width="138" height="24"/>
         <image name="search-normal.png" width="40" height="40"/>
     </resources>

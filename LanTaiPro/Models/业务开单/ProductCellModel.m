@@ -15,7 +15,10 @@
     return  @{
               @"id": mts_key(productId),
               @"name": mts_key(name),
-              @"price": mts_key(price)
+              @"sale_price": mts_key(price),
+              @"several_times": mts_key(several_times),
+              @"types": mts_key(types),
+              @"isseleted": mts_key(selected),
               };
 }
 

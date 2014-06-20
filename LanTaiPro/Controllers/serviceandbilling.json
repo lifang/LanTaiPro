@@ -1,72 +1,99 @@
 {
     "status": "1",
-    "productList": [
-                    {
-                    "id": "1",
-                    "name": "优惠处置0",
-                    "products":[
-                                {
-                                "id":"10",
-                                "name":"可是的0",
-                                "price":"500"
-                                },
-                                {
-                                "id":"11",
-                                "name":"可是的1",
-                                "price":"500"
-                                },
-                                {
-                                "id":"12",
-                                "name":"可是的2",
-                                "price":"500"
-                                }
-                                ]
-                    
-                    },
-                    {
-                    "id": "1",
-                    "name": "优惠处置1",
-                    "products":[
-                                {
-                                "id":"10",
-                                "name":"咖啡机0",
-                                "price":"500"
-                                },
-                                {
-                                "id":"11",
-                                "name":"咖啡机1",
-                                "price":"500"
-                                },
-                                {
-                                "id":"12",
-                                "name":"咖啡机2",
-                                "price":"500"
-                                }
-                                ]
-                    
-                    },
-                    {
-                    "id": "1",
-                    "name": "优惠处置2",
-                    "products":[
-                                {
-                                "id":"10",
-                                "name":"健康大会0",
-                                "price":"500"
-                                },
-                                {
-                                "id":"11",
-                                "name":"健康大会1",
-                                "price":"300"
-                                },
-                                {
-                                "id":"12",
-                                "name":"健康大会2",
-                                "price":"600"
-                                }
-                                ]
-                    
-                    }
-                    ]
+    "products": [
+                 {
+                 "id": "1",
+                 "name": "清洗服务",
+                 "prod":[
+                         {
+                         "id":"33",
+                         "name":"清洗服务1",
+                         "sale_price":"1000",
+                         "several_times": "6",
+                         "isSelected":"0",
+                         "types": "0"
+                         },
+                         {
+                         "id":"32",
+                         "name":"清洗服务2",
+                         "sale_price":"1000",
+                         "several_times": "6",
+                         "isSelected":"0",
+                         "types": "0"
+                         },
+                         {
+                         "id":"31",
+                         "name":"清洗服务3",
+                         "sale_price":"1000",
+                         "several_times": "6",
+                         "isSelected":"0",
+                         "types": "0"
+                         }
+                         ]
+                 
+                 },
+                 {
+                 "id": "1",
+                 "name": "优惠处置1",
+                 "prod":[
+                         {
+                         "id":"10",
+                         "name":"咖啡机0",
+                         "sale_price":"500",
+                         "several_times": "6",
+                         "isSelected":"0",
+                         "types": "1"
+                         },
+                         {
+                         "id":"11",
+                         "name":"咖啡机1",
+                         "sale_price":"500",
+                         "several_times": "6",
+                         "isSelected":"0",
+                         "types": "1"
+                         },
+                         {
+                         "id":"12",
+                         "name":"咖啡机2",
+                         "sale_price":"500",
+                         "several_times": "6",
+                         "isSelected":"0",
+                         "types": "1"
+                         }
+                         ]
+                 
+                 },
+                 {
+                 "id": "1",
+                 "name": "优惠处置2",
+                 "prod":[
+                         {
+                         "id":"10",
+                         "name":"健康大会0",
+                         "sale_price":"500",
+                         "several_times": "6",
+                         "isSelected":"0",
+                         "types": "1"
+                         },
+                         {
+                         "id":"11",
+                         "name":"健康大会1",
+                         "sale_price":"300",
+                         "several_times": "6",
+                         "isSelected":"0",
+                         "types": "1"
+                         },
+                         {
+                         "id":"12",
+                         "name":"健康大会2",
+                         "sale_price":"600",
+                         "isSelected":"0",
+                         "several_times": "6",
+                         "types": "1"
+                         }
+                         ]
+                 
+                 }
+                 ]
     
 }

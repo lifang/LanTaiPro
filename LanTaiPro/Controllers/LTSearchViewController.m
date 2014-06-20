@@ -48,6 +48,14 @@
     return _scrollView;
 }
 
+-(LTMainViewController *)mainViewControl
+{
+    if (!_mainViewControl) {
+        _mainViewControl = (LTMainViewController *)self.parentViewController;
+    }
+    return _mainViewControl;
+}
+
 -(void)testData
 {
     NSDictionary *aDic = [Utility initWithJSONFile:@"searchInfo"];
@@ -103,7 +111,7 @@
 
 -(void)textFieldChanged:(NSNotification *)sender {
     UITextField *txtField = (UITextField *)sender.object;
-    
+     
     if (txtField.text.length == 0) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
@@ -174,7 +182,7 @@
 -(IBAction)searchButtonPressed:(id)sender
 {
     if (self.searchTextField.text.length==0) {
-        [Utility errorAlert:@"请填写您要搜索的产品" dismiss:YES];
+        [Utility errorAlert:@"请输入车牌号码或者手机号码" dismiss:YES];
     }else {
         [self.searchTextField resignFirstResponder];
         if (self.appDel.isReachable==NO) {
@@ -186,6 +194,7 @@
             NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
             [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
             [params setObject:self.searchTextField.text forKey:@"car_num"];
+            [params setObject:@"0" forKey:@"type"];
             
             [LTInterfaceBase request:params requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary){
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -213,20 +222,54 @@
 {
     NSArray *bundles = [[NSBundle mainBundle] loadNibNamed:@"SearchCustomView" owner:self options:nil];
     SearchCustomView *currentView = (SearchCustomView*)[bundles objectAtIndex:0];
+    currentView.delegate = self;
     
     currentView.orderType = OrderTypeWorking;//正在进行中的订单
     
-    SearchCustomerModel *customerModel = (SearchCustomerModel *)self.searchModel.customerList[index];
-    [currentView setCustomerModel:customerModel];
-    currentView.packageCardList = self.searchModel.packageCardList;
-    currentView.discountCardList = self.searchModel.discountCardList;
-    currentView.svCardList = self.searchModel.svCardList;
-    
+    if (self.searchModel.customerList.count>0) {
+        SearchCustomerModel *customerModel = (SearchCustomerModel *)self.searchModel.customerList[index];
+        [currentView setCustomerModel:customerModel];
+        [currentView setPackageCardList:self.searchModel.packageCardList];
+        currentView.discountCardList = self.searchModel.discountCardList;
+        currentView.svCardList = self.searchModel.svCardList;
+    }
     
     return currentView;
 }
 -(void)scrollAtPage:(NSInteger)page
 {
     
+}
+
+#pragma mark - SearchCustomView代理
+
+- (void)dismisSearchCustomView:(SearchCustomView *)searchView
+{
+    self.serviceViewControl = (LTServiceBillingViewController *)self.mainViewControl.childViewControllers[2];
+    
+    self.mainViewControl.currentPage = 2;
+    
+    NSMutableArray *orderArray = [[NSMutableArray alloc]init];
+    for (int i=0; i<[LTDataShare sharedService].packageOrderArray.count; i++) {
+        NSString *string = [LTDataShare sharedService].packageOrderArray[i];
+        NSArray *array = [string componentsSeparatedByString:@"_"];
+        
+        PackageCardModel *package = (PackageCardModel *)self.searchModel.packageCardList[[array[0] integerValue]];
+        PackageCardProductModel *packageProduct = (PackageCardProductModel *)package.productList[[array[1] integerValue]];
+        
+        OrderProductModel *product = [[OrderProductModel alloc]init];
+        product.productId = packageProduct.productId;
+        product.price = @"0";
+        product.name = packageProduct.name;
+        product.number = [array[4] integerValue];
+        product.validNumber = 0;
+        
+        [orderArray addObject:product];
+    }
+    SearchCustomView *currentView = (SearchCustomView*)self.scrollView.scrollView.subviews[1];
+    [self.serviceViewControl setCustomerModel:currentView.customerModel];
+    self.serviceViewControl.isSearching = NO;
+    self.serviceViewControl.orderArray = orderArray;
+    [self.serviceViewControl setPackageCardList:self.searchModel.packageCardList];
 }
 @end

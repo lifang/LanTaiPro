@@ -52,20 +52,7 @@
 }
 
 -(void)buttonClicked{
-   
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(fastToOrderCell:didSelectedItemAtIndexPath:)]) {
-//         NSLog(@"####");
-//        [self.delegate fastToOrderCell:self didSelectedItemAtIndexPath:self.path];
-//        
-//    }
-//    NSLog(@"%d",[self.delegate respondsToSelector:@selector
-//                 (fastToOrderCell:didSelectedItemAtIndexPath:)]);
-    NSLog(@"%@",self.delegate);
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(fastToOrderCell:didSelectedItemAtIndexPath:)]) {
-        NSLog(@"11111");
-    }
-    
+ 
 }
 
 -(void)setIsSelected:(BOOL)isSelected{

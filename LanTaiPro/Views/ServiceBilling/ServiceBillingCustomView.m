@@ -19,20 +19,14 @@ static WYPopoverController *popVC;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:@"ServiceBillingCustomView" owner:self options:nil];
+        if(arrayOfViews.count < 1){return nil;}
+        if(![[arrayOfViews objectAtIndex:0] isKindOfClass:[ServiceBillingCustomView class]]){
+            return nil;
+        }
+        self = [arrayOfViews objectAtIndex:0];
     }
     return self;
-}
-
--(UITableView *)packageTable
-{
-    if (!_packageTable) {
-        _packageTable = [[UITableView alloc]initWithFrame:(CGRect){0,214,526,300} style:UITableViewStylePlain];
-        _packageTable.dataSource = self;
-        _packageTable.delegate = self;
-        _packageTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    return _packageTable;
 }
 + (WYPopoverController *)popVC
 {
@@ -64,51 +58,59 @@ static WYPopoverController *popVC;
 
 - (void)setCustomerModel:(SearchCustomerModel *)customerModel
 {
-    _customerModel = customerModel;
-    
-    self.nameField.text = _customerModel.customer_name;
-    self.carNumField.text = _customerModel.customer_carNum;
-    self.phoneField.text = _customerModel.customer_phone;
-    
-    for (int i=100; i<107; i++) {
-        UILabel *label = (UILabel *)[self viewWithTag:i+LabelTag];
+    if (customerModel != nil) {
+        _customerModel = customerModel;
         
-        switch (i) {
-            case 100:
-                label.text = [NSString stringWithFormat:@"%@  %@",_customerModel.customer_brandName,_customerModel.customer_modelName];
-                break;
-            case 101:
-                label.text = _customerModel.customer_carYear;
-                break;
-            case 102:
-                if ([_customerModel.customer_property intValue]==0) {
-                    label.text = @"个人";
-                }else {
-                    label.text = @"单位";
-                }
-                break;
-            case 103:
-                
-                if ([_customerModel.customer_sex intValue]==0) {
-                    label.text = @"男";
-                }else {
-                    label.text = @"女";
-                }
-                
-                break;
-            case 104:
-                label.text = _customerModel.customer_vin;
-                break;
-            case 105:
-                label.text = _customerModel.customer_distance;
-                break;
-            case 106:
-                label.text = _customerModel.customer_company;
-                break;
-                
-            default:
-                break;
+        self.nameField.text = _customerModel.customer_name;
+        self.carNumField.text = _customerModel.customer_carNum;
+        self.phoneField.text = _customerModel.customer_phone;
+        
+        for (int i=100; i<107; i++) {
+            UILabel *label = (UILabel *)[self viewWithTag:i+LabelTag];
+            
+            switch (i) {
+                case 100:
+                    label.text = [NSString stringWithFormat:@"%@  %@",_customerModel.customer_brandName,_customerModel.customer_modelName];
+                    break;
+                case 101:
+                    label.text = _customerModel.customer_carYear;
+                    break;
+                case 102:
+                    if ([_customerModel.customer_property intValue]==0) {
+                        label.text = @"个人";
+                    }else {
+                        label.text = @"单位";
+                    }
+                    break;
+                case 103:
+                    
+                    if ([_customerModel.customer_sex intValue]==0) {
+                        label.text = @"男";
+                    }else {
+                        label.text = @"女";
+                    }
+                    
+                    break;
+                case 104:
+                    label.text = _customerModel.customer_vin;
+                    break;
+                case 105:
+                    label.text = _customerModel.customer_distance;
+                    break;
+                case 106:
+                    label.text = _customerModel.customer_company;
+                    break;
+                    
+                default:
+                    break;
+            }
         }
+    }else {
+        for (int i=100; i<107; i++){
+            UILabel *label = (UILabel *)[self viewWithTag:i+LabelTag];
+            label.text = @"";
+        }
+        _customerModel = [[SearchCustomerModel alloc]init];
     }
 }
 
@@ -166,10 +168,14 @@ static WYPopoverController *popVC;
     
     switch (tempTag) {
         case 100:
+            self.carBrand = self.infoViewControl.brandName;
+            self.carModel = self.infoViewControl.modelName;
             
+            label.text = [NSString stringWithFormat:@"%@  %@",self.carBrand,self.carModel];
             break;
         case 101:
             label.text = [self.infoViewControl.dateFormatter stringFromDate:self.infoViewControl.pickerView.date];
+            self.customerModel.customer_carYear = label.text;
             break;
         case 102:
             if (self.infoViewControl.selectedTag==0) {
@@ -177,6 +183,7 @@ static WYPopoverController *popVC;
             }else {
                 label.text = @"单位";
             }
+            self.customerModel.customer_property = [NSString stringWithFormat:@"%d",self.infoViewControl.selectedTag];
             break;
         case 103:
             if (self.infoViewControl.selectedTag==0) {
@@ -184,6 +191,7 @@ static WYPopoverController *popVC;
             }else {
                 label.text = @"女";
             }
+            self.customerModel.customer_sex = [NSString stringWithFormat:@"%d",self.infoViewControl.selectedTag];
             break;
             
         default:
@@ -197,34 +205,24 @@ static WYPopoverController *popVC;
     UILabel *label = (UILabel *)[self viewWithTag:tempTag+LabelTag];
     switch (tempTag) {
         case 100:
-            
             break;
         case 101:
-            
             break;
         case 102:
-            if (self.infoViewControl.selectedTag==0) {
-                label.text = @"个人";
-            }else {
-                label.text = @"单位";
-            }
             break;
         case 103:
-            if (self.infoViewControl.selectedTag==0) {
-                label.text = @"男";
-            }else {
-                label.text = @"女";
-            }
             break;
         case 104:
             label.text = self.infoViewControl.infoTextField.text;
+            self.customerModel.customer_vin = label.text;
             break;
         case 105:
             label.text = self.infoViewControl.infoTextField.text;
+            self.customerModel.customer_distance = label.text;
             break;
         case 106:
             label.text = self.infoViewControl.infoTextField.text;
-            
+            self.customerModel.customer_company = label.text;
             break;
             
         default:
@@ -233,14 +231,28 @@ static WYPopoverController *popVC;
     finish(YES);
 }
 
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+#pragma mark - UITextField代理
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    // Drawing code
+    if ([textField isEqual:self.nameField]) {
+        self.customerModel.customer_name = textField.text;
+    }else if ([textField isEqual:self.carNumField]){
+        self.customerModel.customer_carNum = textField.text;
+    }else if ([textField isEqual:self.phoneField]){
+        self.customerModel.customer_phone = textField.text;
+    }
 }
-*/
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    if ([textField isEqual:self.nameField]) {
+        self.customerModel.customer_name = textField.text;
+    }else if ([textField isEqual:self.carNumField]){
+        self.customerModel.customer_carNum = textField.text;
+    }else if ([textField isEqual:self.phoneField]){
+        self.customerModel.customer_phone = textField.text;
+    }
+    return YES;
+}
 @end

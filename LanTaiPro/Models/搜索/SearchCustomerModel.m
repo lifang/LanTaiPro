@@ -19,7 +19,7 @@
               @"sex": mts_key(customer_sex),
               @"email": mts_key(customer_email),
               @"property": mts_key(customer_property),
-              @"company":mts_key(customer_company),
+              @"group_name":mts_key(customer_company),
               @"vin":mts_key(customer_vin),
               
               @"car_num_id": mts_key(customer_carNumId),
@@ -45,4 +45,53 @@
              };
 }
 
+
++(NSMutableDictionary *)dictionaryFromModel:(SearchCustomerModel *)customerModel
+{
+    NSMutableDictionary *aDic = [NSMutableDictionary dictionary];
+    
+    if (customerModel) {
+        if (customerModel.customer_id != nil) {
+            [aDic setObject:customerModel.customer_id forKey:@"customer_id"];
+        }
+        if (customerModel.customer_name != nil) {
+            [aDic setObject:customerModel.customer_name forKey:@"name"];
+        }
+        if (customerModel.customer_carNum != nil) {
+            [aDic setObject:customerModel.customer_carNum forKey:@"num"];
+        }
+        if (customerModel.customer_phone != nil) {
+            [aDic setObject:customerModel.customer_phone forKey:@"mobilephone"];
+        }
+        if (customerModel.customer_brandName != nil) {
+            [aDic setObject:customerModel.customer_brandName forKey:@"brand_name"];
+        }
+        if (customerModel.customer_modelName != nil) {
+            [aDic setObject:customerModel.customer_modelName forKey:@"model_name"];
+        }
+        if (customerModel.customer_carNumId != nil) {
+            [aDic setObject:customerModel.customer_carNumId forKey:@"car_num_id"];
+        }
+        if (customerModel.customer_carYear != nil) {
+            [aDic setObject:customerModel.customer_carYear forKey:@"year"];
+        }
+        if (customerModel.customer_distance != nil) {
+            [aDic setObject:customerModel.customer_distance forKey:@"distance"];
+        }
+        if (customerModel.customer_company != nil) {
+            [aDic setObject:customerModel.customer_company forKey:@"group_name"];
+        }
+        if (customerModel.customer_vin != nil) {
+            [aDic setObject:customerModel.customer_vin forKey:@"vin"];
+        }
+        if (customerModel.customer_property != nil) {
+            [aDic setObject:customerModel.customer_property forKey:@"property"];
+        }
+        if (customerModel.customer_sex != nil) {
+            [aDic setObject:customerModel.customer_sex forKey:@"sex"];
+        }
+    }
+    
+    return aDic;
+}
 @end

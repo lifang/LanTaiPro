@@ -55,26 +55,16 @@
     
     self.orderInfoView.frame = CGRectMake(-1024, 45, 588, 1003);
     self.leftViewCover.frame = CGRectMake(-1024, 45, 100, 1003);
-//    self.orderInfoView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"userBackground"]];
+
     self.isFirst = YES;
     
-//    for (int i = 0; i < 3; i++) {
-//           [self testConstruction:i];
-//    }
-//    [self setCarviewWithCarsArr:self.waitCarsArr andWorkOrderFlag:0];
-//    [self setCarviewWithCarsArr:self.inConstructionCarsArr andWorkOrderFlag:1];
-//    [self setCarviewWithCarsArr:self.finshedCarsArr andWorkOrderFlag:2];
-//    
     [self.waitScrollView setShowsHorizontalScrollIndicator:NO];
     [self.finshScrollView setShowsHorizontalScrollIndicator:NO];
     [self.constructionScrollView setShowsVerticalScrollIndicator:NO];
-//
+
     [self getData];
     
     self.panGesture = [[UIPanGestureRecognizer alloc]init];
-//    [self.constructionTable setUserInteractionEnabled:YES];
-//    [self.constructionTable addGestureRecognizer:panGesture];
-//    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSeletedStaffs:) name:@"showSeletedStaffs" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTotal:) name:@"showTotal" object:nil];
     
@@ -85,17 +75,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPat
 {
     CGFloat cellHeiht = 44;
-//    if ([tableView isEqual:self.constructionTable]) {
-//        cellHeiht = 79;
-//    }
     return cellHeiht;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-//    if ([tableView isEqual:self.constructionTable]) {
-//        return self.stationServiceArr.count;
-//    }
-//    else
         if ([tableView isEqual:self.orderTable]) {
         return self.stationOrderModel.order_pro.count;
     }
@@ -129,49 +112,19 @@
         if (cell==nil) {
             cell = [[FastToOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-       
         ServiceModel *service = (ServiceModel *)[self.dataArray objectAtIndex:indexPath.row];
         [cell.serveBt setTitle:service.name forState:UIControlStateNormal];
         cell.path = indexPath;
         cell.backgroundColor = [UIColor clearColor];
-//        cell.delegate = self;
         if (indexPath.row == 0) {
             cell.isSelected = YES;
         }
         return cell;
 
        }
-    //正在施工的中的table
-//    if ([tableView isEqual:self.constructionTable]) {
-//        NSString *identifier = @"carCell";
-//        self.carCell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//        if (self.carCell == nil) {
-//            self.carCell = [[carCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//        }
-//        [tableView setSeparatorColor:[UIColor clearColor]];
-//        self.carCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//        NSDictionary *stationServiceDic = [[NSDictionary alloc]initWithDictionary:[self.stationServiceArr objectAtIndex:indexPath.row]];
-//        [self.stationModel mts_setValuesForKeysWithDictionary:stationServiceDic];
-//        [self.carCell initcarcellStation:self.stationModel];
-//       
-//        if (indexPath.row < self.inConstructionCarsArr.count) {
-//             NSDictionary *inConstructionCarsDic = [[NSDictionary alloc]initWithDictionary:[self.inConstructionCarsArr objectAtIndex:indexPath.row]];
-//            CarView *carView = [[CarView alloc]initWithFrame:CGRectMake(177 ,13+79*indexPath.row, 125, 51)];
-//            [self.constructionTable addSubview:carView];
-//
-//             [self.stationCarModel mts_setValuesForKeysWithDictionary:inConstructionCarsDic];
-//            
-//            [self.carCell initCarCellWithCarModel:self.stationCarModel];
-//            
-//            
-//        }
-//       
-//        return  self.carCell;
-//    }
     //选择技师table
     if ([tableView isEqual:self.staffTable]) {
-        NSString *identifier = @"staffCell";
+        static NSString *identifier = @"staffCell";
         StaffsCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
             cell = [[StaffsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -187,7 +140,7 @@
     //订单界面中显示订单的包含的项目或产品的table
     if ([tableView isEqual:self.orderTable]) {
         
-        NSString *identifier = @"orderCell";
+        static NSString *identifier = @"orderCell";
         OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
              cell = [[OrderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -245,11 +198,6 @@
         NSDictionary *seletedServiceDic = [[NSDictionary alloc]initWithDictionary:[self.serviceArr objectAtIndex:indexPath.row]];
         NSLog(@"----%@",seletedServiceDic);
     }
-//    if ([tableView isEqual:self.constructionTable]) {
-//        if (self.inConstructionCarsArr.count >indexPath.row) {
-//            [self checkOrder];
-//        }
-//    }
 }
 
 //点击正在施工中的按钮，查看订单详情
@@ -435,13 +383,6 @@
     return _stationCarModel;
 }
 
-//-(StationModel*)stationModel
-//{
-//    if (!_stationModel) {
-//        _stationModel = [[StationModel alloc]init];
-//    }
-//    return _stationModel;
-//}
 
 -(FastToOrderModel *)fastToOrderModel
 {
@@ -495,7 +436,7 @@
     
 }
 
-- (IBAction)moveInconstructionCarView:(UIPanGestureRecognizer *)sender;
+- (IBAction)moveInconstructionCarView:(UIPanGestureRecognizer *)sender
 {
     CGPoint point = [sender locationInView:self.constructionScrollView];
     if (sender.state == UIGestureRecognizerStateBegan) {
@@ -588,7 +529,6 @@
     for (int index = 0; index < [self.finishedCarsArr count]; index++) {
         CarView *view = [[CarView alloc] init];
         view.frame = (CGRect){CELL_PADDING+(CELL_WIDHT+CELL_PADDING)*(index-1),CELL_PADDING*2,CELL_WIDHT,CELL_HEIGHT-CELL_PADDING*4};
-//        view.frame = CGRectMake(10+index*CARVIEWWIDTH, 15, CARVIEWWIDTH, CARVIEWHIGHT);;
         view.tag = index;
         StationCarModel *obj = [self.finishedCarsArr objectAtIndex:index];
         view.carNumber = obj.carPlateNumber;
@@ -604,7 +544,6 @@
     [UIView animateWithDuration:0.5 animations:^{
         for (int index = 0; index < [self.finishedCarsArr count]; index++) {
             CarView *view = (CarView*)[self.finshScrollView viewWithTag:index];
-//            view.frame = (CGRect){CELL_PADDING+(CELL_WIDHT+CELL_PADDING)*index,CELL_PADDING*2,CELL_WIDHT,CELL_HEIGHT-CELL_PADDING*4};
             view.frame = CGRectMake(10+index*CARVIEWWIDTH, 15, CARVIEWWIDTH, CARVIEWHIGHT);
         }
         carView.frame = [self.finshScrollView convertRect:rect toView:self.leftBackgroundView];
@@ -622,54 +561,24 @@
 static NSString *work_order_id = nil;
 static NSMutableDictionary *finish_dic = nil;
 -(void)didMoveCarCellFromBeginningScrollViewToBottomLeftScrollViewCellPosionFromIndex:(int)from toIndex:(int)to orCarObj:(StationCarModel*)fromObj{
-//    if ([[Utils isExistenceNetwork] isEqualToString:@"NotReachable"]) {
-//        [Utils errorAlert:@"暂无网络!"];
-//    }else
+
     {
         finish_dic = [[NSMutableDictionary alloc]init];
         [finish_dic setObject:[NSString stringWithFormat:@"%d",from] forKey:@"from"];
         [finish_dic setObject:[NSString stringWithFormat:@"%d",to] forKey:@"to"];
         [finish_dic setObject:fromObj forKey:@"carObj"];
-        
-//        AppDelegate *app = [AppDelegate shareInstance];
-//        [MBProgressHUD showHUDAddedTo:app.window animated:YES];
         work_order_id = fromObj.workOrder_id;
-//        NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
-//        [params setObject:[DataService sharedService].store_id forKey:@"store_id"];
-//        [params setObject:[DataService sharedService].user_id forKey:@"user_id"];
-//        [params setObject:work_order_id forKey:@"work_order_id"];
-//        NSMutableURLRequest *request=[Utils getRequest:params string:[NSString stringWithFormat:@"%@%@",[DataService sharedService].kHost,kWaitPay]];
-//        NSOperationQueue *queue=[[NSOperationQueue alloc] init];
-//        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *respone,NSData *data,NSError *error) {
-//            if ([data length]>0 && error==nil) {
-//                [self performSelectorOnMainThread:@selector(finishOrder:) withObject:data waitUntilDone:NO];
-//            }
-//        }
-//         ];
     }
 }
 
 -(void)getData{
-//    NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
-//    [params setObject:[DataService sharedService].store_id forKey:@"store_id"];
-//    NSMutableURLRequest *request=[Utils getRequest:params string:[NSString stringWithFormat:@"%@%@",[DataService sharedService].kHost,kService]];
-//    NSOperationQueue *queue=[[NSOperationQueue alloc] init];
-//    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *respone,NSData *data,NSError *error) {
-//        if ([data length]>0 && error==nil) {
-//            [self performSelectorOnMainThread:@selector(setRespondtext:) withObject:data waitUntilDone:NO];
-//            //             NSLog(@"%@",data);
-//            
-//        }
-//    }
-//     ];
     NSDictionary *constrDic = [Utility initWithJSONFile:@"construction"];
-//    NSDictionary *workOrdersDic = [[NSDictionary alloc]initWithDictionary:[constrDic objectForKey:@"work_orders"]];
+
     [self setRespondtext:constrDic];
 
     
 }
 -(void)setRespondtext:(NSDictionary *)jsonObject {
-//    id jsonObject=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     if (jsonObject !=nil) {
         if ([jsonObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *jsonData=(NSDictionary *)jsonObject;
@@ -897,9 +806,6 @@ static NSMutableDictionary *finish_dic = nil;
 static NSString *work_order_id_station_id = nil;
 static NSMutableDictionary *work_dic = nil;
 -(void)didExchangeBeginningCarCellPosionFromIndex:(int)from toIndex:(int)to orFromCarObj:(StationCarModel*)fromObj toCarObj:(StationCarModel*)toObj{
-//    if ([[Utils isExistenceNetwork] isEqualToString:@"NotReachable"]) {
-//        [Utils errorAlert:@"暂无网络!"];
-//    }else
     {
         work_dic = [[NSMutableDictionary alloc]init];
         [work_dic setObject:[NSString stringWithFormat:@"%d",from] forKey:@"from"];
@@ -914,21 +820,6 @@ static NSMutableDictionary *work_dic = nil;
         }
         
         if (work_order_id_station_id) {
-//            AppDelegate *app = [AppDelegate shareInstance];
-//            [MBProgressHUD showHUDAddedTo:app.window animated:YES];
-//            NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
-//            [params setObject:[DataService sharedService].store_id forKey:@"store_id"];
-//            [params setObject:[DataService sharedService].user_id forKey:@"user_id"];
-//            [params setObject:work_order_id_station_id forKey:@"wo_station_ids"];
-//            DLog(@"params = %@",params);
-//            NSMutableURLRequest *request=[Utils getRequest:params string:[NSString stringWithFormat:@"%@%@",[DataService sharedService].kHost,kStation]];
-//            NSOperationQueue *queue=[[NSOperationQueue alloc] init];
-//            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *respone,NSData *data,NSError *error) {
-//                if ([data length]>0 && error==nil) {
-//                    [self performSelectorOnMainThread:@selector(selectStation:) withObject:data waitUntilDone:NO];
-//                }
-//            }
-//             ];
         }
     }
 }
