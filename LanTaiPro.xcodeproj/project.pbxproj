@@ -254,9 +254,9 @@
 		0EDFCA5F192329D900FA8493 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFCA5D192329D900FA8493 /* cancel.png */; };
 		0EDFCA60192329D900FA8493 /* confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EDFCA5E192329D900FA8493 /* confirm.png */; };
 		AC9F525719358AC6009A4802 /* CarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F525619358AC6009A4802 /* CarView.m */; };
+		ACA0F1D5194AA59E00BF243A /* ConstationCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA0F1D4194AA59E00BF243A /* ConstationCarView.m */; };
+		ACA0F1D8194AF5C000BF243A /* DRScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA0F1D7194AF5C000BF243A /* DRScrollView.m */; };
 		ACA31C861936D46000A570CB /* Car.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C851936D46000A570CB /* Car.png */; };
-		ACA31C8A1936DA4100A570CB /* carCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA31C881936DA4100A570CB /* carCell.m */; };
-		ACA31C8B1936DA4100A570CB /* carCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C891936DA4100A570CB /* carCell.xib */; };
 		ACA31C8D1936DACC00A570CB /* station-showLab.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C8C1936DACC00A570CB /* station-showLab.png */; };
 		ACA31C961936ECA400A570CB /* station-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C941936ECA400A570CB /* station-btn.png */; };
 		ACA31C971936ECA400A570CB /* station-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA31C951936ECA400A570CB /* station-clock.png */; };
@@ -268,11 +268,13 @@
 		ACA3C784193316D8003EB1C3 /* reddivider.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA3C783193316D8003EB1C3 /* reddivider.png */; };
 		ACA3C78919331881003EB1C3 /* station-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA3C78819331881003EB1C3 /* station-divider.png */; };
 		ACA3C78B193328CE003EB1C3 /* station-fastOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA3C78A193328CE003EB1C3 /* station-fastOrder.png */; };
+		ACA46558194557630086F6EF /* StationCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA46557194557630086F6EF /* StationCarModel.m */; };
 		ACA5D49B193EA9F500087F87 /* DataService.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA5D49A193EA9F500087F87 /* DataService.m */; };
 		ACA5D49E193EF8EA00087F87 /* station-activePerson.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA5D49C193EF8EA00087F87 /* station-activePerson.png */; };
 		ACA5D49F193EF8EA00087F87 /* station-person.png in Resources */ = {isa = PBXBuildFile; fileRef = ACA5D49D193EF8EA00087F87 /* station-person.png */; };
 		ACA5D4A3193F1D9600087F87 /* fastOrderServiceList.json in Resources */ = {isa = PBXBuildFile; fileRef = ACA5D4A2193F1D9600087F87 /* fastOrderServiceList.json */; };
 		ACA62CA1194150B2004B1203 /* FastToOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA62CA0194150B2004B1203 /* FastToOrderModel.m */; };
+		ACA656E719503BE10010BE5B /* CustomTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA588B0194843090041EA32 /* CustomTimeView.m */; };
 		ACA69F8F193D9968000D6C1A /* StationOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA69F8E193D9968000D6C1A /* StationOrderModel.m */; };
 		ACA69F94193DA40D000D6C1A /* order_details.json in Resources */ = {isa = PBXBuildFile; fileRef = ACA69F93193DA40D000D6C1A /* order_details.json */; };
 		ACAB1B01194019BB00378612 /* construction.json in Resources */ = {isa = PBXBuildFile; fileRef = ACAB1B00194019BB00378612 /* construction.json */; };
@@ -655,10 +657,11 @@
 		0EDFCA5E192329D900FA8493 /* confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confirm.png; sourceTree = "<group>"; };
 		AC9F525519358AC6009A4802 /* CarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarView.h; sourceTree = "<group>"; };
 		AC9F525619358AC6009A4802 /* CarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarView.m; sourceTree = "<group>"; };
+		ACA0F1D3194AA59E00BF243A /* ConstationCarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstationCarView.h; sourceTree = "<group>"; };
+		ACA0F1D4194AA59E00BF243A /* ConstationCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstationCarView.m; sourceTree = "<group>"; };
+		ACA0F1D6194AF5BF00BF243A /* DRScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRScrollView.h; sourceTree = "<group>"; };
+		ACA0F1D7194AF5C000BF243A /* DRScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRScrollView.m; sourceTree = "<group>"; };
 		ACA31C851936D46000A570CB /* Car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Car.png; sourceTree = "<group>"; };
-		ACA31C871936DA4100A570CB /* carCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = carCell.h; sourceTree = "<group>"; };
-		ACA31C881936DA4100A570CB /* carCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = carCell.m; sourceTree = "<group>"; };
-		ACA31C891936DA4100A570CB /* carCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = carCell.xib; sourceTree = "<group>"; };
 		ACA31C8C1936DACC00A570CB /* station-showLab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-showLab.png"; sourceTree = "<group>"; };
 		ACA31C941936ECA400A570CB /* station-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-btn.png"; sourceTree = "<group>"; };
 		ACA31C951936ECA400A570CB /* station-clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-clock.png"; sourceTree = "<group>"; };
@@ -672,6 +675,10 @@
 		ACA3C783193316D8003EB1C3 /* reddivider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reddivider.png; sourceTree = "<group>"; };
 		ACA3C78819331881003EB1C3 /* station-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-divider.png"; sourceTree = "<group>"; };
 		ACA3C78A193328CE003EB1C3 /* station-fastOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-fastOrder.png"; sourceTree = "<group>"; };
+		ACA46556194557630086F6EF /* StationCarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCarModel.h; sourceTree = "<group>"; };
+		ACA46557194557630086F6EF /* StationCarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCarModel.m; sourceTree = "<group>"; };
+		ACA588AF194843090041EA32 /* CustomTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTimeView.h; sourceTree = "<group>"; };
+		ACA588B0194843090041EA32 /* CustomTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTimeView.m; sourceTree = "<group>"; };
 		ACA5D499193EA9F500087F87 /* DataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataService.h; sourceTree = "<group>"; };
 		ACA5D49A193EA9F500087F87 /* DataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataService.m; sourceTree = "<group>"; };
 		ACA5D49C193EF8EA00087F87 /* station-activePerson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station-activePerson.png"; sourceTree = "<group>"; };
@@ -679,6 +686,8 @@
 		ACA5D4A2193F1D9600087F87 /* fastOrderServiceList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fastOrderServiceList.json; sourceTree = "<group>"; };
 		ACA62C9F194150B2004B1203 /* FastToOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastToOrderModel.h; sourceTree = "<group>"; };
 		ACA62CA0194150B2004B1203 /* FastToOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastToOrderModel.m; sourceTree = "<group>"; };
+		ACA656E4194FDA430010BE5B /* CustomTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTimeView.h; sourceTree = "<group>"; };
+		ACA656E5194FDA430010BE5B /* CustomTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTimeView.m; sourceTree = "<group>"; };
 		ACA69F8D193D9968000D6C1A /* StationOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationOrderModel.h; sourceTree = "<group>"; };
 		ACA69F8E193D9968000D6C1A /* StationOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationOrderModel.m; sourceTree = "<group>"; };
 		ACA69F93193DA40D000D6C1A /* order_details.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = order_details.json; sourceTree = "<group>"; };
@@ -1417,9 +1426,6 @@
 			children = (
 				AC9F525519358AC6009A4802 /* CarView.h */,
 				AC9F525619358AC6009A4802 /* CarView.m */,
-				ACA31C871936DA4100A570CB /* carCell.h */,
-				ACA31C881936DA4100A570CB /* carCell.m */,
-				ACA31C891936DA4100A570CB /* carCell.xib */,
 				ACA31C9819370A4E00A570CB /* StaffsCell.h */,
 				ACA31C9919370A4E00A570CB /* StaffsCell.m */,
 				ACA31C9A19370A4E00A570CB /* StaffsCell.xib */,
@@ -1429,6 +1435,12 @@
 				ACAB1B0219405B0C00378612 /* FastToOrderCell.h */,
 				ACAB1B0319405B0C00378612 /* FastToOrderCell.m */,
 				ACAB1B0419405B0C00378612 /* FastToOrderCell.xib */,
+				ACA0F1D3194AA59E00BF243A /* ConstationCarView.h */,
+				ACA0F1D4194AA59E00BF243A /* ConstationCarView.m */,
+				ACA0F1D6194AF5BF00BF243A /* DRScrollView.h */,
+				ACA0F1D7194AF5C000BF243A /* DRScrollView.m */,
+				ACA656E4194FDA430010BE5B /* CustomTimeView.h */,
+				ACA656E5194FDA430010BE5B /* CustomTimeView.m */,
 			);
 			name = Station;
 			sourceTree = "<group>";
@@ -1440,6 +1452,10 @@
 				ACA69F8E193D9968000D6C1A /* StationOrderModel.m */,
 				ACA62C9F194150B2004B1203 /* FastToOrderModel.h */,
 				ACA62CA0194150B2004B1203 /* FastToOrderModel.m */,
+				ACA46556194557630086F6EF /* StationCarModel.h */,
+				ACA46557194557630086F6EF /* StationCarModel.m */,
+				ACA588AF194843090041EA32 /* CustomTimeView.h */,
+				ACA588B0194843090041EA32 /* CustomTimeView.m */,
 			);
 			name = "现场管理";
 			sourceTree = "<group>";
@@ -1534,15 +1550,11 @@
 				0E2285641924696200BF3380 /* LTProductViewController.xib in Resources */,
 				0E2285481924652C00BF3380 /* station-active.png in Resources */,
 				0E0866801932D92100354FDC /* product-shop-selected.png in Resources */,
-
 				ACA69F94193DA40D000D6C1A /* order_details.json in Resources */,
-
 				0E174BCC1936DD9A00B30337 /* person.png in Resources */,
-
 				0E2285551924691800BF3380 /* LTStationViewController.xib in Resources */,
 				0E2285451924652C00BF3380 /* serviceBilling-normal.png in Resources */,
 				0E2285491924652C00BF3380 /* station-normal.png in Resources */,
-				ACA31C8B1936DA4100A570CB /* carCell.xib in Resources */,
 				0E541EEC192DC2BC00C88A72 /* ProductOrderCell.xib in Resources */,
 				ACA5D49E193EF8EA00087F87 /* station-activePerson.png in Resources */,
 				ACA5D4A3193F1D9600087F87 /* fastOrderServiceList.json in Resources */,
@@ -1559,11 +1571,8 @@
 				0EAF9E21192205B800789A8D /* log-name-normal.png in Resources */,
 				0E541ED0192D8CF200C88A72 /* ProductCell.xib in Resources */,
 				0E541EC5192D890300C88A72 /* product-product.png in Resources */,
-
 				ACA31C8D1936DACC00A570CB /* station-showLab.png in Resources */,
-
 				0E174B861935D51D00B30337 /* searchInfo.json in Resources */,
-
 				0E541F09192F2F0500C88A72 /* CustomView.xib in Resources */,
 				0EDFCA60192329D900FA8493 /* confirm.png in Resources */,
 				0E541EE0192DB4EF00C88A72 /* product-status-selected.png in Resources */,
@@ -1612,9 +1621,7 @@
 				0E174BCD1936DD9A00B30337 /* woman.png in Resources */,
 				0E541ECA192D89FA00C88A72 /* product-reduce.png in Resources */,
 				0E2285401924652C00BF3380 /* product-active.png in Resources */,
-
 				ACA31C861936D46000A570CB /* Car.png in Resources */,
-
 				0E921DEF193DA42D0053B64F /* eeee.png in Resources */,
 				0E92EDCC192B29F80006839B /* appointment.json in Resources */,
 				0E22858C1924A5D400BF3380 /* arrow_up.png in Resources */,
@@ -1627,7 +1634,6 @@
 				0E541EC9192D89FA00C88A72 /* product-add.png in Resources */,
 				0EAF9E20192205B800789A8D /* log-name-active.png in Resources */,
 				0E22856E1924698900BF3380 /* LTAppointmentViewController.xib in Resources */,
-
 				ACA3C784193316D8003EB1C3 /* reddivider.png in Resources */,
 				0E8184971941B0DB0092ED8B /* ServiceBillingCustomView.xib in Resources */,
 				0E9BA76A19259FC900DCB1FA /* LTLocalUserViewController.xib in Resources */,
@@ -1689,6 +1695,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACA656E719503BE10010BE5B /* CustomTimeView.m in Sources */,
 				0E174B7F1935C91B00B30337 /* pinyin.c in Sources */,
 				0E22852A19245A6200BF3380 /* LTMainViewLeftBar.m in Sources */,
 				0E174BE71937337700B30337 /* CapitalModel.m in Sources */,
@@ -1729,6 +1736,7 @@
 				0E174BD01936DED200B30337 /* SelectedView.m in Sources */,
 				0E959ADE1918AD5C0098E2E8 /* main.m in Sources */,
 				0E959B831918AFA70098E2E8 /* SVPullToRefresh.m in Sources */,
+				ACA46558194557630086F6EF /* StationCarModel.m in Sources */,
 				0E22857F19249CA700BF3380 /* UserNowOrderModel.m in Sources */,
 				0E541F07192F2DFA00C88A72 /* CustomView.m in Sources */,
 				0E2285631924696200BF3380 /* LTProductViewController.m in Sources */,
@@ -1737,8 +1745,6 @@
 				0E174B931935DF7200B30337 /* SearchCustomerModel.m in Sources */,
 				0E959B7D1918AFA70098E2E8 /* UIButton+WebCache.m in Sources */,
 				0E9BA7751925A33C00DCB1FA /* UserNowOrderOpenCell.m in Sources */,
-
-				0E959BB11918B7A70098E2E8 /* CarModel.m in Sources */,
 				ACA62CA1194150B2004B1203 /* FastToOrderModel.m in Sources */,
 				0E959BC31918BB920098E2E8 /* LTDB.m in Sources */,
 				0E959BBA1918B8710098E2E8 /* OrderModel.m in Sources */,
@@ -1760,7 +1766,6 @@
 				0E174BE61937337700B30337 /* BrandModel.m in Sources */,
 				0E959BB61918B7D10098E2E8 /* ServiceModel.m in Sources */,
 				0E959B791918AFA70098E2E8 /* SDWebImageDownloader.m in Sources */,
-				ACA31C8A1936DA4100A570CB /* carCell.m in Sources */,
 				0E959B091918AE7A0098E2E8 /* UIImageView+Addition.m in Sources */,
 				0E541EFF192ED83200C88A72 /* LTImageViewController.m in Sources */,
 				0E959B801918AFA70098E2E8 /* UIImage+WebP.m in Sources */,
@@ -1769,11 +1774,9 @@
 				0E174BD619371BAD00B30337 /* WorkingOrderCell.m in Sources */,
 				0E22856D1924698900BF3380 /* LTAppointmentViewController.m in Sources */,
 				0E959BB71918B7D10098E2E8 /* StationModel.m in Sources */,
-
 				ACA31CB81937416100A570CB /* OrderCell.m in Sources */,
-
+				ACA0F1D8194AF5C000BF243A /* DRScrollView.m in Sources */,
 				0E7D5E021938893B00CB68F5 /* OldOrderCell.m in Sources */,
-
 				0E541EF9192DC8B900C88A72 /* CardModel.m in Sources */,
 				0E959B891918B1F50098E2E8 /* SVSegmentedControl.m in Sources */,
 				0E174BA81935E71500B30337 /* SvCardModel.m in Sources */,
@@ -1808,6 +1811,7 @@
 				0E9BA7731925A33C00DCB1FA /* UserNowOrderCell.m in Sources */,
 				0E921DEA193D9AAD0053B64F /* ServiceBillingCell.m in Sources */,
 				0E959B7F1918AFA70098E2E8 /* UIImage+MultiFormat.m in Sources */,
+				ACA0F1D5194AA59E00BF243A /* ConstationCarView.m in Sources */,
 				0E174B831935CA5000B30337 /* ShaixuanView.m in Sources */,
 				0E8184831941843F0092ED8B /* SearchCore.mm in Sources */,
 				0E959B7E1918AFA70098E2E8 /* UIImage+GIF.m in Sources */,

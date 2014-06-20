@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LanTaiPro/Controllers/LTStationViewController.m"
-            timestampString = "423720062.12463"
+            timestampString = "424764618.951475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "-checkOrder"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LanTaiPro/Controllers/LTStationViewController.m"
-            timestampString = "423720062.12463"
+            timestampString = "424836261.66449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
-            landmarkName = "-testConstruction:"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
+            landmarkName = "-initInfoView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,14 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "carCell.h"
+
 #import "StaffsCell.h"
 #import "OrderCell.h"
 #import "StationOrderModel.h"
 #import "CarView.h"
-#import "CarModel.h"
+#import "StationCarModel.h"
 #import "StationModel.h"
 #import "FastToOrderModel.h"
+#import "ConstationCarView.h"
+#import "DRScrollView.h"
+#import "StationModel.h"
+#import "FastToOrderCell.h"
+#import "ServiceModel.h"
 /**
  * 现场管理页面
  * 等待施工，正在施工，等待确认付款
@@ -22,11 +27,12 @@
  */
 
 
-@interface LTStationViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface LTStationViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,FastDelegate>
 @property (nonatomic, strong) AppDelegate *appDel;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *waitScrollView;//等待施工
-@property (strong, nonatomic) IBOutlet UITableView *constructionTable;//正在施工table
+@property (strong, nonatomic) IBOutlet DRScrollView *constructionScrollView;
+
 @property (strong, nonatomic) IBOutlet UIScrollView *finshScrollView;//完成施工
 @property (strong, nonatomic) IBOutlet UITableView *fastToOrderTable;//快速下单view中的tableView
 @property (strong, nonatomic) IBOutlet UIView *orderInfoView;//订单详情
@@ -54,19 +60,28 @@
 @property (strong, nonatomic) IBOutlet UILabel *total;//总计
 
 @property (strong, nonatomic) StationOrderModel *stationOrderModel;
-
-@property (strong, nonatomic) NSMutableArray *waitCarsArr;//等待施工的车辆
+@property (strong, nonatomic) ConstationCarView *constationCarView;
+@property (strong, nonatomic) NSMutableArray *waitCarsArr,*waittingCarsArr;//等待施工的车辆
 @property (strong, nonatomic) NSMutableArray *inConstructionCarsArr;//正在施工的车辆
-@property (strong, nonatomic) NSMutableArray *finshedCarsArr;//等待确认付款的车辆
+@property (strong, nonatomic) NSMutableArray *finshedCarsArr,*finishedCarsArr;//等待确认付款的车辆
+@property (strong, nonatomic) NSMutableDictionary *beginningCarsDic;//正在施工中的车辆DIC
 @property (strong, nonatomic) NSArray *stationServiceArr;//工位信息;
 @property (strong, nonatomic) IBOutlet UIView *leftView;
+@property (strong, nonatomic) IBOutlet UIView *leftBackgroundView;
+@property (strong, nonatomic) IBOutlet UIView *sub_view;
 
 @property (strong, nonatomic) CarView *carView;
-@property (strong, nonatomic) CarModel *carModel;
+@property (strong, nonatomic) CarView *moveCarView;
+@property (strong, nonatomic) StationCarModel *stationCarModel;
 @property (strong, nonatomic) StationModel *stationModel;
 @property (strong, nonatomic) FastToOrderModel *fastToOrderModel;
 @property (strong, nonatomic) NSArray *serviceArr;//快速下单服务Arr
 
+@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
+@property (strong, nonatomic) IBOutlet UIView *rightView;
+@property (assign, nonatomic) BOOL isScrollMiddleScrollView;
+@property (strong, nonatomic) NSMutableArray *stationArray;
+@property (nonatomic,strong) NSMutableArray *dataArray;//快速下单服务项目ARR
 
 - (IBAction)tapLeftViewCover:(UIControl *)sender;//点击回到现场管理
 - (IBAction)moveInconstructionCarView:(UIPanGestureRecognizer *)sender;

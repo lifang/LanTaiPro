@@ -17,4 +17,9 @@
              @"price":mts_key(price)
              };
 }
+
++ (BOOL)mts_shouldSetUndefinedKeys
+{
+    return NO;
+}
 @end
