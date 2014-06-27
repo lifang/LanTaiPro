@@ -7,17 +7,36 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CarModel.h"
+#import "StationCarModel.h"
 
-@interface CarView : UIView
+typedef enum {CARNOTHING,CARWAITTING,CARBEGINNING,CARPAYING,CARFINISHED} CarState;
 
-@property (strong, nonatomic)UILabel *carNumberLab;//车牌
-@property (strong, nonatomic)UIImageView *carImageView;
-@property (nonatomic, strong)NSString *stationId;//工位ID
+@interface CarView : UIView<UIGestureRecognizerDelegate>
+
+
+@property (nonatomic, assign) CGRect beforeMoiveRect;
+@property (nonatomic, assign) CGRect parentViewRect;
+@property (nonatomic, strong) NSString *carNumber;
+@property (nonatomic, assign) CarState state;
+@property (nonatomic, assign) NSString *station_id;
+@property (nonatomic, strong) UIView *coverView;
+
+
+
+
 @property (nonatomic, strong)NSString *orderId;//订单id
 @property (nonatomic, strong)NSString *workId;
-@property (nonatomic, strong)CarModel *carModel;
--(void)initCarViewWithCarModel:(CarModel *)carModel;
+
+@property (nonatomic, strong)StationCarModel *stationCarModel;
+
+//@property (nonatomic,assign) CGRect beforeMoiveRect;
+//@property (nonatomic,assign) CGRect parentViewRect;
+
+@property (nonatomic, assign) CGSize offset;
+@property (nonatomic, assign) CGPoint oldCenter;
+
+-(void)initCarViewWithCarModel:(StationCarModel *)stationCarModel;
+-(CarView *)copyCarView;
 
 
 @end

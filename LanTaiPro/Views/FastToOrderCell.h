@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface FastToOrderCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIButton *serveBt;
+@property (nonatomic,strong) NSIndexPath *path;
+@property (nonatomic,assign) BOOL isSelected;
+
 
 @end
+
+
