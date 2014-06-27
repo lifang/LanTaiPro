@@ -37,7 +37,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="xZ2-3p-QFb">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="xZ2-3p-QFb">
                     <rect key="frame" x="110" y="20" width="164" height="21"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,7 +47,7 @@
                         <outlet property="delegate" destination="iN0-l3-epB" id="TFd-Rz-ESz"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="KFA-60-byj">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="KFA-60-byj">
                     <rect key="frame" x="332" y="20" width="106" height="21"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,7 +57,7 @@
                         <outlet property="delegate" destination="iN0-l3-epB" id="qSn-g3-F5O"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="EVc-dg-Ugz">
+                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="EVc-dg-Ugz">
                     <rect key="frame" x="508" y="19" width="135" height="21"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="textColor" red="0.35686274509999999" green="0.87450980389999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,82 +67,61 @@
                         <outlet property="delegate" destination="iN0-l3-epB" id="BMB-C0-NoJ"/>
                     </connections>
                 </textField>
-                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="S1E-NR-uzS">
+                <button opaque="NO" tag="100" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="S1E-NR-uzS">
                     <rect key="frame" x="60" y="60" width="42" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <state key="normal" title="车型">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="infoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="FV2-9t-MgM"/>
-                    </connections>
                 </button>
-                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T1c-k3-RLP">
+                <button opaque="NO" tag="102" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T1c-k3-RLP">
                     <rect key="frame" x="60" y="98" width="42" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <state key="normal" title="属性">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="infoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="bag-K1-KhY"/>
-                    </connections>
                 </button>
-                <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xA7-KQ-USe">
+                <button opaque="NO" tag="104" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xA7-KQ-USe">
                     <rect key="frame" x="60" y="136" width="42" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <state key="normal" title="VIN">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="infoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="bLa-JT-n2F"/>
-                    </connections>
                 </button>
-                <button opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NhC-hX-c3y">
+                <button opaque="NO" tag="106" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NhC-hX-c3y">
                     <rect key="frame" x="60" y="174" width="42" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <state key="normal" title="单位">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="infoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Mjq-bm-M1S"/>
-                    </connections>
                 </button>
-                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="igW-Sm-ycZ">
+                <button opaque="NO" tag="101" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="igW-Sm-ycZ">
                     <rect key="frame" x="364" y="60" width="42" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <state key="normal" title="年份">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="infoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Qt4-51-gAr"/>
-                    </connections>
                 </button>
-                <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="thc-Nf-51P">
+                <button opaque="NO" tag="103" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="thc-Nf-51P">
                     <rect key="frame" x="364" y="98" width="42" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <state key="normal" title="性别">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="infoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Wkb-3c-3uF"/>
-                    </connections>
                 </button>
-                <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qm0-hT-Pbg">
+                <button opaque="NO" tag="105" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qm0-hT-Pbg">
                     <rect key="frame" x="364" y="136" width="42" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                     <state key="normal" title="里程">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="infoButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZO6-sR-K69"/>
-                    </connections>
                 </button>
                 <view contentMode="scaleToFill" id="6Ah-2d-41L">
                     <rect key="frame" x="20" y="212" width="648" height="1"/>
@@ -150,7 +129,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" tag="98765334" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Qq-Vn-eKa">
-                    <rect key="frame" x="20" y="224" width="123" height="43"/>
+                    <rect key="frame" x="36" y="224" width="123" height="43"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                     <state key="normal" title="进行中订单" backgroundImage="orderClass.png">
@@ -162,7 +141,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="98765335" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EKp-mN-8nB">
-                    <rect key="frame" x="151" y="224" width="108" height="43"/>
+                    <rect key="frame" x="174" y="224" width="108" height="43"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                     <state key="normal" title="消费记录" backgroundImage="orderClass.png">
@@ -174,7 +153,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="98765336" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n7d-eR-FtE">
-                    <rect key="frame" x="282" y="224" width="108" height="43"/>
+                    <rect key="frame" x="298" y="224" width="108" height="43"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                     <state key="normal" title="套餐卡" backgroundImage="orderClass.png">
@@ -186,7 +165,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="98765337" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SJP-t6-cgR">
-                    <rect key="frame" x="398" y="224" width="108" height="43"/>
+                    <rect key="frame" x="421" y="224" width="108" height="43"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                     <state key="normal" title="储值卡" backgroundImage="orderClass.png">
@@ -198,7 +177,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="98765338" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wnW-Q8-SCq">
-                    <rect key="frame" x="514" y="224" width="108" height="43"/>
+                    <rect key="frame" x="544" y="224" width="108" height="43"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                     <state key="normal" title="打折卡" backgroundImage="orderClass.png">

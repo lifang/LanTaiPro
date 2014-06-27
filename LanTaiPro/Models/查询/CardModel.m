@@ -15,14 +15,12 @@
     return  @{@"id": mts_key(c_id),
               @"img_url": mts_key(c_imageUrl),
               @"name": mts_key(c_name),
-              @"type": mts_key(c_type),
+              @"types": mts_key(c_type),
               @"description": mts_key(c_description),
               @"price": mts_key(c_price),
-              @"isseleted": mts_key(c_selected),
+              @"is_selected": mts_key(c_selected),
               @"products": mts_key(c_product),
-              @"brand": mts_key(c_brand),
               @"is_new": mts_key(c_isNew),
-              
               };
 }
 

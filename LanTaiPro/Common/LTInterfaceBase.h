@@ -13,16 +13,6 @@
  * 结合ARC，Blocks和GCD 来实现了一个网络请求的封装
  */
 
-/*
- * typedef Block 类型变量
- * 提高源代码的可读性
- */
-
-/*
- * 5-15修改
- * 增加get方法
- */
-
 typedef void(^CompleteBlock_t)(NSDictionary *dictionary);
 typedef void(^ErrorBlock_t)(NSString *notice);
 
@@ -32,6 +22,8 @@ typedef void(^ErrorBlock_t)(NSString *notice);
     CompleteBlock_t completeBlock_;
     ErrorBlock_t errorBlock_;
 }
+
+@property (nonatomic, strong) NSInputStream *inputStreamForFile;
 
 + (id)request:(NSMutableDictionary *)params requestUrl:(NSString *)requestUrl method:(NSString *)method completeBlock:(CompleteBlock_t)compleBlock errorBlock:(ErrorBlock_t)errorBlock;
 

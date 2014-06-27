@@ -31,8 +31,6 @@
 
 @synthesize segmentedControl, backgroundImage, highlightedBackgroundImage, font, tintColor, textColor, textShadowColor, textShadowOffset, shouldCastShadow, selected;
 @synthesize label, secondLabel;
-
-// deprecated properties
 @synthesize shadowColor, shadowOffset, castsShadow;
 
 

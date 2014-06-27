@@ -11,7 +11,9 @@
 
 #define HEADER @"orderTableViewHeader"
 #define FOOTER @"orderTableViewFooter"
-#define LabelTag 1000///////
+//下拉刷新
+#import "SVPullToRefresh.h"
+
 @implementation LTServiceBillingViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -84,7 +86,13 @@
     }
     return _keyViewController;
 }
-
+-(LTMainViewController *)mainViewControl
+{
+    if (!_mainViewControl) {
+        _mainViewControl = (LTMainViewController *)self.parentViewController;
+    }
+    return _mainViewControl;
+}
 -(void)setOrderArray:(NSMutableArray *)orderArray
 {
     _orderArray = orderArray;
@@ -170,10 +178,11 @@
     [self.orderTable reloadData];
 }
 
--(void)setCustomerModel:(SearchCustomerModel *)customerModel
-{
-    _customerModel = customerModel;
-}
+//-(void)setCustomerModel:(SearchCustomerModel *)customerModel
+//{
+//    _customerModel = customerModel;
+//    [self.scrollView reloadData];
+//}
 
 -(void)setPackageCardList:(NSMutableArray *)packageCardList
 {
@@ -187,6 +196,7 @@
     }
     [self.packageTable reloadData];
 }
+
 -(void)testData
 {
     NSDictionary *aDic = [Utility initWithJSONFile:@"serviceandbilling"];
@@ -220,7 +230,6 @@
         NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kServiceBillingProduct];
         NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
         [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
-        
         
         [LTInterfaceBase request:params requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -259,12 +268,12 @@
                                                object:self.productSearchTextField];
     
     //筛选车牌
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shaixuanSure:) name:@"shaixuanSure" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shaixuanSure:) name:@"shaixuanFromServiceViewControl" object:nil];
     //监听键盘
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name: UIKeyboardWillHideNotification object:nil];
     
-    [self testData];
+    [self getRightProductList];
     [self testData2];
     [self.leftView addSubview:self.scrollView];
     
@@ -283,6 +292,14 @@
     
     //套餐卡选择产品
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(packageCardSelected:) name:@"packageCardSelected" object:nil];
+    
+    //右边栏  下拉刷新
+    __block LTServiceBillingViewController *viewControl = self;
+    __block UITableView *table = self.fastTable;
+    [_fastTable addPullToRefreshWithActionHandler:^{
+        [viewControl getRightProductList];
+        [table.pullToRefreshView performSelector:@selector(stopAnimating) withObject:nil afterDelay:1];
+    }];
 }
 //套餐卡选择产品
 -(void)packageCardSelected:(NSNotification *)notification
@@ -397,7 +414,7 @@
 
 -(void)textFieldChanged:(NSNotification *)sender {
     UITextField *txtField = (UITextField *)sender.object;
-    
+    [LTDataShare sharedService].viewFrom = 0;
     if (txtField.text.length == 0) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
@@ -451,14 +468,19 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     if ([textField isEqual:self.productSearchTextField]) {
         [textField resignFirstResponder];
-        NSMutableArray *tempArray = [[NSMutableArray alloc]init];
-        for (ProductSectionModel *sectionModel in self.billingModel.productList){
-            [tempArray addObjectsFromArray:sectionModel.products];
-        }
         
-        NSPredicate *predicateString = [NSPredicate predicateWithFormat:@"%K contains[cd] %@", @"name", textField.text];
-        self.searchArray  = [NSMutableArray arrayWithArray:[tempArray filteredArrayUsingPredicate:predicateString]];
-        [self.fastTable reloadData];
+        if (self.billingModel.productList.count==0) {
+            [Utility errorAlert:@"暂无产品可快速选择" dismiss:YES];
+        }else {
+            NSMutableArray *tempArray = [[NSMutableArray alloc]init];
+            for (ProductSectionModel *sectionModel in self.billingModel.productList){
+                [tempArray addObjectsFromArray:sectionModel.products];
+            }
+            
+            NSPredicate *predicateString = [NSPredicate predicateWithFormat:@"%K contains[cd] %@", @"name", textField.text];
+            self.searchArray  = [NSMutableArray arrayWithArray:[tempArray filteredArrayUsingPredicate:predicateString]];
+            [self.fastTable reloadData];
+        }
     }
     return YES;
 }
@@ -493,28 +515,55 @@
         if (self.appDel.isReachable==NO) {
             [Utility errorAlert:@"请检查网络" dismiss:NO];
         }else{
-            self.isSearching = YES;
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            NSString *is_car_num = @"";
+            NSString *carNumRegex = @"[\u4E00-\u9FFF]+[A-Za-z]{1}+[A-Z0-9a-z]{5}";
+            NSPredicate *carNumTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", carNumRegex];
+            if (![carNumTest evaluateWithObject:self.searchTextField.text]) {
+                NSString *phoneRegex = @"((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))|(((\\+86)|(86))?+\\d{11})$)";
+                NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+                if (![phoneTest evaluateWithObject:self.searchTextField.text]){
+                    [Utility errorAlert:@"请输入正确的车牌号码或者手机号码!" dismiss:YES];
+                }else {
+                    is_car_num = @"1";
+                }
+            }else {
+                NSArray *array = [[NSArray alloc]initWithObjects:@"京",@"沪",@"津",@"渝",@"冀",@"晋",@"蒙",@"辽",@"吉",@"黑",@"苏",@"浙",@"皖",@"闽",@"赣",@"鲁",@"豫",@"鄂",@"湘",@"粤",@"桂",@"琼",@"川",@"贵",@"云",@"藏",@"陕",@"甘",@"青",@"宁",@"新", nil];
+                
+                NSString *firstLetter = [self.searchTextField.text substringToIndex:1];
+                if (![array containsObject:firstLetter]) {
+                    [Utility errorAlert:@"输入正确的车牌号码!" dismiss:YES];
+                }else {
+                    is_car_num = @"0";
+                }
+            }
             
-            NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kSearch];
-            NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
-            [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
-            [params setObject:self.searchTextField.text forKey:@"car_num"];
-            [params setObject:@"1" forKey:@"type"];
-            
-            [LTInterfaceBase request:params requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    [self.searchModel mts_setValuesForKeysWithDictionary:dictionary];
-                    
-                    [self.scrollView reloadData];
-                });
-            }errorBlock:^(NSString *notice){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    [Utility errorAlert:notice dismiss:YES];
-                });
-            }];
+            if (is_car_num.length != 0){
+                
+                self.isSearching = YES;
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                
+                NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kSearch];
+                NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
+                [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
+                [params setObject:self.searchTextField.text forKey:@"car_num"];
+                [params setObject:@"1" forKey:@"type"];
+                
+                [LTInterfaceBase request:params requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        [self.searchModel mts_setValuesForKeysWithDictionary:dictionary];
+                        
+                        [self.scrollView reloadData];
+                    });
+                }errorBlock:^(NSString *notice){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        [Utility errorAlert:notice dismiss:YES];
+                    });
+                }];
+            }else {
+                [Utility errorAlert:@"请输入正确的车牌号码或者手机号码!" dismiss:YES];
+            }
         }
     }
 }
@@ -535,8 +584,8 @@
         [currentView setCustomerModel:self.customerModel];
     }else {
         if (self.searchModel.customerList.count>0){
-            SearchCustomerModel *customerModel = (SearchCustomerModel *)self.searchModel.customerList[index];
-            [currentView setCustomerModel:customerModel];
+//            SearchCustomerModel *customerModel = (SearchCustomerModel *)self.searchModel.customerList[index];
+//            [currentView setCustomerModel:customerModel];
             
         }else {
             [currentView setCustomerModel:nil];
@@ -697,7 +746,7 @@
         if (self.isSearch) {
             ProductCellModel *cellModel = (ProductCellModel *)self.searchArray[indexPath.row];
             cell.titleLanel.text = cellModel.name;
-            cell.priceLabel.text = cellModel.price;
+            cell.priceLabel.text = [NSString stringWithFormat:@"%@元",cellModel.price];
             
             if ([cellModel.selected intValue]==1) {
                 cell.backgroundColor = [UIColor redColor];
@@ -710,7 +759,7 @@
                     ProductSectionModel *sectionModel = (ProductSectionModel *)self.billingModel.productList[indexPath.section];
                     ProductCellModel *cellModel = (ProductCellModel *)sectionModel.products[indexPath.row];
                     cell.titleLanel.text = cellModel.name;
-                    cell.priceLabel.text = cellModel.price;
+                    cell.priceLabel.text = [NSString stringWithFormat:@"%@元",cellModel.price];;
                 
                     if ([cellModel.selected intValue]==1) {
                         cell.backgroundColor = [UIColor redColor];
@@ -1030,34 +1079,46 @@
 #pragma mark - 订单处理按钮事件
 -(void)comfirmOrderInfo
 {
-    if (self.appDel.isReachable==NO) {
-        [Utility errorAlert:@"请检查网络" dismiss:NO];
-    }else {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kServiceBillingMakeOrder];
-        //用户信息
-        ServiceBillingCustomView *currentView = (ServiceBillingCustomView *)self.scrollView.scrollView.subviews[1];
-        NSMutableDictionary *aDic = [SearchCustomerModel dictionaryFromModel:currentView.customerModel];
-        
-        [aDic setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
-        [aDic setObject:[LTDataShare sharedService].user.user_id forKey:@"user_id"];
-        
-        NSString *prods = [self checkForm];
-        [aDic setObject:prods forKey:@"prods"];
-        
-        [LTInterfaceBase request:aDic requestUrl:urlString method:@"POST" completeBlock:^(NSDictionary *dictionary) {
-            //TODO:页面数据清空－－－－
-            
-            
-            
-        } errorBlock:^(NSString *notice) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:NO];
-                [Utility errorAlert:notice dismiss:YES];
-            });
-        }];
-    }
+    OrderViewController *orderViewControl = [[OrderViewController alloc]initWithNibName:@"OrderViewController" bundle:nil];
+
+    orderViewControl.delegate = self;
+    [orderViewControl willMoveToParentViewController:self.mainViewControl];
+    [self.mainViewControl addChildViewController:orderViewControl];
+    [orderViewControl didMoveToParentViewController:self.mainViewControl];
+    
+    [self.mainViewControl presentPopupViewController:orderViewControl animationType:MJPopupViewAnimationSlideBottomTop width:80];
+//    if (self.appDel.isReachable==NO) {
+//        [Utility errorAlert:@"请检查网络" dismiss:NO];
+//    }else {
+//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        
+//        NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kServiceBillingMakeOrder];
+//        //用户信息
+//        ServiceBillingCustomView *currentView = (ServiceBillingCustomView *)self.scrollView.scrollView.subviews[1];
+//        NSMutableDictionary *aDic = [SearchCustomerModel dictionaryFromModel:currentView.customerModel];
+//        
+//        [aDic setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
+//        [aDic setObject:[LTDataShare sharedService].user.user_id forKey:@"user_id"];
+//        
+//        NSString *prods = [self checkForm];
+//        [aDic setObject:prods forKey:@"prods"];
+//        
+//        [LTInterfaceBase request:aDic requestUrl:urlString method:@"POST" completeBlock:^(NSDictionary *dictionary) {
+//            //TODO:页面数据清空－－－－
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [MBProgressHUD hideHUDForView:self.view animated:NO];
+//                
+//                
+//                
+//            });
+//   
+//        } errorBlock:^(NSString *notice) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [MBProgressHUD hideHUDForView:self.view animated:NO];
+//                [Utility errorAlert:notice dismiss:YES];
+//            });
+//        }];
+//    }
 }
 
 - (NSString *)checkForm{
@@ -1104,40 +1165,96 @@
 //确认下单
 -(IBAction)sureToOrder:(id)sender
 {
-    self.isExitSvcard = NO;
     
-    //基本信息
-    ServiceBillingCustomView *currentView = (ServiceBillingCustomView *)self.scrollView.scrollView.subviews[1];
-    NSString *notice = @"";
-    if (currentView.nameField.text.length == 0) {
-        notice = @"请输入用户名";
-    }else if (currentView.carNumField.text.length == 0){
-        notice = @"请输入车牌号";
-    }else if (currentView.phoneField.text.length == 0){
-        notice = @"请输入手机号码";
-    }
-    if (notice.length>0) {
-        [Utility errorAlert:notice dismiss:YES];
-    }else {
-        for (OrderProductModel *product in self.orderArray){
-            int type = [product.types intValue];
-            
-            if (type==4) {//购买了储值卡－－设置密码
-                self.isExitSvcard = YES;
-                self.keyViewController = nil;
-                [self presentPopupViewController:self.keyViewController animationType:MJPopupViewAnimationSlideBottomTop width:228];
-            }
-        }
-        
-        if (self.isExitSvcard == NO) {//不存在储值卡
-            [self comfirmOrderInfo];
-        }
-    }
+    [self comfirmOrderInfo];
+//    self.isExitSvcard = NO;
+//    
+//    //基本信息
+//    ServiceBillingCustomView *currentView = (ServiceBillingCustomView *)self.scrollView.scrollView.subviews[1];
+//    NSString *notice = @"";
+//    if (currentView.nameField.text.length == 0) {
+//        notice = @"请输入用户名";
+//    }else if (currentView.carNumField.text.length == 0){
+//        notice = @"请输入车牌号";
+//    }else if (currentView.phoneField.text.length == 0){
+//        notice = @"请输入手机号码";
+//    }
+//    if (notice.length>0) {
+//        [Utility errorAlert:notice dismiss:YES];
+//    }else {
+//        for (OrderProductModel *product in self.orderArray){
+//            int type = [product.types intValue];
+//            
+//            if (type==4) {//购买了储值卡－－设置密码
+//                self.isExitSvcard = YES;
+//                self.keyViewController = nil;
+//                [self presentPopupViewController:self.keyViewController animationType:MJPopupViewAnimationSlideBottomTop width:228];
+//            }
+//        }
+//        
+//        if (self.isExitSvcard == NO) {//不存在储值卡
+//            [self comfirmOrderInfo];
+//        }
+//    }
 }
 //取消下单
 -(IBAction)cancelToOrder:(id)sender
 {
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:kTitle message:@"确定取消选择?"];
     
+    [alert setCancelButtonWithTitle:@"" block:nil];
+    [alert addButtonWithTitle:@"" block:^{
+        //套餐卡
+        if ([LTDataShare sharedService].packageOrderArray.count>0){
+            for (int i=0; i<[LTDataShare sharedService].packageOrderArray.count; i++){
+                NSString *string = [LTDataShare sharedService].packageOrderArray[i];
+                NSArray *array = [string componentsSeparatedByString:@"_"];
+                
+                PackageCardModel *package = (PackageCardModel *)self.packageCardList[[array[0] integerValue]];
+                PackageCardProductModel *packageProduct = (PackageCardProductModel *)package.productList[[array[1] integerValue]];
+                
+                if ([packageProduct.selected_num integerValue]>0) {
+                    packageProduct.selected_num = @"0";
+                    
+                    [package.productList replaceObjectAtIndex:[array[1] integerValue] withObject:packageProduct];
+                    
+                    [self.packageCardList replaceObjectAtIndex:[array[0] integerValue] withObject:package];
+                    
+                    [self.packageTable reloadData];
+                }
+            }
+            
+            [[LTDataShare sharedService].packageOrderArray removeAllObjects];
+        }
+        
+        //右侧边栏
+        for (int i=0; i<self.billingModel.productList.count; i++) {
+            ProductSectionModel *sectionModel = (ProductSectionModel *)self.billingModel.productList[i];
+            for (int j=0; j<sectionModel.products.count; j++) {
+                ProductCellModel *cellModel = (ProductCellModel *)sectionModel.products[j];
+                
+                if ([cellModel.selected intValue]==1) {//选中
+                    cellModel.selected = [NSString stringWithFormat:@"%d",[self validSelectedValue:[cellModel.selected intValue]]];
+                    NSIndexPath *index = [NSIndexPath indexPathForRow:j inSection:i];
+                    [self.fastTable reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+            }
+        }
+        
+        self.footer.totalPriceLabel.text = @"总计:0.00";
+        
+        [self.orderArray removeAllObjects];
+        [self.orderTable reloadData];
+        
+        if (self.orderArray.count==0) {
+            self.orderTable.hidden = YES;
+            self.cancelOrderButton.hidden = YES;
+            self.confirmOrderButton.hidden = YES;
+        }
+        
+        
+    }];
+    [alert show];
 }
 #pragma mark - 设置密码界面代理
 - (void)closePopView:(KeyViewController *)keyView
@@ -1149,5 +1266,14 @@
         }
     }];
 }
-
+#pragma mark - 确认订单页面代理
+-(void)dismissOrderViewController:(OrderViewController *)orderViewController
+{
+    __block OrderViewController *orderViewControl = orderViewController;
+    [self.mainViewControl dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop dismissBlock:^(BOOL isFinish){
+        
+        [orderViewControl removeFromParentViewController];
+        orderViewControl = nil;
+    }];
+}
 @end

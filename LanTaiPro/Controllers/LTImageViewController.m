@@ -100,22 +100,25 @@
     NSString *detailString;
     if (self.classifyType==0  ) {
         ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[index];
-        [currentView.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,psModel.p_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
+        [currentView.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,psModel.p_imageUrl]] placeholderImage:[UIImage imageNamed:@"nonPic"]];
         currentView.nameLab.text = psModel.p_name;
         currentView.priceLab.text = psModel.p_price;
+        currentView.productLab.text = @"";
         detailString = psModel.p_description;
         
     }else if (self.classifyType==1){
         ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[index];
-        [currentView.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,psModel.p_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
+        [currentView.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,psModel.p_imageUrl]] placeholderImage:[UIImage imageNamed:@"nonPic"]];
         currentView.nameLab.text = psModel.p_name;
         currentView.priceLab.text = psModel.p_price;
+        currentView.productLab.text = @"";
         detailString = psModel.p_description;
     }else {
         CardModel *cardModel = (CardModel *)self.productModel.cardList[index];
-        [currentView.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,cardModel.c_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
+        [currentView.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,cardModel.c_imageUrl]] placeholderImage:[UIImage imageNamed:@"nonPic"]];
         currentView.nameLab.text = cardModel.c_name;
         currentView.priceLab.text = cardModel.c_price;
+        currentView.productLab.text = [NSString stringWithFormat:@"项目构成:%@",cardModel.c_product];
         detailString = cardModel.c_description;
     }
 
@@ -129,6 +132,11 @@
     currentView.infoLab.text = detailString;
     currentView.infoLab.frame = frame;
     [currentView.infoLab layoutIfNeeded];
+    
+    CGRect frame2 = currentView.productLab.frame;
+    frame2.origin.y = frame.origin.y +10+ frame.size.height;
+    currentView.productLab.frame = frame2;
+    [currentView.productLab layoutIfNeeded];
     
     return currentView;
 }

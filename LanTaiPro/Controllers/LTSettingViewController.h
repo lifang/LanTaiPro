@@ -12,10 +12,13 @@
  * 设置页面
  * by－－－邱成西
  */
+#import "OrderModel.h"
 
 @protocol SettingViewControlDelegate ;
 
 @interface LTSettingViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) AppDelegate *appDel;
 
 @property (nonatomic, assign) id<SettingViewControlDelegate>delegate;
 @property (nonatomic, weak) IBOutlet UITableView *myTable;

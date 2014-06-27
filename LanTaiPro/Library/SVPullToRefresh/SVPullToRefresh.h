@@ -13,7 +13,6 @@
 
 @property (nonatomic, retain) UIColor *arrowColor;
 @property (nonatomic, retain) UIColor *textColor;
-@property (nonatomic, readwrite) UIActivityIndicatorViewStyle activityIndicatorViewStyle;
 
 - (void)stopAnimating;
 

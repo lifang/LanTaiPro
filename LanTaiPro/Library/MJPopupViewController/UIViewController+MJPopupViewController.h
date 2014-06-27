@@ -16,10 +16,12 @@ typedef enum {
 } MJPopupViewAnimation;
 
 typedef void(^DismissCallBack)(BOOL isFinish);
+typedef void(^FinishCallBack)(BOOL isFinish);
 
 @interface UIViewController (MJPopupViewController)
 
 - (void)presentPopupViewController:(UIViewController*)popupViewController animationType:(MJPopupViewAnimation)animationType width:(CGFloat)width;
+//- (void)presentPopupViewController:(UIViewController*)popupViewController animationType:(MJPopupViewAnimation)animationType width:(CGFloat)width finishBlock:(FinishCallBack)finishBlock;
 - (void)dismissPopupViewControllerWithanimationType:(MJPopupViewAnimation)animationType  dismissBlock:(DismissCallBack)dismissBlock;
 
 @end

@@ -331,6 +331,14 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
     return self.memCache.totalCostLimit;
 }
 
+#pragma mark - 清理缓存
+
+-(void)clearCacheCompletion:(void (^)())completion
+{
+    [self clearMemory];
+    [self clearDiskOnCompletion:completion];
+}
+
 - (void)clearMemory {
     [self.memCache removeAllObjects];
 }

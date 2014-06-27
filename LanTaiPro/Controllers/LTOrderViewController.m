@@ -29,6 +29,8 @@
 }
 #pragma mark - property
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -97,53 +99,61 @@
 #pragma mark - button点击事件
 -(IBAction)orderCancelButtonPressed:(id)sender
 {
-    //此时LTOrderViewController里面的实例变量是映射到LTProductViewController上的，
-    if (self.classifyType==0 || self.classifyType==1) {
-        for (ProductAndServiceModel *psModel in self.orderArray){
-            if (psModel.p_count>1) {
-                psModel.p_count=1;
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:kTitle message:@"确定取消选择?"];
+    
+    [alert setCancelButtonWithTitle:@"" block:nil];
+    [alert addButtonWithTitle:@"" block:^{
+        //此时LTOrderViewController里面的实例变量是映射到LTProductViewController上的，
+        if (self.classifyType==0 || self.classifyType==1) {
+            for (ProductAndServiceModel *psModel in self.orderArray){
+                if (psModel.p_count>1) {
+                    psModel.p_count=1;
+                }
             }
         }
-    }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(disMissOrderViewControl:)]) {
-        [self.delegate disMissOrderViewControl:self];
-    }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(disMissOrderViewControl:)]) {
+            [self.delegate disMissOrderViewControl:self];
+        }
+    }];
+    [alert show];
 }
 ///跳转到开单页面
 -(IBAction)orderToConfirmButtonPressed:(id)sender
 {
     NSMutableArray *orderArray = [[NSMutableArray alloc]init];
-    for (ProductAndServiceModel *psModel in self.orderArray){
-        
-        OrderProductModel *product = [[OrderProductModel alloc]init];
-        product.productId = psModel.p_id;
-        product.price = psModel.p_price;
-        product.name = psModel.p_name;
-        product.number = psModel.p_count;
-        product.validNumber = psModel.p_count;
-        //0 为产品 1 为服务 2 为卡类
-        
-        switch (self.classifyType) {
-            case 0:
-                product.types=@"0";
-                break;
-            case 1:
-                product.types=@"1";
-                break;
-            case 2:
-                
-                if ([psModel.p_types intValue]==1) {//储值卡
-                    product.types=@"4";
-                }else {
-                    product.types = psModel.p_types;
-                }
-                product.c_isNew = @"1";
-                break;
-                
-            default:
-                break;
+    if (self.classifyType==0 || self.classifyType==1) {
+        for (ProductAndServiceModel *psModel in self.orderArray){
+            
+            OrderProductModel *product = [[OrderProductModel alloc]init];
+            product.productId = psModel.p_id;
+            product.price = psModel.p_price;
+            product.name = psModel.p_name;
+            product.number = psModel.p_count;
+            product.validNumber = psModel.p_count;
+            product.types = psModel.p_types;
+            
+            [orderArray addObject:product];
         }
-        [orderArray addObject:product];
+    }else {
+        for (CardModel *cardModel in self.orderArray) {
+            OrderProductModel *product = [[OrderProductModel alloc]init];
+            product.productId = cardModel.c_id;
+            product.price = cardModel.c_price;
+            product.name = cardModel.c_name;
+            product.number = 1;
+            product.validNumber = 1;
+            
+            if ([cardModel.c_type intValue]==1) {//储值卡
+                product.types=@"4";
+            }else if ([cardModel.c_type intValue]==0){//打折卡
+                product.types=@"2";
+            }else if ([cardModel.c_type intValue]==2){//套餐卡
+                product.types=@"3";
+            }
+            product.c_isNew = @"1";
+            
+            [orderArray addObject:product];
+        }
     }
     
     if ([self.delegate respondsToSelector:@selector(disMissOrderViewControl:withArray:)]) {

@@ -75,20 +75,17 @@
         
         self.backgroundColor = [UIColor clearColor];
         self.tintColor = [UIColor clearColor];
-        self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
         self.animateToInitialSelection = NO;
-        self.clipsToBounds = NO;
         
-        self.font = [UIFont boldSystemFontOfSize:15];
-        self.textColor = [UIColor grayColor];
+        self.font = [UIFont fontWithName:@"HiraginoSansGB-W3" size:17];
+        self.textColor = [UIColor whiteColor];
         self.textShadowColor = [UIColor clearColor];
         self.textShadowOffset = CGSizeMake(0, -1);
         
         self.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
-        self.thumbEdgeInset = UIEdgeInsetsMake(2, 2, 3, 2);
+        self.thumbEdgeInset = UIEdgeInsetsMake(2, 2, 2, 2);
         self.height = 32.0;
-        self.cornerRadius = 4.0;
         
         self.selectedIndex = 0;
         self.thumb.segmentedControl = self;
@@ -113,50 +110,45 @@
 		return;
     
 	int c = [self.titlesArray count];
-	int i = 0;
+	self.segmentWidth = 80;
 	
-	self.segmentWidth = 0;
-	
-	for(id title in self.titlesArray) {
-        if([title isKindOfClass:[NSString class]])
-        {
-            if(self.LKWidth > 0)
-            {
-                self.segmentWidth = self.LKWidth;      
-
-            }
-            else{
-                CGFloat stringWidth = [title sizeWithFont:self.font].width+(self.titleEdgeInsets.left+self.titleEdgeInsets.right+self.thumbEdgeInset.left+self.thumbEdgeInset.right);
-                self.segmentWidth = MAX(stringWidth, self.segmentWidth);
-            }
-        }
-        if([title isKindOfClass:[UIImage class]])
-        {
-            UIImage* timage = title;
-            if(self.LKWidth > 0)
-            {
-                self.segmentWidth = self.LKWidth;
-            }
-            else{
-                
-                self.segmentWidth = MAX(timage.size.width, self.segmentWidth);
-            }
-        }
-	}
+//	for(id title in self.titlesArray) {
+//        if([title isKindOfClass:[NSString class]])
+//        {
+//            if(self.LKWidth > 0)
+//            {
+//                self.segmentWidth = self.LKWidth;      
+//
+//            }
+//            else{
+//                CGFloat stringWidth = [title sizeWithFont:self.font].width+(self.titleEdgeInsets.left+self.titleEdgeInsets.right+self.thumbEdgeInset.left+self.thumbEdgeInset.right);
+//                self.segmentWidth = MAX(stringWidth, self.segmentWidth);
+//            }
+//        }
+//        if([title isKindOfClass:[UIImage class]])
+//        {
+//            UIImage* timage = title;
+//            if(self.LKWidth > 0)
+//            {
+//                self.segmentWidth = self.LKWidth;
+//            }
+//            else{
+//                
+//                self.segmentWidth = MAX(timage.size.width, self.segmentWidth);
+//            }
+//        }
+//	}
     
 	self.segmentWidth = ceil(self.segmentWidth/2.0)*2; // make it an even number so we can position with center
-	self.bounds = CGRectMake(0, 0, self.segmentWidth*c, self.height);
+	self.bounds = CGRectMake(0, 0, self.segmentWidth*c+c+1, self.height);
     self.thumbHeight = self.thumb.backgroundImage ? self.thumb.backgroundImage.size.height : self.height-(self.thumbEdgeInset.top+self.thumbEdgeInset.bottom);
     
-    i = 0;
-    
-//	for(id title in self.titlesArray) {
-        [self.thumbRects addObject:[NSValue valueWithCGRect:CGRectMake(self.segmentWidth*i+self.thumbEdgeInset.left, self.thumbEdgeInset.top, self.segmentWidth-(self.thumbEdgeInset.left*2), self.thumbHeight)]];
-		i++;
-//	}
+    for (int i=0; i<self.titlesArray.count; i++) {
+        [self.thumbRects addObject:[NSValue valueWithCGRect:CGRectMake(1+i+self.segmentWidth*i+self.thumbEdgeInset.left, self.thumbEdgeInset.top, self.segmentWidth-(self.thumbEdgeInset.left*2), self.thumbHeight)]];
+    }
 	
 	self.thumb.frame = [[self.thumbRects objectAtIndex:0] CGRectValue];
-	self.thumb.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.thumb.bounds cornerRadius:2].CGPath;
+	self.thumb.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.thumb.bounds cornerRadius:0].CGPath;
     [self.thumb setTitleData:[self.titlesArray objectAtIndex:0]];
 	self.thumb.font = self.font;
 	
@@ -179,12 +171,11 @@
     
     if(self.backgroundImage)
         [self.backgroundImage drawInRect:rect];
-    
     else {
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
         
         // bottom gloss
-        CGContextSetFillColorWithColor(context, [UIColor colorWithRed:0.8941 green:0.8941 blue:0.9098 alpha:1].CGColor);
+        CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
         CGPathRef bottomGlossRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height) cornerRadius:self.cornerRadius].CGPath;
         CGContextAddPath(context, bottomGlossRect);
         CGContextFillPath(context);
@@ -193,19 +184,19 @@
         CGContextAddPath(context, roundedRect);
         CGContextClip(context);
         
-        // background tint
-        CGFloat components[4] = {0.10, 1,  0.12, 1};
-        CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, NULL, 2);
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(0,0), CGPointMake(0,CGRectGetHeight(rect)-1), 0);
-        CGGradientRelease(gradient);
-        
-        [self.tintColor set];
-        UIRectFillUsingBlendMode(rect, kCGBlendModeOverlay);
+//        // background tint
+//        CGFloat components[4] = {0.10, 1,  0.12, 1};
+//        CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, NULL, 2);
+//        CGContextDrawLinearGradient(context, gradient, CGPointMake(0,0), CGPointMake(0,CGRectGetHeight(rect)-1), 0);
+//        CGGradientRelease(gradient);
+//        
+//        [self.tintColor set];
+//        UIRectFillUsingBlendMode(rect, kCGBlendModeOverlay);
         
         // inner shadow
         CGContextAddPath(context, roundedRect);
         CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), CGSizeMake(0, 1), 1, [UIColor colorWithWhite:0 alpha:0.6].CGColor);
-        CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:0.8941 green:0.8941 blue:0.9098 alpha:1].CGColor);
+        CGContextSetStrokeColorWithColor(context, [UIColor clearColor].CGColor);
         CGContextStrokePath(context);
         
         CGColorSpaceRelease(colorSpace);
@@ -445,13 +436,11 @@
 	
 	if (secondTitleOnLeft && hoverIndex > 0) {
 		self.thumb.label.alpha = 0.5 + ((self.thumb.center.x / self.segmentWidth) - hoverIndex);
-//		self.thumb.secondLabel.text = [self.titlesArray objectAtIndex:hoverIndex - 1];
 		self.thumb.secondLabel.alpha = 0.5 - ((self.thumb.center.x / self.segmentWidth) - hoverIndex);
 	}
 	
     else if (hoverIndex + 1 < self.titlesArray.count) {
 		self.thumb.label.alpha = 0.5 + (1 - ((self.thumb.center.x / self.segmentWidth) - hoverIndex));
-//		self.thumb.secondLabel.text = [self.titlesArray objectAtIndex:hoverIndex + 1];
 		self.thumb.secondLabel.alpha = ((self.thumb.center.x / self.segmentWidth) - hoverIndex) - 0.5;
 	}
 	

@@ -40,10 +40,18 @@
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody:[header dataUsingEncoding:NSUTF8StringEncoding]];
         [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    }else {
+    }else if ([method isEqualToString:@"GET"]){
         NSMutableString *urlStr = [NSMutableString stringWithFormat:@"%@",requestUrl];
         [urlStr appendFormat:@"?%@",header];
-        request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
+        //url含中文转化UTF8
+        urlStr = (__bridge_transfer NSMutableString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                              (CFStringRef)urlStr,
+                                                                                              NULL,
+                                                                                              NULL,
+                                                                                              kCFStringEncodingUTF8);
+        request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStr] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
+    }else if ([method isEqualToString:@"PUT"]){
+        
     }
     
     if (self = [super initWithRequest:request delegate:self startImmediately:NO]) {
@@ -76,29 +84,16 @@
     if (jsonObject !=nil) {
         if ([jsonObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *jsonData=(NSDictionary *)jsonObject;
-            
-            if (![[jsonData objectForKey:@"info"]isKindOfClass:[NSNull class]] && [jsonData objectForKey:@"info"]!=nil) {
-                NSString *info = [jsonData objectForKey:@"info"];
-                if (info.length>0) {
-                    if (errorBlock_) {
-                        errorBlock_(info);
-                    }
-                }else {
-                    if (completeBlock_) {
-                        completeBlock_(jsonData);
-                    }
+            if ([[jsonData objectForKey:@"status"]intValue]==1){
+                NSDictionary *obj = [jsonData objectForKey:@"obj"];
+                if (completeBlock_) {
+                    completeBlock_(obj);
                 }
-            }else {
-                if ([[jsonData objectForKey:@"status"]intValue]==1){
-                    if (completeBlock_) {
-                        completeBlock_(jsonData);
-                    }
-                }else {
-                    if (errorBlock_) {
-                        errorBlock_(@"");
-                    }
+            }else if ([[jsonData objectForKey:@"status"]intValue]==0){
+                NSString *msg = [jsonData objectForKey:@"msg"];
+                if (errorBlock_) {
+                    errorBlock_(msg);
                 }
-                
             }
         }
     }
@@ -106,7 +101,7 @@
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    errorBlock_(@"");
+    errorBlock_(@"出错了,产品经理要被扣工资了～");
 }
 
 @end

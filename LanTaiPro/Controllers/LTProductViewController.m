@@ -18,10 +18,6 @@ static const char productkey;
 static const char serivicekey;
 static const char cardkey;
 
-static const char productselectedkey;
-static const char seriviceselectedkey;
-static const char cardselectedkey;
-
 @implementation LTProductViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -104,13 +100,10 @@ static const char cardselectedkey;
     self.serviceButton.selected = NO;
     self.cardButton.selected = NO;
 
-//    //下拉刷新
-//    __block LTProductViewController *productViewControl = self;
-//    __block UITableView *table = self.productTable;
-//    [_productTable addPullToRefreshWithActionHandler:^{
-//        [productViewControl getProductData];
-//        [table.pullToRefreshView performSelector:@selector(stopAnimating) withObject:nil afterDelay:1];
-//    }];
+    self.cancelOrderButton.hidden=YES;
+    self.confirmOrderButton.hidden=YES;
+
+    [Utility setLogoImageWithTable:self.productTable];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(shoppingNotification:) name:@"shoppingNotification" object:nil];
 }
@@ -173,29 +166,41 @@ static const char cardselectedkey;
             if (self.searchText.text.length>0) {
                 objc_setAssociatedObject(self, &productkey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             }
-            if (self.selectedArray.count>0) {
-                objc_setAssociatedObject(self, &productselectedkey, self.selectedArray, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            }
             break;
         case 1:
             if (self.searchText.text.length>0) {
                 objc_setAssociatedObject(self, &serivicekey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            }
-            if (self.selectedArray.count>0) {
-                objc_setAssociatedObject(self, &seriviceselectedkey, self.selectedArray, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             }
             break;
         case 2:
             if (self.searchText.text.length>0) {
                 objc_setAssociatedObject(self, &cardkey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             }
-            if (self.selectedArray.count>0) {
-                objc_setAssociatedObject(self, &cardselectedkey, self.selectedArray, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            }
             break;
             
         default:
             break;
+    }
+    
+    if (self.selectedArray.count>0) {
+        for (int i=0; i<self.selectedArray.count; i++){
+            int aRow = [self.selectedArray[i] integerValue];
+            if (self.classifyType==0) {
+                ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[aRow];
+                psModel.p_selected = @"0";
+                psModel.p_count -= 1;
+                [self.productModel.productList replaceObjectAtIndex:aRow withObject:psModel];
+            }else if (self.classifyType==1){
+                ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[aRow];
+                psModel.p_selected = @"0";
+                psModel.p_count -= 1;
+                [self.productModel.serviceList replaceObjectAtIndex:aRow withObject:psModel];
+            }else{
+                CardModel *cardModel = (CardModel *)self.productModel.cardList[aRow];
+                cardModel.c_selected = @"0";
+                [self.productModel.cardList replaceObjectAtIndex:aRow withObject:cardModel];
+            }
+        }
     }
     
     UIButton *btn = (UIButton *)sender;
@@ -208,21 +213,18 @@ static const char cardselectedkey;
             self.serviceButton.selected = NO;
             self.cardButton.selected = NO;
             self.searchText.text = objc_getAssociatedObject(self, &productkey);
-            self.selectedArray = objc_getAssociatedObject(self, &productselectedkey);
             break;
         case 1:
             self.productButton.selected = NO;
             self.serviceButton.selected = YES;
             self.cardButton.selected = NO;
             self.searchText.text =objc_getAssociatedObject(self, &serivicekey);
-            self.selectedArray = objc_getAssociatedObject(self, &seriviceselectedkey);
             break;
         case 2:
             self.productButton.selected = NO;
             self.serviceButton.selected = NO;
             self.cardButton.selected = YES;
             self.searchText.text =objc_getAssociatedObject(self, &cardkey);
-            self.selectedArray = objc_getAssociatedObject(self, &cardselectedkey);
             break;
             
         default:
@@ -244,8 +246,8 @@ static const char cardselectedkey;
         [Utility errorAlert:@"暂未查找到您需要的产品" dismiss:YES];
     }
 }
-
--(void)getProductData {
+#pragma mark - 搜索请求
+-(void)getSearchResultData {
     if (self.searchText.text.length==0) {
         [Utility errorAlert:@"请填写您要搜索的产品" dismiss:YES];
     }else {
@@ -274,11 +276,11 @@ static const char cardselectedkey;
                             tempArray = self.productModel.productList;
                             break;
                         case 1:
-                            self.productModel.productList = model.serviceList;
+                            self.productModel.serviceList = model.serviceList;
                             tempArray = self.productModel.serviceList;
                             break;
                         case 2:
-                            self.productModel.productList = model.cardList;
+                            self.productModel.cardList = model.cardList;
                             tempArray = self.productModel.cardList;
                             break;
                             
@@ -304,7 +306,7 @@ static const char cardselectedkey;
 {
     [self.searchText resignFirstResponder];
     self.selectedArray = nil;
-    [self getTestData];
+    [self getSearchResultData];
     
     [self.productTable reloadData];
 }
@@ -422,27 +424,37 @@ static const char cardselectedkey;
 #pragma mark - 取消or生成订单
 -(IBAction)cancelOrderButtonPressed:(id)sender
 {
-    for (int i=0; i<self.selectedArray.count; i++) {
-        int aRow = [self.selectedArray[i] integerValue];
-        if (self.classifyType==0) {
-            ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[aRow];
-            psModel.p_selected = @"0";
-            psModel.p_count -= 1;
-            [self.productModel.productList replaceObjectAtIndex:aRow withObject:psModel];
-        }else if (self.classifyType==1){
-            ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[aRow];
-            psModel.p_selected = @"0";
-            psModel.p_count -= 1;
-            [self.productModel.serviceList replaceObjectAtIndex:aRow withObject:psModel];
-        }else{
-            CardModel *cardModel = (CardModel *)self.productModel.cardList[aRow];
-            cardModel.c_selected = @"0";
-            [self.productModel.cardList replaceObjectAtIndex:aRow withObject:cardModel];
-        }
-        NSIndexPath *idxPath = [NSIndexPath indexPathForRow:aRow inSection:0];
-        [self.productTable reloadRowsAtIndexPaths:@[idxPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (self.selectedArray.count>0) {
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:kTitle message:@"确定取消选择?"];
+        
+        [alert setCancelButtonWithTitle:@"" block:nil];
+        [alert addButtonWithTitle:@"" block:^{
+            for (int i=0; i<self.selectedArray.count; i++) {
+                int aRow = [self.selectedArray[i] integerValue];
+                if (self.classifyType==0) {
+                    ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.productList[aRow];
+                    psModel.p_selected = @"0";
+                    psModel.p_count -= 1;
+                    [self.productModel.productList replaceObjectAtIndex:aRow withObject:psModel];
+                }else if (self.classifyType==1){
+                    ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.productModel.serviceList[aRow];
+                    psModel.p_selected = @"0";
+                    psModel.p_count -= 1;
+                    [self.productModel.serviceList replaceObjectAtIndex:aRow withObject:psModel];
+                }else{
+                    CardModel *cardModel = (CardModel *)self.productModel.cardList[aRow];
+                    cardModel.c_selected = @"0";
+                    [self.productModel.cardList replaceObjectAtIndex:aRow withObject:cardModel];
+                }
+                NSIndexPath *idxPath = [NSIndexPath indexPathForRow:aRow inSection:0];
+                [self.productTable reloadRowsAtIndexPaths:@[idxPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            self.selectedArray = nil;
+        }];
+        [alert show];
+    }else {
+        [Utility errorAlert:@"暂未选择任何产品" dismiss:YES];
     }
-    self.selectedArray = nil;
 }
 -(IBAction)confirmOrderButtonPressed:(id)sender
 {

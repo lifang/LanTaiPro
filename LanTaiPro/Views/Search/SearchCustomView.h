@@ -29,10 +29,21 @@
 #import "PackageCardCell.h"
 #import "DiscountCardCell.h"
 #import "SvCardCell.h"
+#import "SearchOrder.h"
+
+#import "CustomerModel.h"
+
+#import "WorkingOrderModel.h"
+#import "OldOrderModel.h"
+#import "PackageOrderModel.h"
+#import "SvCardOrderModel.h"
+#import "DiscountCardOrderModel.h"
 
 @protocol SearchCustomViewDelegate;
 
 @interface SearchCustomView : UIView <UITextFieldDelegate,WYPopoverControllerDelegate,InfoViewControlDelegate,UITableViewDelegate,UITableViewDataSource,WorkingOrderCellDelegate,OldOrderCellDelegate,PackageCardCellDelegate>
+
+@property (nonatomic, strong) AppDelegate *appDel;
 
 @property (nonatomic, weak) IBOutlet UITextField *nameField;
 @property (nonatomic, weak) IBOutlet UITextField *carNumField;
@@ -41,16 +52,9 @@
 @property (nonatomic, strong) WYPopoverController *popController;
 @property (nonatomic, strong) InfoViewController *infoViewControl;
 
-@property (nonatomic, strong) SearchCustomerModel *customerModel;
+@property (nonatomic, strong) CustomerModel *customerModel;
 
 @property (nonatomic, assign) id<SearchCustomViewDelegate>delegate;
-///套餐卡
-@property (nonatomic, strong) NSMutableArray *packageCardList;
-///打折卡
-@property (nonatomic, strong) NSMutableArray *discountCardList;
-///储值卡
-@property (nonatomic, strong) NSMutableArray *svCardList;
-
 ///车辆品牌
 @property (nonatomic, strong) NSString *carBrand;
 ///车辆型号
@@ -60,10 +64,19 @@
 @property (nonatomic, weak) IBOutlet UITableView *orderTable;
 
 @property (nonatomic, assign) OrderTypes orderType;
+
+@property (nonatomic, assign) NSInteger pageIndex;
+
+@property (nonatomic, assign) BOOL isRefreshing;
 + (WYPopoverController *)popVC;
 @end
 
 @protocol SearchCustomViewDelegate <NSObject>
 
 - (void)dismisSearchCustomView:(SearchCustomView *)searchView;
+//投诉
+- (void)presentCompliantViewControlWithDictionary:(NSDictionary *)aDic;
+//取消订单
+-(void)cancelOrderWithOrderId:(NSString *)orderId;
+//订单付款
 @end

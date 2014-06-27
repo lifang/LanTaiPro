@@ -17,7 +17,6 @@
               @"name": mts_key(appointUserName),
               @"mobilephone": mts_key(appointUserPhone),
               @"is_vip": mts_key(appointUserVip),
-              @"email": mts_key(appointUserEmail),
               @"customer_id": mts_key(appointUserId),
               @"id": mts_key(appointId),
               @"created_at": mts_key(appointCreatTime),

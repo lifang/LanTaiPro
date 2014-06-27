@@ -15,7 +15,7 @@
 #import "ServiceBillingOrderCell.h"
 #import "OrderProductModel.h"
 
-
+#import "CustomerModel.h"
 
 @interface ServiceBillingCustomView : UIView<UITextFieldDelegate,WYPopoverControllerDelegate,InfoViewControlDelegate>
 
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) WYPopoverController *popController;
 @property (nonatomic, strong) InfoViewController *infoViewControl;
 
-@property (nonatomic, strong) SearchCustomerModel *customerModel;
+@property (nonatomic, strong) CustomerModel *customerModel;
 ///车辆品牌
 @property (nonatomic, strong) NSString *carBrand;
 ///车辆型号

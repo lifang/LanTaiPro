@@ -8,11 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SearchCustomerModel.h"
-#import "PackageCardModel.h"
-#import "DiscountCardModel.h"
-#import "SvCardModel.h"
-
 typedef enum : NSUInteger {
     OrderTypeWorking=0,
     OrderTypeOld,
@@ -22,7 +17,8 @@ typedef enum : NSUInteger {
 } OrderTypes;
 
 @interface SearchModel : NSObject
-///用户－－包含基本信息，进行中的订单，过往订单
+
+///用户－－包含基本信息
 @property (nonatomic, strong) NSMutableArray *customerList;
 ///套餐卡
 @property (nonatomic, strong) NSMutableArray *packageCardList;

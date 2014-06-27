@@ -19,9 +19,6 @@
 ///a_p_:appoint_product_项目基本价格
 @property (nonatomic, strong) NSString *a_p_basePrice;
 
-///a_p_:appoint_product_项目
-@property (nonatomic, strong) NSString *a_p_isService;
-
 ///a_p_:appoint_product_项目名称
 @property (nonatomic, strong) NSString *a_p_name;
 

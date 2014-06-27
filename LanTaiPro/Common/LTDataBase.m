@@ -91,6 +91,7 @@
         }
         
         [carModel close];
+        
         //产品服务表
         FMResultSet *rs_product = [self.db executeQuery:@"select name from SQLITE_MASTER where name = 'product'"];
         if (![rs_product next]) {
@@ -128,7 +129,7 @@
         FMResultSet *rs_order = [self.db executeQuery:@"select order_id from SQLITE_MASTER where name = 'orderInfo'"];
         if (![rs_order next]) {
             [rs_order close];
-            [self.db executeUpdate:@"CREATE TABLE orderInfo (id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , order_id VARCHAR , customer_id VARCHAR , car_num_id VARCHAR , content VARCHAR , oprice VARCHAR , is_please VARCHAR , total_price VARCHAR , prods VARCHAR , brand VARCHAR , year VARCHAR , birth VARCHAR , cdistance VARCHAR , userName VARCHAR , phone VARCHAR , sex VARCHAR , billing VARCHAR , pay_type VARCHAR , is_free VARCHAR , status VARCHAR , store_id VARCHAR , reason VARCHAR , request VARCHAR , cproperty VARCHAR , ccompany VARCHAR)"];
+            [self.db executeUpdate:@"CREATE TABLE orderInfo (id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , store_id VARCHAR ,order_id VARCHAR , order_is_please VARCHAR , order_total_price VARCHAR , order_prods VARCHAR , order_billing VARCHAR , order_pay_type VARCHAR , order_is_free VARCHAR , order_status VARCHAR , oprice VARCHAR , content VARCHAR , car_num_id VARCHAR , car_brand VARCHAR , car_model VARCHAR , car_year VARCHAR , car_distance VARCHAR , car_num VARCHAR , customer_id VARCHAR , customer_name VARCHAR , customer_phone VARCHAR , customer_sex VARCHAR , customer_property VARCHAR , customer_company VARCHAR , customer_vin VARCHAR , reason VARCHAR , request VARCHAR)"];
         }
         
         [rs_order close];

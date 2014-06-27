@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SearchModel.h"
 #import "ShaixuanView.h"
 #import "XLCycleScrollView.h"
 #import "SearchCustomView.h"
 #import "LTMainViewController.h"
 #import "LTServiceBillingViewController.h"
+#import "ComplaintViewController.h"
 
-@interface LTSearchViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate,SearchCustomViewDelegate>
+#import "CustomerListModel.h"
+#import "WorkingOrderModel.h"
+#import "CustomerModel.h"
+
+@interface LTSearchViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate,SearchCustomViewDelegate,ComplaintDelegate>
 
 @property (nonatomic, strong) LTMainViewController *mainViewControl;
 @property (nonatomic, strong) LTServiceBillingViewController *serviceViewControl;
@@ -26,9 +30,18 @@
 @property (nonatomic, weak) IBOutlet UITextField *searchTextField;
 ///筛选车牌
 @property (nonatomic, strong) ShaixuanView *sxView;
-
-@property (nonatomic, strong) SearchModel *searchModel;
 ///scrollView
 @property (nonatomic, strong) XLCycleScrollView *scrollView;
 
+///搜索的内容
+@property (nonatomic, strong) NSString *searchText;
+
+///滚动视图
+@property (nonatomic, strong) UIView *rollView;
+///滚动的按钮
+@property (nonatomic, strong) UILabel *rollLabel;
+///滚动试图的高度
+@property (nonatomic, assign) float scrollHeight;
+///小按钮的滚动尺寸差值
+@property (nonatomic, assign) float rollSize;
 @end

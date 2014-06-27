@@ -65,7 +65,11 @@
 {
     NSString *str = [self.dataArray objectAtIndex:indexPath.row];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:str,@"name", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"shaixuanSure" object:dic];
+    if ([LTDataShare sharedService].viewFrom == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shaixuanFromServiceViewControl" object:dic];
+    }else if ([LTDataShare sharedService].viewFrom == 1){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shaixuanFromSearchViewControl" object:dic];
+    }
 }
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);

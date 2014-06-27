@@ -27,8 +27,11 @@
 #import "Footer.h"
 #import "Header.h"
 #import "KeyViewController.h"
+#import "OrderViewController.h"//订单确认 付款页面
 
-@interface LTServiceBillingViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,ServiceBillingPackageCellDelegate,KeyViewControllerDelegate>
+#import "LTMainViewController.h"
+
+@interface LTServiceBillingViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,ServiceBillingPackageCellDelegate,KeyViewControllerDelegate,OrderViewControllerDelegate>
 
 @property (nonatomic, strong) AppDelegate *appDel;
 
@@ -43,7 +46,7 @@
 ///scrollView
 @property (nonatomic, strong) XLCycleScrollView *scrollView;
 @property (nonatomic, assign) BOOL isSearching;//判断用户信息是否是搜索
-@property (nonatomic, strong) SearchCustomerModel *customerModel;
+@property (nonatomic, strong) CustomerModel *customerModel;
 
 @property (nonatomic, strong) BillingModel *billingModel;
 ///右侧
@@ -71,4 +74,6 @@
 @property (strong, nonatomic) NSString *sv_card_password;///设置密码
 @property (assign, nonatomic) BOOL isExitSvcard;//判断是否存在储值卡
 @property (nonatomic, strong) KeyViewController *keyViewController;
+
+@property (nonatomic, strong) LTMainViewController *mainViewControl;
 @end

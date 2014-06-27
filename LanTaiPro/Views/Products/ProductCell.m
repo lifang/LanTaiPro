@@ -43,13 +43,13 @@
             ProductAndServiceModel *psModel = (ProductAndServiceModel *)self.objectModel;
             self.titlelabel.text = psModel.p_name;
             self.detailLabel.text = psModel.p_description;
-            [self.headerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,psModel.p_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
+            [self.headerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,psModel.p_imageUrl]] placeholderImage:[UIImage imageNamed:@"nonPic"]];
             self.statusButton.selected = [psModel.p_selected boolValue];
         }else {
             CardModel *cardModel = (CardModel *)self.objectModel;
             self.titlelabel.text = cardModel.c_name;
             self.detailLabel.text = cardModel.c_description;
-            [self.headerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,cardModel.c_imageUrl]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
+            [self.headerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,cardModel.c_imageUrl]] placeholderImage:[UIImage imageNamed:@"nonPic"]];
             self.statusButton.selected = [cardModel.c_selected boolValue];
         }
         self.numberImageView.hidden = !self.statusButton.selected;

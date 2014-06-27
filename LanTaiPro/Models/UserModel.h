@@ -16,7 +16,7 @@
 
 ///用户id
 @property (nonatomic, strong) NSString *user_id;
-///用户帐号
+///用户手机
 @property (nonatomic, strong) NSString *userName;
 ///用户头像
 @property (nonatomic, strong) NSString *userImg;

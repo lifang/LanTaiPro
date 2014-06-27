@@ -26,8 +26,6 @@
 @property (nonatomic, strong) NSString *appointUserPhone;
 ///用户是否vip
 @property (nonatomic, strong) NSString *appointUserVip;
-///用户邮箱
-@property (nonatomic, strong) NSString *appointUserEmail;
 ///用户id
 @property (nonatomic, strong) NSString *appointUserId;
 
