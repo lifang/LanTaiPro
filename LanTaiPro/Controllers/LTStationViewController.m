@@ -32,6 +32,7 @@
 @interface LTStationViewController ()
 
 @property (nonatomic,strong) NSMutableArray *posionItemArr;
+@property (nonatomic,assign) BOOL isScrollMiddleScrollView;
 @end
 
 @implementation LTStationViewController
@@ -200,9 +201,36 @@
     }
 }
 
-//点击正在施工中的按钮，查看订单详情
--(void)checkOrder
+- (IBAction)singleTapConstationCarView:(UITapGestureRecognizer *)sender;
 {
+    CGPoint point = [sender locationInView:self.constructionScrollView];
+        for (UIView *subView in [self.constructionScrollView subviews]) {
+            if ([subView isKindOfClass:[ConstationCarView class]]) {
+                
+                ConstationCarView  *constationCarView = (ConstationCarView*)subView;
+//                CGRect carRect = [subView convertRect:constationCarView.frame toView:self.constructionScrollView];
+               
+                CGRect carRect = [subView convertRect:subView.frame toView:self.constructionScrollView];
+                if ([subView isKindOfClass:[ConstationCarView class]] && CGRectContainsPoint(carRect, point) )
+                {
+
+                    self.constationCarView = (ConstationCarView*)subView;
+                    [self checkOrder:self.constationCarView];
+                    break;
+                }
+        }
+    }
+
+}
+//点击正在施工中的按钮，查看订单详情
+-(void)checkOrder:(ConstationCarView  *)constationCarView;
+{
+   
+//    CGPoint point = [constationCarView locationInView:self.leftView];
+//    NSString *pointStr = NSStringFromCGPoint(point);
+//     NSLog(@"%@",pointStr);
+    NSLog(@"%@",constationCarView.station_id);
+    
     [self testGetorderInfo];
     self.orderInfoView.frame = CGRectMake(100, 45, 588, 1003);
     
@@ -445,7 +473,7 @@
                 
                 CarView *carView = [((ConstationCarView*)subView) carView];
                 CGRect carRect = [subView convertRect:carView.frame toView:self.constructionScrollView];
-                if ([subView isKindOfClass:[ConstationCarView class]] && CGRectContainsPoint(carRect, point)  ) {
+                if ([subView isKindOfClass:[ConstationCarView class]] && CGRectContainsPoint(carRect, point) && ![((ConstationCarView *)subView) isEmpty]) {
                     
                     self.moveCarView = [carView copyCarView];
                     self.constationCarView = (ConstationCarView*)subView;
@@ -466,10 +494,12 @@
         if (sender.state == UIGestureRecognizerStateEnded) {
             if (self.moveCarView) {
                 //drag down
-                if (CGRectGetMaxY(self.moveCarView.frame) - CGRectGetMinY(self.finshScrollView.frame) > 20) {
+//                if (CGRectGetMaxX(self.moveCarView.frame) - CGRectGetMinX(self.finshScrollView.frame) > 20) {
+                 if ((self.constructionScrollView.contentOffset.y) - CGRectGetMinX(self.finshScrollView.frame) > 20) {
                 [self moveCarViewFromBeginningScrollViewIntoBottomRightScrollView:self.moveCarView
                  ];
-                }else{
+                }else
+                {
                     //drag exchang
                   [self exchangeBeginningCarCellViewPositionWithTouchView:self.moveCarView];
                 }
@@ -486,12 +516,12 @@
     else{
         if (self.moveCarView) {
             CGPoint movepoint = [sender locationInView:self.leftBackgroundView];
-            if (CGRectGetMaxY(self.leftBackgroundView.frame) < CGRectGetMaxY(self.moveCarView.frame) && !self.isScrollMiddleScrollView) {
-                [self.constructionScrollView startScrollContentWithStep:LEFTVIEW_WIDTH/4];
+            if (CGRectGetMaxY(self.leftView.frame) < CGRectGetMaxY(self.moveCarView.frame) ) {
+                [self.constructionScrollView startScrollContentWithStep:79/4];
                 self.isScrollMiddleScrollView = YES;
             }else
                 if (CGRectGetMinY(self.moveCarView.frame) <= 0 && !self.isScrollMiddleScrollView) {
-                    [self.constructionScrollView startScrollContentWithStep:-LEFTVIEW_WIDTH/4];
+                    [self.constructionScrollView startScrollContentWithStep:-79/4];
                     self.isScrollMiddleScrollView = YES;
                 }else
                     if (self.isScrollMiddleScrollView) {
@@ -651,6 +681,45 @@ static NSMutableDictionary *finish_dic = nil;
     }
 }
 
+-(void)addGestureToConstationCarView:(ConstationCarView *)constationCarView
+{
+  
+//    CGPoint point = [sender locationInView:self.constructionScrollView];
+//    if (sender.state == UIGestureRecognizerStateBegan) {
+//        for (UIView *subView in [self.constructionScrollView subviews]) {
+//            if ([subView isKindOfClass:[ConstationCarView class]]) {
+//                
+//                CarView *carView = [((ConstationCarView*)subView) carView];
+//                CGRect carRect = [subView convertRect:carView.frame toView:self.constructionScrollView];
+//                if ([subView isKindOfClass:[ConstationCarView class]] && CGRectContainsPoint(carRect, point)  ) {
+//                    
+//                    self.moveCarView = [carView copyCarView];
+//                    self.constationCarView = (ConstationCarView*)subView;
+//                    self.moveCarView.station_id= self.constationCarView.station_id;
+//                    NSLog(@"----------%@",self.moveCarView.station_id);
+//                    [self.leftBackgroundView addSubview:self.moveCarView];
+//                    self.moveCarView.beforeMoiveRect = carRect;
+//                    self.moveCarView.parentViewRect = subView.frame;
+//                    [self.moveCarView setHidden:YES];
+//                    self.constationCarView.isEmpty = YES;
+//                    self.isScrollMiddleScrollView = NO;
+//                    break;
+//                }
+//            }
+//        }
+//    }
+
+//    if (!constationCarView.isEmpty) {
+//        constationCarView.userInteractionEnabled = YES;
+//        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(checkOrder:)];
+////        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]init];
+//        [constationCarView addGestureRecognizer:singleTap];
+//      
+////         NSLog(@"%@_________%@",constationCarView.order_id,constationCarView.station_id);
+//    }
+   
+   }
+
 #pragma mark 重置工位情况
 -(void)setStationDataWithDic:(NSDictionary *)order_dic {
     self.waittingCarsArr = [[NSMutableArray alloc]init];
@@ -743,12 +812,15 @@ static NSMutableDictionary *finish_dic = nil;
 }
 
 -(void)moveCarIntoCarPosion{
+    
     for (int index = 0; index < [self.posionItemArr count]; index++) {
         ConstationCarView *posion = [self.posionItemArr objectAtIndex:index];
+//        posion.isEmpty = NO;
         StationModel *ss = (StationModel *)[self.stationArray objectAtIndex:index];
         StationCarModel *obj = [self.beginningCarsDic objectForKey:[NSString stringWithFormat:@"%@",ss.station_id]];
-        
+       
         [posion setCarObj:obj];
+         [self addGestureToConstationCarView:posion];
     }
 }
 

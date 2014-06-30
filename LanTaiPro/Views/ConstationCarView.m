@@ -51,10 +51,23 @@
         self.carView = [[CarView alloc]initWithFrame:CGRectZero];
         self.backgroundColor = [UIColor clearColor];
         [self addSubview:self.carView];
+        
+//        self.timeLab.userInteractionEnabled = YES;
+//        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+//        [self.timeLab addGestureRecognizer:singleTap];
+
     }
     return self;
 }
 
+//-(void)singleTap:(UITapGestureRecognizer *)singleTap
+//{
+//    
+////    if (self.delegate && self.delegate respondsToSelector:@selector(singleTapConstationCarView:)) {
+////        
+////    }
+//    NSLog(@"%i------8888",[self.delegate respondsToSelector:@selector(singleTapConstationCarView:)]);
+//}
 -(void)layoutSubviews{
     [super layoutSubviews];
     
@@ -68,37 +81,37 @@
     self.carView.frame = CGRectMake(177, 13, 125, 51);
 }
 
--(void)initConstationCarViewWithStationModel:(StationModel *)stationModel  AndStationCarModel:(StationCarModel *)stationCarModel AndType:(NSInteger)type
-{
-    self.postionNameLab.text = stationModel.name;
-//    self.station_id = stationCarModel.station_id;
-       if (type == 0) {
-        
-        self.carView.hidden = YES;
-        self.clockImg.hidden = YES;
-        self.arrowheadImg.hidden = YES;
-        self.serviceNameLab.hidden = YES;
-        self.timeLab.hidden = YES;
-        self.isEmpty = YES;
-        
-    }
-    else
-    {
-        if ([stationCarModel.station_id isEqualToString:stationModel.station_id]) {
-            self.carView.hidden = NO;
-            self.clockImg.hidden = NO;
-            self.arrowheadImg.hidden = NO;
-            self.serviceNameLab.hidden = NO;
-            self.timeLab.hidden = NO;
-            self.isEmpty = NO;
-            
-//            self.carView.carNumberLab.text = stationCarModel.carPlateNumber;
-            self.serviceNameLab.text = stationCarModel.serviceName;
-        }
-       
-    }
-    
-}
+//-(void)initConstationCarViewWithStationModel:(StationModel *)stationModel  AndStationCarModel:(StationCarModel *)stationCarModel AndType:(NSInteger)type
+//{
+//    self.postionNameLab.text = stationModel.name;
+////    self.station_id = stationCarModel.station_id;
+//       if (type == 0) {
+//        
+//        self.carView.hidden = YES;
+//        self.clockImg.hidden = YES;
+//        self.arrowheadImg.hidden = YES;
+//        self.serviceNameLab.hidden = YES;
+//        self.timeLab.hidden = YES;
+//        self.isEmpty = YES;
+//        
+//    }
+//    else
+//    {
+//        if ([stationCarModel.station_id isEqualToString:stationModel.station_id]) {
+//            self.carView.hidden = NO;
+//            self.clockImg.hidden = NO;
+//            self.arrowheadImg.hidden = NO;
+//            self.serviceNameLab.hidden = NO;
+//            self.timeLab.hidden = NO;
+//            self.isEmpty = NO;
+//            
+////            self.carView.carNumberLab.text = stationCarModel.carPlateNumber;
+//            self.serviceNameLab.text = stationCarModel.serviceName;
+//        }
+//       
+//    }
+//    
+//}
 -(void)setIsEmpty:(BOOL)isEmpty
 {
     _isEmpty = isEmpty;
@@ -150,6 +163,8 @@
         
         self.posinServeName = car.serviceName;
         self.isEmpty = NO;
+        
+       
     }
     else
     {

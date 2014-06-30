@@ -157,6 +157,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <connections>
                                 <outletCollection property="gestureRecognizers" destination="Iw1-Oz-7yN" appends="YES" id="7V3-Ba-rcE"/>
+                                <outletCollection property="gestureRecognizers" destination="SNv-IT-hx2" appends="YES" id="UZf-ta-eNC"/>
                             </connections>
                         </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现场管理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A3g-sS-fgI">
@@ -447,6 +448,11 @@
                 <action selector="moveInconstructionCarView:" destination="-1" id="C7P-9C-Dik"/>
             </connections>
         </panGestureRecognizer>
+        <tapGestureRecognizer id="SNv-IT-hx2">
+            <connections>
+                <action selector="singleTapConstationCarView:" destination="-1" id="Sco-vG-lFe"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="cancelOrder.png" width="40" height="40"/>

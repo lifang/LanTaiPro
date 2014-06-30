@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LanTaiPro/Controllers/LTStationViewController.m"
-            timestampString = "424926662.89292"
+            filePath = "LanTaiPro/Views/DRScrollView.m"
+            timestampString = "425462584.560274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
-            landmarkName = "-initInfoView"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "-scrollMiddleScrollview"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LanTaiPro/Controllers/LTStationViewController.m"
+            timestampString = "425466095.152494"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "518"
+            endingLineNumber = "518"
+            landmarkName = "-moveInconstructionCarView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -79,11 +79,14 @@
 
 @property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
 @property (strong, nonatomic) IBOutlet UIView *rightView;
-@property (assign, nonatomic) BOOL isScrollMiddleScrollView;
+//@property (assign, nonatomic) BOOL isScrollMiddleScrollView;
 @property (strong, nonatomic) NSMutableArray *stationArray;
 @property (nonatomic,strong) NSMutableArray *dataArray;//快速下单服务项目ARR
 
 - (IBAction)tapLeftViewCover:(UIControl *)sender;//点击回到现场管理
 - (IBAction)moveInconstructionCarView:(UIPanGestureRecognizer *)sender;
+
+- (IBAction)singleTapConstationCarView:(UITapGestureRecognizer *)sender;
+
 
 @end

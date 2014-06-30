@@ -12,6 +12,8 @@
 #import "StationModel.h"
 #import "CustomTimeView.h"
 
+@protocol  ConstationCarViewDelegate;
+
 @interface ConstationCarView : UIView
 
 @property(assign, nonatomic) NSString *station_id;
@@ -41,9 +43,17 @@
 @property (strong, nonatomic) UILabel *postionNameLab;
 @property(nonatomic,strong) UILabel *posinDateLab;
 
+@property (weak, nonatomic)id<ConstationCarViewDelegate> delegate;
+
 //@property (strong, nonatomic) NSString *station_id;
 //@property (assign, nonatomic) BOOL isEmpty;
 
 -(void)initConstationCarViewWithStationModel:(StationModel *)stationModel  AndStationCarModel:(StationCarModel *)stationCarModel AndType:(NSInteger)type;
 -(void)setCarObj:(StationCarModel *)car;
+@end
+
+@protocol ConstationCarViewDelegate <NSObject>
+
+-(void)singleTapConstationCarView:(ConstationCarView *)constationCarView;
+
 @end
