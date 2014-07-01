@@ -494,8 +494,9 @@
         if (sender.state == UIGestureRecognizerStateEnded) {
             if (self.moveCarView) {
                 //drag down
-//                if (CGRectGetMaxX(self.moveCarView.frame) - CGRectGetMinX(self.finshScrollView.frame) > 20) {
-                 if ((self.constructionScrollView.contentOffset.y) - CGRectGetMinX(self.finshScrollView.frame) > 20) {
+                if (CGRectGetMaxY(self.moveCarView.frame) - CGRectGetMinY(self.finshScrollView.frame) > 20)
+//                 if ((self.constructionScrollView.contentOffset.y) - CGRectGetMinX(self.finshScrollView.frame) > 20)
+                 {
                 [self moveCarViewFromBeginningScrollViewIntoBottomRightScrollView:self.moveCarView
                  ];
                 }else
@@ -516,12 +517,14 @@
     else{
         if (self.moveCarView) {
             CGPoint movepoint = [sender locationInView:self.leftBackgroundView];
-            if (CGRectGetMaxY(self.leftView.frame) < CGRectGetMaxY(self.moveCarView.frame) ) {
-                [self.constructionScrollView startScrollContentWithStep:79/4];
+//            if (CGRectGetMaxY(self.leftView.frame) < CGRectGetMaxY(self.moveCarView.frame) ) {
+            if (CGRectGetMaxY(self.leftView.frame) - CGRectGetMaxY(self.moveCarView.frame) > 35)
+            {
+                [self.constructionScrollView startScrollContentWithStep:20];
                 self.isScrollMiddleScrollView = YES;
             }else
                 if (CGRectGetMinY(self.moveCarView.frame) <= 0 && !self.isScrollMiddleScrollView) {
-                    [self.constructionScrollView startScrollContentWithStep:-79/4];
+                    [self.constructionScrollView startScrollContentWithStep:-20];
                     self.isScrollMiddleScrollView = YES;
                 }else
                     if (self.isScrollMiddleScrollView) {

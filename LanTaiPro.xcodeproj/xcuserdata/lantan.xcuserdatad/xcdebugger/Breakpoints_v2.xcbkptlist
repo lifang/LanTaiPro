@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LanTaiPro/Controllers/LTStationViewController.m"
-            timestampString = "425466095.152494"
+            timestampString = "425811195.868406"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "518"
-            endingLineNumber = "518"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
             landmarkName = "-moveInconstructionCarView:"
             landmarkType = "5">
          </BreakpointContent>
