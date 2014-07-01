@@ -15,6 +15,7 @@
 #import "UserModel.h"
 #import "LTMainViewLeftBar.h"
 #import "CarModel.h"
+#import "SearchModel.h"
 
 @interface LTDataShare : NSObject
 
@@ -31,12 +32,17 @@
 ///车辆品牌、型号
 @property (nonatomic, strong) CarModel *carModel;
 
-
 ///套餐卡选择产品下单  
 @property (nonatomic, strong) NSMutableArray *packageOrderArray;
 
 ///业务开单-右侧边栏选择
 @property (nonatomic, strong) NSMutableArray *billingProductArray;
+
+///车牌或手机搜索框
+@property (nonatomic, assign) NSInteger viewFrom;
+
+///搜索用户页面
+@property (nonatomic, strong) SearchModel *searchModel;
 
 + (LTDataShare *)sharedService;
 

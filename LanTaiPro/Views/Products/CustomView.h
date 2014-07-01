@@ -14,5 +14,5 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLab;
 @property (nonatomic, weak) IBOutlet UILabel *priceLab;
 @property (nonatomic, weak) IBOutlet UILabel *infoLab;
-
+@property (nonatomic, weak) IBOutlet UILabel *productLab;
 @end

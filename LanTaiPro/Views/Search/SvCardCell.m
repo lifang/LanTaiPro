@@ -67,7 +67,7 @@
             SvCardProductModel *svProduct = (SvCardProductModel *)svCard.recordList[i];
             //卡内金额
             UILabel *totalPriceLab = [self returnlabel];
-            totalPriceLab.text = [NSString stringWithFormat:@"%.2f",[svProduct.use_price floatValue]+[svProduct.left_price floatValue]];
+            totalPriceLab.text = [NSString stringWithFormat:@"%.2f",[svProduct.origin_price floatValue]];
             
             frame.origin.x = 151;
             frame.size.width =90;
@@ -81,9 +81,9 @@
             frame.size.width =100;
             timeLab.frame = frame;
             [self.contentView addSubview:timeLab];
-            //订单
+            //项目
             UILabel *codeLab = [self returnlabel];
-            codeLab.text = [NSString stringWithFormat:@"%.2f",[svProduct.use_price floatValue]+[svProduct.left_price floatValue]];
+            codeLab.text = [NSString stringWithFormat:@"%@",svProduct.products];
             
             frame.origin.x += frame.size.width;
             frame.size.width =130;

@@ -58,7 +58,7 @@
     }else {
         NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kUserInfo];
         NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
-        [params setObject:[LTDataShare sharedService].user.user_id forKey:@"staff_id"];
+        [params setObject:[LTDataShare sharedService].user.user_id forKey:@"user_id"];
         [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -78,7 +78,7 @@
         }errorBlock:^(NSString *notice){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [Utility errorAlert:notice dismiss:YES];
+                [Utility errorAlert:notice dismiss:NO];
             });
         }];
     }
@@ -95,18 +95,18 @@
     [super viewDidLoad];
     //用户信息
     [self roundView:self.userImageView];
-    [self.userImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,[LTDataShare sharedService].user.userImg]] placeholderImage:[UIImage imageNamed:@"alert-black-button"]];
+    [self.userImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,[LTDataShare sharedService].user.userImg]] placeholderImage:[UIImage imageNamed:@"nonPic"]];
     
     self.userNameLabel.text = [NSString stringWithFormat:@"%@",[LTDataShare sharedService].user.name];
     self.userPostLabel.text = [NSString stringWithFormat:@"%@",[LTDataShare sharedService].user.userPost];
     
-    [self testGetOrderInfos];
+    [self getOrderInfos];
     
     //下拉刷新
     __block LTUserInfoViewController *userViewControl = self;
     __block UITableView *table = self.orderTable;
     [_orderTable addPullToRefreshWithActionHandler:^{
-        [userViewControl testGetOrderInfos];
+        [userViewControl getOrderInfos];
         [table.pullToRefreshView performSelector:@selector(stopAnimating) withObject:nil afterDelay:1];
     }];
 }

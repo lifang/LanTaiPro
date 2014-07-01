@@ -12,7 +12,7 @@
 -(CapitalModel *)capitalModelFromLocal:(FMResultSet *)rs;
 -(BrandModel *)brandModelFromLocal:(FMResultSet *)rs;
 -(ModelModel *)modelModelFromLocal:(FMResultSet *)rs;
-
+-(OrderModel *)orderModelFromLocal:(FMResultSet *)rs;
 @end
 @implementation LTDB(DBPrivate)
 -(UserModel *)userModelFromLocal:(FMResultSet *)rs
@@ -53,6 +53,39 @@
     modelModel.brand_id = [rs stringForColumn:@"car_capital_id"];
     modelModel.name = [rs stringForColumn:@"name"];
     return modelModel;
+}
+-(OrderModel *)orderModelFromLocal:(FMResultSet *)rs
+{
+    OrderModel *orderModel = [[OrderModel alloc]init];
+    
+    orderModel.store_id = [rs stringForColumn:@"store_id"];
+    orderModel.order_id = [rs stringForColumn:@"order_id"];
+    orderModel.order_is_please = [rs stringForColumn:@"order_is_please"];
+    orderModel.order_total_price = [rs stringForColumn:@"order_total_price"];
+    orderModel.order_prods = [rs stringForColumn:@"order_prods"];
+    orderModel.order_billing = [rs stringForColumn:@"order_billing"];
+    orderModel.order_pay_type = [rs stringForColumn:@"order_pay_type"];
+    orderModel.order_is_free = [rs stringForColumn:@"order_is_free"];
+    orderModel.order_status = [rs stringForColumn:@"order_status"];
+    orderModel.oprice = [rs stringForColumn:@"oprice"];
+    orderModel.content = [rs stringForColumn:@"content"];
+    orderModel.car_num_id = [rs stringForColumn:@"car_num_id"];
+    orderModel.car_brand = [rs stringForColumn:@"car_brand"];
+    orderModel.car_model = [rs stringForColumn:@"car_model"];
+    orderModel.car_year = [rs stringForColumn:@"car_year"];
+    orderModel.car_distance = [rs stringForColumn:@"car_distance"];
+    orderModel.car_num = [rs stringForColumn:@"car_num"];
+    orderModel.customer_id = [rs stringForColumn:@"customer_id"];
+    orderModel.customer_name = [rs stringForColumn:@"customer_name"];
+    orderModel.customer_phone = [rs stringForColumn:@"customer_phone"];
+    orderModel.customer_sex = [rs stringForColumn:@"customer_sex"];
+    orderModel.customer_property = [rs stringForColumn:@"customer_property"];
+    orderModel.customer_company = [rs stringForColumn:@"customer_company"];
+    orderModel.customer_vin = [rs stringForColumn:@"customer_vin"];
+    orderModel.reason = [rs stringForColumn:@"reason"];
+    orderModel.request = [rs stringForColumn:@"request"];
+    
+    return orderModel;
 }
 @end
 
@@ -186,5 +219,59 @@
     
     [self.db close];
     return carModel;
+}
+
+
+#pragma mark - 保存订单信息至本地
+- (BOOL)saveOrderDataToLocal:(OrderModel *)orderModel
+{
+    BOOL res = [self.db executeUpdate:@"insert into orderInfo (store_id ,order_id, order_is_please, order_total_price, order_prods, order_billing, order_pay_type, order_is_free, order_status, oprice, content, car_num_id, car_brand, car_model, car_year, car_distance, car_num, customer_id, customer_name, customer_phone, customer_sex, customer_property, customer_company, customer_vin, reason, request) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",orderModel.store_id,orderModel.order_id,orderModel.order_is_please,orderModel.order_total_price,orderModel.order_prods,orderModel.order_billing,orderModel.order_pay_type,orderModel.order_is_free,orderModel.order_status,orderModel.oprice,orderModel.content,orderModel.car_num_id,orderModel.car_brand,orderModel.car_model,orderModel.car_year,orderModel.car_distance,orderModel.car_num,orderModel.customer_id,orderModel.customer_name,orderModel.customer_phone,orderModel.customer_sex,orderModel.customer_property,orderModel.customer_company,orderModel.customer_vin,orderModel.reason,orderModel.request];
+    return res;
+}
+
+#pragma mark - 获取本地订单信息
+-(OrderModel *)getLocalOrderInfoWhereOid:(NSString *)orderId
+{
+    FMResultSet * rs = [self.db executeQuery:@"select * from orderInfo where order_id=?",orderId];
+    
+    OrderModel *orderModel = nil;
+    while ([rs next]) {
+        orderModel = [self orderModelFromLocal:rs];
+    }
+    [rs close];
+    
+    return orderModel;
+}
+
+#pragma mark - 更新投诉内容
+-(BOOL)updateOrderInfoReason:(NSString *)reason Reaquest:(NSString *)request WhereOid:(NSString *)orderId
+{
+    return [self.db executeUpdate:@"update orderInfo set reason=?,request=? where order_id= ?",reason,request,orderId];
+}
+
+#pragma mark - 删除本地订单
+-(BOOL)deleteDataFromOrder
+{
+    BOOL res = [self.db executeUpdate:@"delete from orderInfo"];
+    return res;
+}
+
+#pragma mark - 更新订单信息
+-(BOOL)updateOrderInfoWithOrder:(OrderModel *)orderModel WhereOid:(NSString *)orderId
+{
+    return [self.db executeUpdate:@"update orderInfo set order_is_please=?, order_total_price=?, order_prods=?, order_billing=?, order_pay_type=?, order_is_free=?, order_status=?, oprice=?, content=?, car_num_id=?, car_brand=?, car_model=?, car_year=?, car_distance=?, car_num=?, customer_id=?, customer_name=?, customer_phone=?, customer_sex=?, customer_property=?, customer_company=?, customer_vin=? where order_id= ?",orderModel.order_is_please,orderModel.order_total_price,orderModel.order_prods,orderModel.order_billing,orderModel.order_pay_type,orderModel.order_is_free,orderModel.order_status,orderModel.oprice,orderModel.content,orderModel.car_num_id,orderModel.car_brand,orderModel.car_model,orderModel.car_year,orderModel.car_distance,orderModel.car_num,orderModel.customer_id,orderModel.customer_name,orderModel.customer_phone,orderModel.customer_sex,orderModel.customer_property,orderModel.customer_company,orderModel.customer_vin, orderId];
+}
+
+#pragma mark - 获取所有订单信息
+-(NSArray *)getLocalOrderInfo
+{
+    FMResultSet * rs = [self.db executeQuery:@"select * from orderInfo"];
+    NSMutableArray *array = [NSMutableArray array];
+    while ([rs next]){
+        OrderModel *orderModel = [self orderModelFromLocal:rs];
+        [array addObject:orderModel];
+    }
+    [rs close];
+    return array;
 }
 @end

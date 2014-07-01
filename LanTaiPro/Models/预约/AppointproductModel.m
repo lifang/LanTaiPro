@@ -14,7 +14,6 @@
 {
     return  @{@"id": mts_key(a_p_id),
               @"base_price": mts_key(a_p_basePrice),
-              @"is_service": mts_key(a_p_isService),
               @"name": mts_key(a_p_name),
               @"reservation_id": mts_key(a_p_reservationId),
               @"sale_price": mts_key(a_p_salePrice),

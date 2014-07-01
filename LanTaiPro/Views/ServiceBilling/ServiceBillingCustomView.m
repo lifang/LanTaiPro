@@ -56,7 +56,7 @@ static WYPopoverController *popVC;
     return _popController;
 }
 
-- (void)setCustomerModel:(SearchCustomerModel *)customerModel
+- (void)setCustomerModel:(CustomerModel *)customerModel
 {
     if (customerModel != nil) {
         _customerModel = customerModel;
@@ -110,7 +110,7 @@ static WYPopoverController *popVC;
             UILabel *label = (UILabel *)[self viewWithTag:i+LabelTag];
             label.text = @"";
         }
-        _customerModel = [[SearchCustomerModel alloc]init];
+        _customerModel = [[CustomerModel alloc]init];
     }
 }
 

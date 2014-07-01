@@ -1,19 +1,18 @@
 //
-//  SearchCustomerModel.m
+//  CustomerModel.m
 //  LanTaiPro
 //
-//  Created by comdosoft on 14-5-28.
+//  Created by comdosoft on 14-6-27.
 //  Copyright (c) 2014年 LanTaiPro. All rights reserved.
 //
 
-#import "SearchCustomerModel.h"
+#import "CustomerModel.h"
 
-@implementation SearchCustomerModel
+@implementation CustomerModel
 
 + (NSDictionary*)mts_mapping
 {
     return  @{@"customer_id": mts_key(customer_id),
-              @"birth": mts_key(customer_birth),
               @"name": mts_key(customer_name),
               @"mobilephone": mts_key(customer_phone),
               @"sex": mts_key(customer_sex),
@@ -28,9 +27,9 @@
               @"num": mts_key(customer_carNum),
               @"distance": mts_key(customer_distance),
               @"year": mts_key(customer_carYear),
-
-              @"old_order": mts_key(oldOrderList),
-              @"working_order": mts_key(workingOrderList),
+              
+              
+              @"working_orders":mts_key(workingOrderList),
               };
 }
 
@@ -38,15 +37,15 @@
 {
     return NO;
 }
+
 + (NSDictionary*)mts_arrayClassMapping
 {
-    return @{mts_key(oldOrderList) : SearchOrder.class,
+    return @{
              mts_key(workingOrderList) : SearchOrder.class,
              };
 }
 
-
-+(NSMutableDictionary *)dictionaryFromModel:(SearchCustomerModel *)customerModel
++(NSMutableDictionary *)dictionaryFromModel:(CustomerModel *)customerModel
 {
     NSMutableDictionary *aDic = [NSMutableDictionary dictionary];
     
@@ -94,4 +93,6 @@
     
     return aDic;
 }
+
+
 @end

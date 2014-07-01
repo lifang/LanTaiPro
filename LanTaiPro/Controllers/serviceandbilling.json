@@ -9,24 +9,24 @@
                          "id":"33",
                          "name":"清洗服务1",
                          "sale_price":"1000",
-                         "several_times": "6",
-                         "isSelected":"0",
+                         "storage": "6",
+                         "is_selected":"0",
                          "types": "0"
                          },
                          {
                          "id":"32",
                          "name":"清洗服务2",
                          "sale_price":"1000",
-                         "several_times": "6",
-                         "isSelected":"0",
+                         "storage": "6",
+                         "is_selected":"0",
                          "types": "0"
                          },
                          {
                          "id":"31",
                          "name":"清洗服务3",
                          "sale_price":"1000",
-                         "several_times": "6",
-                         "isSelected":"0",
+                         "storage": "6",
+                         "is_selected":"0",
                          "types": "0"
                          }
                          ]
@@ -40,24 +40,24 @@
                          "id":"10",
                          "name":"咖啡机0",
                          "sale_price":"500",
-                         "several_times": "6",
-                         "isSelected":"0",
+                         "storage": "6",
+                         "is_selected":"0",
                          "types": "1"
                          },
                          {
                          "id":"11",
                          "name":"咖啡机1",
                          "sale_price":"500",
-                         "several_times": "6",
-                         "isSelected":"0",
+                         "storage": "6",
+                         "is_selected":"0",
                          "types": "1"
                          },
                          {
                          "id":"12",
                          "name":"咖啡机2",
                          "sale_price":"500",
-                         "several_times": "6",
-                         "isSelected":"0",
+                         "storage": "6",
+                         "is_selected":"0",
                          "types": "1"
                          }
                          ]
@@ -71,24 +71,24 @@
                          "id":"10",
                          "name":"健康大会0",
                          "sale_price":"500",
-                         "several_times": "6",
-                         "isSelected":"0",
+                         "storage": "6",
+                         "is_selected":"0",
                          "types": "1"
                          },
                          {
                          "id":"11",
                          "name":"健康大会1",
                          "sale_price":"300",
-                         "several_times": "6",
-                         "isSelected":"0",
+                         "storage": "6",
+                         "is_selected":"0",
                          "types": "1"
                          },
                          {
                          "id":"12",
                          "name":"健康大会2",
                          "sale_price":"600",
-                         "isSelected":"0",
-                         "several_times": "6",
+                         "is_selected":"0",
+                         "storage": "6",
                          "types": "1"
                          }
                          ]

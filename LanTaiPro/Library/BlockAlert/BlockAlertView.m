@@ -389,11 +389,11 @@ static UIFont *buttonFont = nil;
         [self dismissWithClickedButtonIndex:buttonIndex animated:YES];
     }else {
         if (self.textField && self.textField.text.length==0) {
-            [Utility errorAlert:@"请填写数据库地址"];
+            [Utility errorAlert:@"请填写数据库地址" dismiss:YES];
         }else if (self.nameTextField && self.nameTextField.text.length==0) {
-            [Utility errorAlert:@"请填写用户名"];
+            [Utility errorAlert:@"请填写用户名" dismiss:YES];
         }else if (self.passWordTextField && self.passWordTextField.text.length==0) {
-            [Utility errorAlert:@"请填写密码"];
+            [Utility errorAlert:@"请填写密码" dismiss:YES];
         }else {
             [self dismissWithClickedButtonIndex:buttonIndex animated:YES];
         }

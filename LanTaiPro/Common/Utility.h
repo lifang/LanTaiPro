@@ -14,4 +14,8 @@
 + (void)errorAlert:(NSString *)message dismiss:(BOOL)animated;
 + (NSDictionary *)initWithJSONFile:(NSString *)jsonPath;
 +(NSMutableArray *)matchArray;
++ (NSString *)getNowDateFromatAnDate;
++(void)shakeViewHorizontal:(UIView*)viewToShake;
++(void)shakeViewVertical:(UIView*)viewToShake;
++(void)setLogoImageWithTable:(UITableView *)table;
 @end

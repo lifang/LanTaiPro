@@ -35,6 +35,7 @@
     }
     return _appDel;
 }
+
 #pragma mark - 车模型
 -(void)getCarModelData
 {
@@ -46,18 +47,16 @@
     LTDB *local = [[LTDB alloc]init];
     [local saveCarModelToLocal:carModel];
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self getCarModelData];
     //界面
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"log-background.jpg"]];
     self.LoginView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"LoginView_background"]];
     
     self.nameView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"log-name-normal"]];
     self.passWordView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"log-password-normal"]];
-    [LTDataShare sharedService].hostString = @"http:116.255.135.175:3008";
+    [LTDataShare sharedService].hostString = @"http:114.215.208.110:3001";
      //判断有无登录
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
      NSString *userId = [defaults objectForKey:@"userId"];
@@ -140,7 +139,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     
-                    NSDictionary *aDic = [dictionary objectForKey:@"staff"];
+                    NSDictionary *aDic = [dictionary objectForKey:@"user_info"];
                     UserModel *user = [UserModel userFromDictionary:aDic];
                     user.kHost = [NSString stringWithFormat:@"%@",[LTDataShare sharedService].hostString];
                     
@@ -155,6 +154,16 @@
                     [localDb saveUserDataToLocal:user];
                     
                     [LTDataShare sharedService].user = user;
+                    
+                    //车模型
+                    NSDictionary *carDic = [dictionary objectForKey:@"carInfo"];
+                    CarModel *carModel = [[CarModel alloc]init];
+                    [carModel mts_setValuesForKeysWithDictionary:carDic];
+                    [LTDataShare sharedService].carModel = carModel;
+                    
+                    LTDB *local = [[LTDB alloc]init];
+                    [local saveCarModelToLocal:carModel];
+                    
                     
                     _LoginView.hidden = YES;
                     _infoLabel1.hidden = NO;

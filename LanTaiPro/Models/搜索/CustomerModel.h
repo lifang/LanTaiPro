@@ -1,21 +1,20 @@
 //
-//  SearchCustomerModel.h
+//  CustomerModel.h
 //  LanTaiPro
 //
-//  Created by comdosoft on 14-5-28.
+//  Created by comdosoft on 14-6-27.
 //  Copyright (c) 2014年 LanTaiPro. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SearchModel.h"
 #import "SearchOrder.h"
 
-@interface SearchCustomerModel : NSObject
+@interface CustomerModel : NSObject
 
 ///用户id
 @property (nonatomic, strong) NSString * customer_id;//
-///用户生日
-@property (nonatomic, strong) NSString * customer_birth;//
+
 ///用户姓名
 @property (nonatomic, strong) NSString * customer_name;//
 ///用户手机
@@ -44,11 +43,12 @@
 ///车行驶里程
 @property (nonatomic, strong) NSString * customer_distance;//
 
+@property (nonatomic, assign) OrderTypes orderType;
 
-@property (nonatomic, strong) NSMutableArray *oldOrderList;
+///进行中订单
 @property (nonatomic, strong) NSMutableArray *workingOrderList;
+///过往消费记录
+@property (nonatomic, strong) NSMutableArray *oldOrderList;
 
-@property (nonatomic, strong) NSMutableArray *orderList;
-
-+(NSMutableDictionary *)dictionaryFromModel:(SearchCustomerModel *)customerModel;
++(NSMutableDictionary *)dictionaryFromModel:(CustomerModel *)customerModel;
 @end

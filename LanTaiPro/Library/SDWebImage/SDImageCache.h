@@ -133,6 +133,7 @@ typedef NS_ENUM(NSInteger, SDImageCacheType) {
  */
 - (void)removeImageForKey:(NSString *)key fromDisk:(BOOL)fromDisk;
 
+-(void)clearCacheCompletion:(void (^)())completion;
 /**
  * Clear all memory cached images
  */

@@ -15,6 +15,7 @@
 
 #import "UserModel.h"
 #import "CarModel.h"
+#import "OrderModel.h"
 
 @interface LTDB : LTDataBase
 
@@ -30,4 +31,18 @@
 -(void)saveCarModelToLocal:(CarModel *)carModel;
 //获取本地车品牌、型号
 -(CarModel *)getLocalCarModel;
+
+
+//保存订单信息至本地
+- (BOOL)saveOrderDataToLocal:(OrderModel *)orderModel;
+//获取本地订单信息
+-(OrderModel *)getLocalOrderInfoWhereOid:(NSString *)orderId;
+//更新投诉内容
+-(BOOL)updateOrderInfoReason:(NSString *)reason Reaquest:(NSString *)request WhereOid:(NSString *)orderId;
+//删除本地订单
+-(BOOL)deleteDataFromOrder;
+//更新订单信息
+-(BOOL)updateOrderInfoWithOrder:(OrderModel *)orderModel WhereOid:(NSString *)orderId;
+//获取所有订单信息
+-(NSArray *)getLocalOrderInfo;
 @end

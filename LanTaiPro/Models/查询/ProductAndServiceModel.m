@@ -17,11 +17,10 @@
               @"description": mts_key(p_description),
               @"introduction": mts_key(p_introduction),
               @"name": mts_key(p_name),
-              @"status": mts_key(p_status),
               @"types": mts_key(p_types),
               @"sale_price":mts_key(p_price),
               @"isseleted": mts_key(p_selected),
-              @"several_times": mts_key(p_num),
+              @"storage": mts_key(p_num),
               };
 }
 

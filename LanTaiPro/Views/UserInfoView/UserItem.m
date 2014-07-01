@@ -39,7 +39,7 @@
         _userImageView.backgroundColor = [UIColor clearColor];
         if (userModel) {
             self.userModel = userModel;
-            [_userImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.userModel.kHost,self.userModel.userImg]] placeholderImage:[UIImage imageNamed:@"userAdd"]];
+            [_userImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.userModel.kHost,self.userModel.userImg]] placeholderImage:[UIImage imageNamed:@"nonPic"]];
         }else {
             [_userImageView setImage:[UIImage imageNamed:@"userAdd"]];
         }

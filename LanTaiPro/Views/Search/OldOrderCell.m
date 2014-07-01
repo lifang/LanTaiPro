@@ -21,6 +21,12 @@
 
     // Configure the view for the selected state
 }
+
+-(void)setIdxPath:(NSIndexPath *)idxPath
+{
+    _idxPath = idxPath;
+}
+
 - (UILabel *)returnlabel
 {
     UILabel *label = [[UILabel alloc]init];

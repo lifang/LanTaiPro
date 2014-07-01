@@ -62,13 +62,16 @@
             self.confirmAcceptButton.hidden = YES;
         }
         
+        //未受理
         self.cancelOrderButton.type = @"3";
         self.cancelOrderButton.reservation_id = appointModel.appointId;
-        self.confirmOrderButton.type = @"4";
+        self.confirmOrderButton.type = @"1";
         self.confirmOrderButton.reservation_id = appointModel.appointId;
         
-        self.cancelAcceptButton.type = @"2";
+        //已受理
+        self.cancelAcceptButton.type = @"3";
         self.cancelAcceptButton.reservation_id = appointModel.appointId;
+        self.confirmAcceptButton.type = @"2";
         self.confirmAcceptButton.reservation_id = appointModel.appointId;
         
         self.nameLabel.text = [NSString stringWithFormat:@"%@",appointModel.appointUserName];
@@ -154,7 +157,8 @@
 }
 -(IBAction)confirmAcceptButtonPressed:(id)sender
 {
-    [self.delegate confirmAcceptButtonPressed];
+    AppointButton *btn = (AppointButton *)sender;
+    [self.delegate confirmAcceptButtonPressed:btn];
 }
 
 

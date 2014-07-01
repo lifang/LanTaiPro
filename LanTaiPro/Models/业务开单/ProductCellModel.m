@@ -16,9 +16,9 @@
               @"id": mts_key(productId),
               @"name": mts_key(name),
               @"sale_price": mts_key(price),
-              @"several_times": mts_key(several_times),
+              @"storage": mts_key(several_times),
               @"types": mts_key(types),
-              @"isseleted": mts_key(selected),
+              @"is_selected": mts_key(selected),
               };
 }
 

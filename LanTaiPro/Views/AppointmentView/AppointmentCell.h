@@ -40,6 +40,6 @@
 @protocol AppointCellDelegate <NSObject>
 
 -(void)buttonPressedWithBtn:(AppointButton *)btn;
--(void)confirmAcceptButtonPressed;
+-(void)confirmAcceptButtonPressed:(AppointButton *)btn;
 
 @end

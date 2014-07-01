@@ -12,18 +12,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="开始的减肥健康阿斯库拉多夫好看" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOK-1f-h6a">
-                    <rect key="frame" x="20" y="857" width="338" height="30"/>
+                    <rect key="frame" x="20" y="796" width="338" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IOO-sc-i5P">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="840"/>
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="768"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="728" translatesAutoresizingMaskIntoConstraints="NO" id="jIb-iy-D8t">
-                    <rect key="frame" x="20" y="895" width="728" height="70"/>
+                    <rect key="frame" x="20" y="834" width="728" height="70"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <string key="text">路上看到就流口水的好收到回复是亮点现在K基础上 v 看对方噶就开始甚至地方开始感觉到AHS的 v是打开AVG卡勒季斯的 v可是的 v 卡是德国 v 阿克索德v 上的 v 考试 v对肌肤说到减肥亮点开放式旅；hals；叉；法律；叉；放 v撒绿化老师的 v 蕾丝短裤 v</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -31,9 +31,17 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="999999元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SB6-Lz-ayg">
-                    <rect key="frame" x="384" y="848" width="185" height="39"/>
+                    <rect key="frame" x="384" y="787" width="185" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="728" translatesAutoresizingMaskIntoConstraints="NO" id="dcQ-XN-SAX">
+                    <rect key="frame" x="20" y="897" width="728" height="42"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <string key="text">路上看到就流口水的好收到回复是亮点现在K基础上 v 看对方噶就开始甚至地方开始感觉到AHS的 v是打开AVG卡勒季斯的 v可是的 v 卡是德国 v 阿克索德v 上的 v 考试 v对肌肤说到减肥亮点开放式旅；hals；叉；法律；叉；放 v撒绿化老师的 v 蕾丝短裤 v</string>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -45,6 +53,7 @@
                 <outlet property="infoLab" destination="jIb-iy-D8t" id="148-VE-OVg"/>
                 <outlet property="nameLab" destination="TOK-1f-h6a" id="31K-wb-d70"/>
                 <outlet property="priceLab" destination="SB6-Lz-ayg" id="DVC-9C-duG"/>
+                <outlet property="productLab" destination="dcQ-XN-SAX" id="9q2-Gh-MsW"/>
             </connections>
         </view>
     </objects>
