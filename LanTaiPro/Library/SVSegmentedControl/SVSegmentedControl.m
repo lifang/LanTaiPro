@@ -86,8 +86,7 @@
         self.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
         self.thumbEdgeInset = UIEdgeInsetsMake(2, 2, 2, 2);
         self.height = 32.0;
-        
-        self.selectedIndex = 0;
+
         self.thumb.segmentedControl = self;
         
         self.LKWidth = 0;
@@ -111,34 +110,6 @@
     
 	int c = [self.titlesArray count];
 	self.segmentWidth = 80;
-	
-//	for(id title in self.titlesArray) {
-//        if([title isKindOfClass:[NSString class]])
-//        {
-//            if(self.LKWidth > 0)
-//            {
-//                self.segmentWidth = self.LKWidth;      
-//
-//            }
-//            else{
-//                CGFloat stringWidth = [title sizeWithFont:self.font].width+(self.titleEdgeInsets.left+self.titleEdgeInsets.right+self.thumbEdgeInset.left+self.thumbEdgeInset.right);
-//                self.segmentWidth = MAX(stringWidth, self.segmentWidth);
-//            }
-//        }
-//        if([title isKindOfClass:[UIImage class]])
-//        {
-//            UIImage* timage = title;
-//            if(self.LKWidth > 0)
-//            {
-//                self.segmentWidth = self.LKWidth;
-//            }
-//            else{
-//                
-//                self.segmentWidth = MAX(timage.size.width, self.segmentWidth);
-//            }
-//        }
-//	}
-    
 	self.segmentWidth = ceil(self.segmentWidth/2.0)*2; // make it an even number so we can position with center
 	self.bounds = CGRectMake(0, 0, self.segmentWidth*c+c+1, self.height);
     self.thumbHeight = self.thumb.backgroundImage ? self.thumb.backgroundImage.size.height : self.height-(self.thumbEdgeInset.top+self.thumbEdgeInset.bottom);
@@ -156,10 +127,15 @@
     
     BOOL animateInitial = self.animateToInitialSelection;
     
-    if(self.selectedIndex == 0)
+    if(self.selectedIndex == 0){
         animateInitial = NO;
+        self.thumb.hidden = YES;
+    }else {
+        self.thumb.hidden = NO;
+        [self moveThumbToIndex:selectedIndex animate:animateInitial];
+    }
 	
-    [self moveThumbToIndex:selectedIndex animate:animateInitial];
+    
 }
 
 #pragma mark - Drawing code
@@ -183,17 +159,7 @@
         CGPathRef roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rect.size.width, rect.size.height-1) cornerRadius:self.cornerRadius].CGPath;
         CGContextAddPath(context, roundedRect);
         CGContextClip(context);
-        
-//        // background tint
-//        CGFloat components[4] = {0.10, 1,  0.12, 1};
-//        CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, NULL, 2);
-//        CGContextDrawLinearGradient(context, gradient, CGPointMake(0,0), CGPointMake(0,CGRectGetHeight(rect)-1), 0);
-//        CGGradientRelease(gradient);
-//        
-//        [self.tintColor set];
-//        UIRectFillUsingBlendMode(rect, kCGBlendModeOverlay);
-        
-        // inner shadow
+    
         CGContextAddPath(context, roundedRect);
         CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), CGSizeMake(0, 1), 1, [UIColor colorWithWhite:0 alpha:0.6].CGColor);
         CGContextSetStrokeColorWithColor(context, [UIColor clearColor].CGColor);
@@ -325,9 +291,9 @@
         }
         
         return YES;
-    }else
-#warning !!!
-//        [Utils errorAlert:@"您已经做过评价,无需重复!"];
+    }else {
+        [Utility errorAlert:@"您已经做过评价,无需重复!" dismiss:YES];
+    }
         return NO;
 }
 
@@ -492,7 +458,7 @@
 }
 
 - (void)moveThumbToIndex:(NSUInteger)segmentIndex animate:(BOOL)animate {
-    
+    self.thumb.hidden = NO;
     self.selectedIndex = segmentIndex;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     

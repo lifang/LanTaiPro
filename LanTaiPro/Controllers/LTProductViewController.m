@@ -64,31 +64,6 @@ static const char cardkey;
     }
     return _productImgViewControl;
 }
-
--(void)getTestData
-{
-    NSDictionary *aDic = [Utility initWithJSONFile:@"productInfo"];
-    [self.productModel mts_setValuesForKeysWithDictionary:aDic];
-    NSMutableArray *tempArray;
-    switch (self.classifyType) {
-        case 0:
-            tempArray = self.productModel.productList;
-            break;
-        case 1:
-            tempArray = self.productModel.serviceList;
-            break;
-        case 2:
-            tempArray = self.productModel.cardList;
-            break;
-            
-        default:
-            tempArray = nil;
-            break;
-    }
-    
-    [self testArray:tempArray];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -96,6 +71,7 @@ static const char cardkey;
     self.searchText.layer.borderWidth = 1;
     
     self.classifyType = 0;
+    
     self.productButton.selected = YES;
     self.serviceButton.selected = NO;
     self.cardButton.selected = NO;
@@ -105,7 +81,33 @@ static const char cardkey;
 
     [Utility setLogoImageWithTable:self.productTable];
     
+    [self getSearchResultDataWithPro:@""];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textFieldChanged:)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:self.searchText];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(shoppingNotification:) name:@"shoppingNotification" object:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.searchText];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"shoppingNotification" object:nil];
+}
+
+-(void)textFieldChanged:(NSNotification *)sender {
+    UITextField *txtField = (UITextField *)sender.object;
+    if (txtField.text.length == 0) {
+        [self getSearchResultDataWithPro:@""];
+    }
 }
 
 -(void)shoppingNotification:(NSNotification *)notification
@@ -157,31 +159,35 @@ static const char cardkey;
 }
 #pragma mark - 分类点击事件
 //0 为产品 1 为服务 2 为卡类
+
+-(void)checkArray:(NSMutableArray *)array
+{
+    if (array.count>0) {
+        [self.productTable reloadData];
+    }else {
+        [self getSearchResultDataWithPro:@""];
+    }
+}
+
 -(IBAction)classificationButtonPressed:(id)sender
 {
     [self.searchText resignFirstResponder];
-    
+    //保存搜索框内容
     switch (self.classifyType) {
         case 0:
-            if (self.searchText.text.length>0) {
-                objc_setAssociatedObject(self, &productkey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            }
+            objc_setAssociatedObject(self, &productkey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             break;
         case 1:
-            if (self.searchText.text.length>0) {
-                objc_setAssociatedObject(self, &serivicekey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            }
+            objc_setAssociatedObject(self, &serivicekey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             break;
         case 2:
-            if (self.searchText.text.length>0) {
-                objc_setAssociatedObject(self, &cardkey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            }
+            objc_setAssociatedObject(self, &cardkey, self.searchText.text, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             break;
             
         default:
             break;
     }
-    
+    //清空已选择
     if (self.selectedArray.count>0) {
         for (int i=0; i<self.selectedArray.count; i++){
             int aRow = [self.selectedArray[i] integerValue];
@@ -202,7 +208,7 @@ static const char cardkey;
             }
         }
     }
-    
+    //button状态，读取搜索框文本，设置数据源
     UIButton *btn = (UIButton *)sender;
     self.classifyType = btn.tag;
     self.selectedArray = nil;
@@ -213,25 +219,26 @@ static const char cardkey;
             self.serviceButton.selected = NO;
             self.cardButton.selected = NO;
             self.searchText.text = objc_getAssociatedObject(self, &productkey);
+            [self checkArray:self.productModel.productList];
             break;
         case 1:
             self.productButton.selected = NO;
             self.serviceButton.selected = YES;
             self.cardButton.selected = NO;
             self.searchText.text =objc_getAssociatedObject(self, &serivicekey);
+            [self checkArray:self.productModel.serviceList];
             break;
         case 2:
             self.productButton.selected = NO;
             self.serviceButton.selected = NO;
             self.cardButton.selected = YES;
             self.searchText.text =objc_getAssociatedObject(self, &cardkey);
+            [self checkArray:self.productModel.cardList];
             break;
             
         default:
             break;
     }
-    
-    [self.productTable reloadData];
 }
 #pragma mark - 获取数据
 -(void)testArray:(NSMutableArray *)array
@@ -243,61 +250,57 @@ static const char cardkey;
     }else {
         self.cancelOrderButton.hidden=YES;
         self.confirmOrderButton.hidden=YES;
-        [Utility errorAlert:@"暂未查找到您需要的产品" dismiss:YES];
+        [Utility errorAlert:@"暂无数据" dismiss:YES];
     }
 }
 #pragma mark - 搜索请求
--(void)getSearchResultData {
-    if (self.searchText.text.length==0) {
-        [Utility errorAlert:@"请填写您要搜索的产品" dismiss:YES];
-    }else {
-        [self.searchText resignFirstResponder];
-        if (self.appDel.isReachable==NO) {
-            [Utility errorAlert:@"请检查网络" dismiss:NO];
-        }else{
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            
-            NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kProduct];
-            NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
-            [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
-            [params setObject:[NSString stringWithFormat:@"%d",self.classifyType] forKey:@"types"];
-            [params setObject:self.searchText.text forKey:@"product_name"];
-            
-            [LTInterfaceBase request:params requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    ProductModel *model = [[ProductModel alloc]init];
-                    [model mts_setValuesForKeysWithDictionary:dictionary];
-                    
-                    NSMutableArray *tempArray;
-                    switch (self.classifyType) {
-                        case 0:
-                            self.productModel.productList = model.productList;
-                            tempArray = self.productModel.productList;
-                            break;
-                        case 1:
-                            self.productModel.serviceList = model.serviceList;
-                            tempArray = self.productModel.serviceList;
-                            break;
-                        case 2:
-                            self.productModel.cardList = model.cardList;
-                            tempArray = self.productModel.cardList;
-                            break;
-                            
-                        default:
-                            tempArray = nil;
-                            break;
-                    }
-                    
-                    [self testArray:tempArray];
-                });
-            }errorBlock:^(NSString *notice){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    [Utility errorAlert:notice dismiss:YES];
-                });
-            }];
-        }
+-(void)getSearchResultDataWithPro:(NSString *)product_name {
+    [self.searchText resignFirstResponder];
+    if (self.appDel.isReachable==NO) {
+        [Utility errorAlert:@"请检查网络" dismiss:NO];
+    }else{
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kProduct];
+        NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
+        [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
+        [params setObject:[NSString stringWithFormat:@"%d",self.classifyType] forKey:@"types"];
+        [params setObject:product_name forKey:@"product_name"];
+        
+        [LTInterfaceBase request:params requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                ProductModel *model = [[ProductModel alloc]init];
+                [model mts_setValuesForKeysWithDictionary:dictionary];
+                
+                NSMutableArray *tempArray;
+                switch (self.classifyType) {
+                    case 0:
+                        self.productModel.productList = model.productList;
+                        tempArray = self.productModel.productList;
+                        break;
+                    case 1:
+                        self.productModel.serviceList = model.serviceList;
+                        tempArray = self.productModel.serviceList;
+                        break;
+                    case 2:
+                        self.productModel.cardList = model.cardList;
+                        tempArray = self.productModel.cardList;
+                        break;
+                        
+                    default:
+                        tempArray = nil;
+                        break;
+                }
+                
+                [self testArray:tempArray];
+            });
+        }errorBlock:^(NSString *notice){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [Utility errorAlert:notice dismiss:YES];
+            });
+        }];
     }
 }
 
@@ -306,7 +309,12 @@ static const char cardkey;
 {
     [self.searchText resignFirstResponder];
     self.selectedArray = nil;
-    [self getSearchResultData];
+    
+    if (self.searchText.text.length==0) {
+        [Utility errorAlert:@"请填写您要搜索的产品" dismiss:YES];
+    }else{
+        [self getSearchResultDataWithPro:self.searchText.text];
+    }
     
     [self.productTable reloadData];
 }
@@ -483,7 +491,7 @@ static const char cardkey;
         orderViewControl.delegate = self;
 
         [orderViewControl loadData:orderArray type:self.classifyType];
-        [orderViewControl willMoveToParentViewController:self.mainViewControl];
+
         [self.mainViewControl addChildViewController:orderViewControl];
         [orderViewControl didMoveToParentViewController:self.mainViewControl];
         
@@ -498,6 +506,7 @@ static const char cardkey;
     __block LTOrderViewController *orderViewControl = viewControl;
     [self.mainViewControl dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop dismissBlock:^(BOOL isFinish){
         
+        [orderViewControl willMoveToParentViewController:nil];
         [orderViewControl removeFromParentViewController];
         orderViewControl = nil;
     }];
@@ -533,8 +542,13 @@ static const char cardkey;
         self.serviceViewControl = (LTServiceBillingViewController *)self.mainViewControl.childViewControllers[2];
         
         self.mainViewControl.currentPage = 2;
-        self.serviceViewControl.orderArray = orderArray;
         
+        self.serviceViewControl.orderArray = orderArray;
+        [self.serviceViewControl setCustomerModel:nil];
+        self.serviceViewControl.isSearching = NO;
+        [self.serviceViewControl setPackageCardList:nil];
+        
+        [orderViewControl willMoveToParentViewController:nil];
         [orderViewControl removeFromParentViewController];
         orderViewControl = nil;
     }];

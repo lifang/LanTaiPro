@@ -123,17 +123,23 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 50;
+    return 40;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UILabel *header = [[UILabel alloc] initWithFrame:(CGRect){0,0,CGRectGetWidth(tableView.bounds),50}];
-    [header setTextColor:[UIColor whiteColor]];
-    header.backgroundColor = self.view.backgroundColor;
-    [header setFont:[UIFont fontWithName:@"HiraginoSansGB-W6" size:26]];
-
+    UIView *customView = [[UIView alloc]initWithFrame:(CGRect){0,0,CGRectGetWidth(tableView.bounds),40}];
+    
+    UILabel *header = [[UILabel alloc] initWithFrame:(CGRect){10,0,CGRectGetWidth(tableView.bounds)-10,40}];
+    header.backgroundColor = [UIColor clearColor];
+    header.textColor = [UIColor colorWithRed:91./255 green:223./255 blue:243./255 alpha:1];
+    [header setFont:[UIFont fontWithName:@"HiraginoSansGB-W6" size:20]];
     header.text = @"当前订单";
-    return header;
+    
+    [customView addSubview:header];
+    header = nil;
+    
+    [Utility setRoundcornerWithView:customView];
+    return customView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

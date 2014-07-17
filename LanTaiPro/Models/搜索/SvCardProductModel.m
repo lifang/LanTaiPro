@@ -17,8 +17,7 @@
               @"left_price": mts_key(left_price),
               @"types": mts_key(types),
               @"use_price": mts_key(use_price),
-              @"use_price": mts_key(origin_price),
-              @"use_price": mts_key(products),
+              @"items": mts_key(products),
               };
 }
 

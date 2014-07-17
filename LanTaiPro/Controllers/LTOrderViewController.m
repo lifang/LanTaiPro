@@ -49,11 +49,18 @@
     self.totalPriceLabel.text = [NSString stringWithFormat:@"总计:%.2f",totalPrice];
     
     [self.orderTable reloadData];
-    
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     //注册增减商品的通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshPrice:) name:@"Order_view_refresh_price" object:nil];
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Order_view_refresh_price" object:nil];
+}
 -(void)refreshPrice:(NSNotification *)notification
 {
     NSDictionary *aDic = [notification object];
@@ -120,6 +127,7 @@
 ///跳转到开单页面
 -(IBAction)orderToConfirmButtonPressed:(id)sender
 {
+    
     NSMutableArray *orderArray = [[NSMutableArray alloc]init];
     if (self.classifyType==0 || self.classifyType==1) {
         for (ProductAndServiceModel *psModel in self.orderArray){

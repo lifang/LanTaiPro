@@ -44,6 +44,9 @@
 ///搜索用户页面
 @property (nonatomic, strong) SearchModel *searchModel;
 
+///工位情况
+@property (nonatomic, strong) NSMutableDictionary *stationDic;
+
 + (LTDataShare *)sharedService;
 
 @end

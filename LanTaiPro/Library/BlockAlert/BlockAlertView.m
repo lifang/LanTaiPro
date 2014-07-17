@@ -262,7 +262,6 @@ static UIFont *buttonFont = nil;
     UIImageView *modalBackground = [[UIImageView alloc] initWithFrame:_view.bounds];
     modalBackground.image = background;
     modalBackground.contentMode = UIViewContentModeScaleToFill;
-    
     modalBackground.layer.shadowPath = [UIBezierPath bezierPathWithRect:modalBackground.bounds].CGPath;
     modalBackground.layer.masksToBounds = NO;
     modalBackground.layer.shadowOffset = CGSizeMake(5, 5);

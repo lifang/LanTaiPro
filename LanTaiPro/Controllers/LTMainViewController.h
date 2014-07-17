@@ -28,4 +28,6 @@
 @property (nonatomic, strong) LTMainViewLeftBar *leftTabBar;
 
 
+-(void)changeFromController:(UIViewController*)fromViewControl toController:(UIViewController*)toViewControl;
+
 @end

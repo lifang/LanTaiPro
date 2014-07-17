@@ -28,7 +28,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor colorWithRed:91./255 green:223./255 blue:243./255 alpha:1];
-    label.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:20];
+    label.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:18];
     return label;
 }
 

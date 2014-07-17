@@ -15,6 +15,5 @@
 @property (nonatomic, strong) NSString *left_price;
 @property (nonatomic, strong) NSString *types;
 @property (nonatomic, strong) NSString *use_price;
-@property (nonatomic, strong) NSString *origin_price;
 @property (nonatomic, strong) NSString *products;
 @end

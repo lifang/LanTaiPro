@@ -14,7 +14,13 @@
 {
 
 }
-
+-(NSMutableArray *)buttonArray
+{
+    if(!_buttonArray){
+        _buttonArray = [[NSMutableArray alloc]init];
+    }
+    return _buttonArray;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
@@ -36,6 +42,49 @@
     label.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:20];
     return label;
 }
+///0等待施工 1正在施工 2等待付款  3已付款未施工 4已付款正在施工
+-(NSString *)orderStatus:(int)status
+{
+    NSString *statusString = @"";
+    
+    self.payOrderButton.hidden = NO;
+    self.returnOrderButton.hidden = NO;
+    self.buttonArray = nil;
+    
+    if (status == 0) {//取消订单，付款
+        statusString = @"等待施工的单子";
+        
+        self.returnOrderButton.hidden = YES;
+        
+        [self.buttonArray addObject:self.payOrderButton];
+    }else if (status == 1){//取消订单，付款，结束施工
+        statusString = @"施工中的单子";
+        
+        self.returnOrderButton.hidden = YES;
+        [self.buttonArray addObject:self.payOrderButton];
+    }else if (status == 2){//付款--有服务
+        statusString = @"等待付款的单子";
+        
+        self.returnOrderButton.hidden = YES;
+        [self.buttonArray addObject:self.payOrderButton];
+    }else if (status == 3){//退单
+        statusString = @"付款后的等待施工的单子";
+        
+        self.payOrderButton.hidden = YES;
+        [self.buttonArray addObject:self.returnOrderButton];
+    }else if (status == 4){//退单，结束施工
+        statusString = @"付款后的施工中的单子";
+        self.payOrderButton.hidden = YES;
+        [self.buttonArray addObject:self.returnOrderButton];
+    }else if (status == 5) {//付款--无服务
+        statusString = @"等待付款的单子";
+        
+        self.returnOrderButton.hidden = YES;
+        [self.buttonArray addObject:self.payOrderButton];
+    }
+    
+    return statusString;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier workingOrder:(SearchOrder *)workOrder
 {
@@ -54,6 +103,7 @@
         self.techLabel.text = workOrder.staff_name;
         self.timeLabel.text = workOrder.created_at;
         self.totalPriceLabel.text = [NSString stringWithFormat:@"总计:%@",workOrder.price];
+        self.statusLabel.text = [self orderStatus:[workOrder.status integerValue]];
         
         CGRect frame = CGRectMake(0, 70, 258, 30);
         for (int i=0; i<workOrder.productList.count; i++) {
@@ -96,16 +146,29 @@
     return self;
 }
 
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    for (int i=0; i<self.buttonArray.count; i++) {
+        UIButton *btn = (UIButton *)self.buttonArray[i];
+        CGRect frame = btn.frame;
+        frame.origin.x = 540-98*i;
+        btn.frame = frame;
+        [btn layoutIfNeeded];
+    }
+}
+
 #pragma mark -------------------------------
 
--(IBAction)cancelOrderClicked:(id)sender
+//付款
+-(IBAction)payOrderClicked:(id)sender
 {
-    [self.delegate cancelWorkingOrder:self];
+    [self.delegate payWorkingOrder:self];
 }
 
--(IBAction)confirmOrderClicked:(id)sender
+//退单
+-(IBAction)returnBackClicked:(id)sender
 {
-    [self.delegate confirmWorkingOrder:self];
+    [self.delegate returnBackOrder:self];
 }
-
 @end

@@ -28,6 +28,8 @@
               @"distance": mts_key(customer_distance),
               @"year": mts_key(customer_carYear),
               
+              @"brand_id": mts_key(customer_brandId),
+              @"model_id": mts_key(customer_modelId),
               
               @"working_orders":mts_key(workingOrderList),
               };
@@ -62,11 +64,8 @@
         if (customerModel.customer_phone != nil) {
             [aDic setObject:customerModel.customer_phone forKey:@"mobilephone"];
         }
-        if (customerModel.customer_brandName != nil) {
-            [aDic setObject:customerModel.customer_brandName forKey:@"brand_name"];
-        }
-        if (customerModel.customer_modelName != nil) {
-            [aDic setObject:customerModel.customer_modelName forKey:@"model_name"];
+        if (customerModel.customer_modelId != nil) {
+            [aDic setObject:customerModel.customer_modelId forKey:@"model_id"];
         }
         if (customerModel.customer_carNumId != nil) {
             [aDic setObject:customerModel.customer_carNumId forKey:@"car_num_id"];

@@ -39,6 +39,9 @@
 #import "SvCardOrderModel.h"
 #import "DiscountCardOrderModel.h"
 
+//付款成功后
+typedef void(^FinishCallBack)(BOOL isFinish);
+
 @protocol SearchCustomViewDelegate;
 
 @interface SearchCustomView : UIView <UITextFieldDelegate,WYPopoverControllerDelegate,InfoViewControlDelegate,UITableViewDelegate,UITableViewDataSource,WorkingOrderCellDelegate,OldOrderCellDelegate,PackageCardCellDelegate>
@@ -72,11 +75,10 @@
 @end
 
 @protocol SearchCustomViewDelegate <NSObject>
-
+//套餐卡下单
 - (void)dismisSearchCustomView:(SearchCustomView *)searchView;
 //投诉
 - (void)presentCompliantViewControlWithDictionary:(NSDictionary *)aDic;
-//取消订单
--(void)cancelOrderWithOrderId:(NSString *)orderId;
-//订单付款
+//付款
+-(void)payOrderWithDic:(NSDictionary *)aDic finishBlock:(FinishCallBack)finishBlock;
 @end

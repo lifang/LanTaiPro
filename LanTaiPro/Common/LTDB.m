@@ -67,21 +67,7 @@
     orderModel.order_pay_type = [rs stringForColumn:@"order_pay_type"];
     orderModel.order_is_free = [rs stringForColumn:@"order_is_free"];
     orderModel.order_status = [rs stringForColumn:@"order_status"];
-    orderModel.oprice = [rs stringForColumn:@"oprice"];
-    orderModel.content = [rs stringForColumn:@"content"];
-    orderModel.car_num_id = [rs stringForColumn:@"car_num_id"];
-    orderModel.car_brand = [rs stringForColumn:@"car_brand"];
-    orderModel.car_model = [rs stringForColumn:@"car_model"];
-    orderModel.car_year = [rs stringForColumn:@"car_year"];
-    orderModel.car_distance = [rs stringForColumn:@"car_distance"];
-    orderModel.car_num = [rs stringForColumn:@"car_num"];
-    orderModel.customer_id = [rs stringForColumn:@"customer_id"];
-    orderModel.customer_name = [rs stringForColumn:@"customer_name"];
-    orderModel.customer_phone = [rs stringForColumn:@"customer_phone"];
-    orderModel.customer_sex = [rs stringForColumn:@"customer_sex"];
-    orderModel.customer_property = [rs stringForColumn:@"customer_property"];
-    orderModel.customer_company = [rs stringForColumn:@"customer_company"];
-    orderModel.customer_vin = [rs stringForColumn:@"customer_vin"];
+
     orderModel.reason = [rs stringForColumn:@"reason"];
     orderModel.request = [rs stringForColumn:@"request"];
     
@@ -225,7 +211,7 @@
 #pragma mark - 保存订单信息至本地
 - (BOOL)saveOrderDataToLocal:(OrderModel *)orderModel
 {
-    BOOL res = [self.db executeUpdate:@"insert into orderInfo (store_id ,order_id, order_is_please, order_total_price, order_prods, order_billing, order_pay_type, order_is_free, order_status, oprice, content, car_num_id, car_brand, car_model, car_year, car_distance, car_num, customer_id, customer_name, customer_phone, customer_sex, customer_property, customer_company, customer_vin, reason, request) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",orderModel.store_id,orderModel.order_id,orderModel.order_is_please,orderModel.order_total_price,orderModel.order_prods,orderModel.order_billing,orderModel.order_pay_type,orderModel.order_is_free,orderModel.order_status,orderModel.oprice,orderModel.content,orderModel.car_num_id,orderModel.car_brand,orderModel.car_model,orderModel.car_year,orderModel.car_distance,orderModel.car_num,orderModel.customer_id,orderModel.customer_name,orderModel.customer_phone,orderModel.customer_sex,orderModel.customer_property,orderModel.customer_company,orderModel.customer_vin,orderModel.reason,orderModel.request];
+    BOOL res = [self.db executeUpdate:@"insert into orderInfo (store_id ,order_id, order_is_please, order_total_price, order_prods, order_billing, order_pay_type, order_is_free, order_status, reason, request) values (?,?,?,?,?,?,?,?,?,?,?)",orderModel.store_id,orderModel.order_id,orderModel.order_is_please,orderModel.order_total_price,orderModel.order_prods,orderModel.order_billing,orderModel.order_pay_type,orderModel.order_is_free,orderModel.order_status,orderModel.reason,orderModel.request];
     return res;
 }
 
@@ -259,7 +245,7 @@
 #pragma mark - 更新订单信息
 -(BOOL)updateOrderInfoWithOrder:(OrderModel *)orderModel WhereOid:(NSString *)orderId
 {
-    return [self.db executeUpdate:@"update orderInfo set order_is_please=?, order_total_price=?, order_prods=?, order_billing=?, order_pay_type=?, order_is_free=?, order_status=?, oprice=?, content=?, car_num_id=?, car_brand=?, car_model=?, car_year=?, car_distance=?, car_num=?, customer_id=?, customer_name=?, customer_phone=?, customer_sex=?, customer_property=?, customer_company=?, customer_vin=? where order_id= ?",orderModel.order_is_please,orderModel.order_total_price,orderModel.order_prods,orderModel.order_billing,orderModel.order_pay_type,orderModel.order_is_free,orderModel.order_status,orderModel.oprice,orderModel.content,orderModel.car_num_id,orderModel.car_brand,orderModel.car_model,orderModel.car_year,orderModel.car_distance,orderModel.car_num,orderModel.customer_id,orderModel.customer_name,orderModel.customer_phone,orderModel.customer_sex,orderModel.customer_property,orderModel.customer_company,orderModel.customer_vin, orderId];
+    return [self.db executeUpdate:@"update orderInfo set order_is_please=?, order_total_price=?, order_prods=?, order_billing=?, order_pay_type=?, order_is_free=?, order_status=? where order_id= ?",orderModel.order_is_please,orderModel.order_total_price,orderModel.order_prods,orderModel.order_billing,orderModel.order_pay_type,orderModel.order_is_free,orderModel.order_status, orderId];
 }
 
 #pragma mark - 获取所有订单信息

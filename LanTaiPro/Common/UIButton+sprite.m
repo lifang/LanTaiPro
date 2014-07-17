@@ -31,11 +31,13 @@
 - (void)animateSmall
 {
     CGRect frame = self.frame;
+
     frame.origin.x = frame.origin.x+3;
     frame.origin.y = frame.origin.y+3;
     frame.size.width = frame.size.width-6;
     frame.size.height = frame.size.height-6;
-    [UIView animateWithDuration:0.3 animations:^{
+
+    [UIView animateWithDuration:0.25 animations:^{
         self.frame = frame;
     }];
 }
@@ -43,11 +45,13 @@
 - (void)animateBig
 {
     CGRect frame = self.frame;
+
     frame.origin.x = frame.origin.x-3;
     frame.origin.y = frame.origin.y-3;
     frame.size.width = frame.size.width+6;
     frame.size.height = frame.size.height+6;
-    [UIView animateWithDuration:0.3 animations:^{
+
+    [UIView animateWithDuration:0.25 animations:^{
         self.frame = frame;
     }];
 }

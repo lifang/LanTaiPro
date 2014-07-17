@@ -40,7 +40,6 @@
     if (self) {
         self.frame = (CGRect){0,0,526,30};
         self.contentView.backgroundColor = [UIColor clearColor];
-        self.backgroundColor = [UIColor clearColor];
         
         self.totalPriceLabel = [self returnlabel];
         self.totalPriceLabel.frame = (CGRect){0,0,526,30};

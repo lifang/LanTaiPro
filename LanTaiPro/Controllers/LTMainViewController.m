@@ -75,7 +75,7 @@
             break;
     }
     
-    [self changeFromController:self.currentViewController toController:[self.childenControllerArray objectAtIndex:_currentPage]];
+    [self changeFromController:self.currentViewController toController:self.childenControllerArray[_currentPage]];
 }
 #pragma mark - 子controller之间切换
 -(void)changeFromController:(UIViewController*)fromViewControl toController:(UIViewController*)toViewControl
@@ -89,9 +89,9 @@
     toViewControl.view.frame =  (CGRect){80,0,688,1024};
     [self transitionFromViewController:fromViewControl toViewController:toViewControl duration:0 options:UIViewAnimationOptionTransitionNone animations:^{
     } completion:^(BOOL finished) {
-        if (finished) {
             self.currentViewController = toViewControl;
-        }
+            
+            [self.currentViewController didMoveToParentViewController:self];
     }];
 }
 
@@ -107,14 +107,14 @@
     if (itemType == LTLeftBarItemTypeSetting) {
         LTSettingViewController *settingViewControl = [[LTSettingViewController alloc]initWithNibName:@"LTSettingViewController" bundle:nil];
         settingViewControl.delegate = self;
-        [settingViewControl willMoveToParentViewController:self];
+
         [self addChildViewController:settingViewControl];
         [settingViewControl didMoveToParentViewController:self];
         [self presentPopupViewController:settingViewControl animationType:MJPopupViewAnimationSlideBottomTop width:140];
     }else {
         [LTDataShare sharedService].leftBarType = itemType;
         if (itemType < self.childenControllerArray.count) {
-            [self changeFromController:self.currentViewController toController:[self.childenControllerArray objectAtIndex:itemType]];
+            [self changeFromController:self.currentViewController toController:self.childenControllerArray[itemType]];
         }
     }
 }
@@ -152,7 +152,7 @@
                 break;
         }
         
-        
+        [setViewControl willMoveToParentViewController:nil];
         [setViewControl removeFromParentViewController];
         setViewControl = nil;
     }];

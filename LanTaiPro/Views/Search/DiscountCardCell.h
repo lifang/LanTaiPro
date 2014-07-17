@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabe;
 
-@property (nonatomic, strong) UILabel *applyContentLabel;
+@property (nonatomic, weak) IBOutlet UILabel *applyContentLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier discountCard:(DiscountCardModel *)discountCard;
 @end

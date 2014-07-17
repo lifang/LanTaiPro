@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SVSegmentedControl.h"
 
 @protocol PayStyleViewDelegate;
 
@@ -15,13 +16,14 @@
 @property (nonatomic, assign) id<PayStyleViewDelegate> delegate;
 @property (nonatomic, strong) AppDelegate *appDel;
 
-@property (nonatomic,strong) NSMutableDictionary *order;
+@property (nonatomic,strong) NSMutableDictionary *orderDic;
 ///储值卡数组
 @property (nonatomic, strong) NSMutableArray *save_cardArray;
 @property (nonatomic, weak) IBOutlet UISwitch *billingBtn;
 @property (nonatomic, assign) BOOL isSuccess;
 @property (nonatomic, strong) IBOutlet UIView *payStyleView,*cardView,*passView;
-@property (nonatomic, weak) IBOutlet UISegmentedControl *segBtn;
+
+@property (nonatomic, strong) SVSegmentedControl *segBtn;
 //储值卡页面
 @property (nonatomic,  weak) IBOutlet UITextField *txtPwd;
 @property (nonatomic, strong) IBOutlet UIButton *cardBackBtn,*forgetBtn,*cardSureBtn;
@@ -41,13 +43,18 @@
 @property (nonatomic, strong) NSMutableDictionary *beginningCarsDic;
 @property (nonatomic, strong) NSMutableArray *finishedCarsArr;
 
-//－－－多个储值卡
+///－－－多个储值卡
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic,  strong) NSString *sv_relation_id;
+
+///退出按钮
+@property (nonatomic, strong) IBOutlet UIButton *quitButton;
+///背景
+@property (nonatomic, strong) IBOutlet UIImageView *backgroundImage;
 @end
 
 
 @protocol PayStyleViewDelegate <NSObject>
 @optional
-- (void)closePopVieww:(PayStyleViewController *)payStyleViewController;
+- (void)dismissPayStyleViewController:(PayStyleViewController *)payStyleViewController;
 @end

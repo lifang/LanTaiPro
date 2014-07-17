@@ -232,6 +232,14 @@ static WYPopoverController *popVC;
 }
 
 #pragma mark - UITextField代理
+static NSString *tempPhone = nil;
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if ([textField isEqual:self.phoneField]){
+        tempPhone = nil;
+        tempPhone = textField.text;
+    }
+}
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if ([textField isEqual:self.nameField]) {
@@ -239,20 +247,33 @@ static WYPopoverController *popVC;
     }else if ([textField isEqual:self.carNumField]){
         self.customerModel.customer_carNum = textField.text;
     }else if ([textField isEqual:self.phoneField]){
-        self.customerModel.customer_phone = textField.text;
+        if (tempPhone.length>0 && ![tempPhone isEqualToString:textField.text]) {
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:kTitle message:@"确定修改电话号码?"];
+            
+            [alert setCancelButtonWithTitle:@"" block:^{
+                textField.text = tempPhone;
+                self.customerModel.customer_phone = tempPhone;
+            }];
+            [alert addButtonWithTitle:@"" block:^{
+                NSString *phoneRegex = @"1[0-9]{10}";
+                NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+                if (![phoneTest evaluateWithObject:textField.text]){
+                    [Utility errorAlert:@"请输入正确的车牌号码或者手机号码!" dismiss:NO];
+                    [textField becomeFirstResponder];
+                }else {
+                    self.customerModel.customer_phone = textField.text;
+                }
+            }];
+            [alert show];
+        }else {
+            self.customerModel.customer_phone = textField.text;
+        }
     }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    if ([textField isEqual:self.nameField]) {
-        self.customerModel.customer_name = textField.text;
-    }else if ([textField isEqual:self.carNumField]){
-        self.customerModel.customer_carNum = textField.text;
-    }else if ([textField isEqual:self.phoneField]){
-        self.customerModel.customer_phone = textField.text;
-    }
     return YES;
 }
 @end

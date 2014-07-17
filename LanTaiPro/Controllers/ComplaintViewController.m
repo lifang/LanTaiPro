@@ -36,7 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ComplaintViewController"]];
+    
+    self.success = NO;
 }
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -60,8 +62,10 @@
     
     if (self.reasonView.text.length==0){
         [Utility errorAlert:@"请输入投诉理由" dismiss:YES];
+        [self.reasonView becomeFirstResponder];
     }else if (self.requestView.text.length==0){
         [Utility errorAlert:@"请输入您的建议或要求" dismiss:YES];
+        [self.requestView becomeFirstResponder];
     }else {
         if (self.appDel.isReachable==NO) {
             BOOL success = NO;//记录添加本地是否成功
@@ -82,16 +86,16 @@
                 success = [db saveOrderDataToLocal:orderModel];
             }
             if (success) {
+                self.success = YES;
                 if ([self.delegate respondsToSelector:@selector(dismissComplaintViewControl:)]) {
                     [self.delegate dismissComplaintViewControl:self];
                 }
             }else {
-                [Utility errorAlert:@"添加评论失败" dismiss:YES];
+                [Utility errorAlert:@"添加投诉失败" dismiss:YES];
             }
-            
         }else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kServiceBillingMakeOrder];
+            NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kComplaint];
             
             NSMutableDictionary *paramas = [[NSMutableDictionary alloc] init];
             
@@ -102,12 +106,14 @@
             
             [LTInterfaceBase request:paramas requestUrl:urlString method:@"POST" completeBlock:^(NSDictionary *dictionary) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:NO];
-                    
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    self.success = YES;
+                    [Utility errorAlert:@"已收到您的反馈，请耐心等待客服回复" dismiss:YES];
+                    [self.delegate dismissComplaintViewControl:self];
                 });
             } errorBlock:^(NSString *notice) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:NO];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [Utility errorAlert:notice dismiss:YES];
                 });
             }];

@@ -53,7 +53,7 @@
         self.timeLabel.text = [NSString stringWithFormat:@"截止时间:%@",package.ended_at];
         
         
-        CGRect frame = CGRectMake(0, 58, 0, 30);
+        CGRect frame = CGRectMake(0, 54, 0, 30);
         for (int i=0; i<package.productList.count; i++) {
             frame.size.height = 30;
             PackageCardProductModel *packageProduct = (PackageCardProductModel *)package.productList[i];
@@ -73,7 +73,7 @@
             
             frame.origin.x = 10;
             frame.size.width = 158;
-            frame.origin.y = 58+30*i;
+            frame.origin.y = 54+30*i;
             leftLab.frame = frame;
         
             [self.contentView addSubview:leftLab];
@@ -86,7 +86,7 @@
             
             frame.origin.x = 169;
             frame.size.width = 180;
-            frame.origin.y = 78+30*i;
+            frame.origin.y = 74+30*i;
             nameLab.frame = frame;
             [self.contentView addSubview:nameLab];
             //已使用
@@ -97,7 +97,7 @@
             
             frame.origin.x = 349;
             frame.size.width = 80;
-            frame.origin.y = 78+30*i;
+            frame.origin.y = 74+30*i;
             useLab.frame = frame;
             [self.contentView addSubview:useLab];
             //剩余
@@ -108,7 +108,7 @@
             
             frame.origin.x = 429;
             frame.size.width = 80;
-            frame.origin.y = 78+30*i;
+            frame.origin.y = 74+30*i;
             unuseLab.frame = frame;
             [self.contentView addSubview:unuseLab];
             
@@ -118,7 +118,7 @@
                 frame.origin.x = 509;
                 frame.size.width = 30;
                 frame.size.height = 30;
-                frame.origin.y = 78+30*i;
+                frame.origin.y = 74+30*i;
                 
                 UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 leftBtn.frame =frame;
@@ -156,7 +156,7 @@
 -(NSString *)returnStringWith:(int)btnTag
 {
     PackageCardProductModel *packageProduct = (PackageCardProductModel *)self.packageModel.productList[btnTag];
-    NSString *string = [NSString stringWithFormat:@"%d_%d_%@_%@_%@",self.idxPath.row,btnTag,self.packageModel.packageId,packageProduct.productId,packageProduct.selected_num];
+    NSString *string = [NSString stringWithFormat:@"%d_%d_%@_%@_%@",self.idxPath.row,btnTag,self.packageModel.cus_card_id,packageProduct.productId,packageProduct.selected_num];
     return string;
 }
 
@@ -176,7 +176,7 @@
     else
     {
         if ((count+1)>[packageProduct.unused_num intValue]) {
-            NSString *message = [NSString stringWithFormat:@"最多只能选择:%@",packageProduct.unused_num];
+            NSString *message = [NSString stringWithFormat:@"套餐卡最多只能选择:%@",packageProduct.unused_num];
             [Utility errorAlert:message dismiss:YES];
         }
         else
@@ -197,7 +197,7 @@
                     for (int i=0; i<[LTDataShare sharedService].packageOrderArray.count; i++) {
                         NSString *string = [LTDataShare sharedService].packageOrderArray[i];
                         NSArray *array = [string componentsSeparatedByString:@"_"];
-                        if ([array[2] intValue]==[self.packageModel.packageId intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
+                        if ([array[2] intValue]==[self.packageModel.cus_card_id intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
                             NSString *string2 = [self returnStringWith:(btn.tag-LeftBtnTag)];
                             [[LTDataShare sharedService].packageOrderArray replaceObjectAtIndex:i withObject:string2];
                             isExit = YES;
@@ -238,7 +238,7 @@
         for (int i=0; i<[LTDataShare sharedService].packageOrderArray.count; i++) {
             NSString *string = [LTDataShare sharedService].packageOrderArray[i];
             NSArray *array = [string componentsSeparatedByString:@"_"];
-            if ([array[2] intValue]==[self.packageModel.packageId intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
+            if ([array[2] intValue]==[self.packageModel.cus_card_id intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
                 if ((count-1)==0) {
                     [[LTDataShare sharedService].packageOrderArray removeObject:string];
                 }else {

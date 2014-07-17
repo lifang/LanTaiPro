@@ -35,7 +35,7 @@ static WYPopoverController *popVC;
         __block UITableView *table = self.orderTable;
         [_orderTable addPullToRefreshWithActionHandler:^{
             customView.isRefreshing = YES;
-            [customView getOrderInfoWithButton:nil];
+            [customView getOrderInfoWithButton:nil Btn2:nil];
             [table.pullToRefreshView performSelector:@selector(stopAnimating) withObject:nil afterDelay:1];
         }];
     }
@@ -270,14 +270,14 @@ static WYPopoverController *popVC;
 }
 
 #pragma mark - 订单类型点击
--(void)getOrderInfoWithButton:(UIButton *)btn
+-(void)getOrderInfoWithButton:(UIButton *)btn Btn2:(UIButton *)btn2
 {
     if (self.appDel.isReachable==NO) {
         [Utility errorAlert:@"请检查网络" dismiss:NO];
     }else {
         [MBProgressHUD showHUDAddedTo:self animated:YES];
         
-        NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kSearch];
+        NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kSearchClassify];
         NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
         [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
         [params setObject:self.customerModel.customer_id forKey:@"customer_id"];
@@ -303,6 +303,10 @@ static WYPopoverController *popVC;
                     [packageObj mts_setValuesForKeysWithDictionary:dictionary];
                     [LTDataShare sharedService].searchModel.packageCardList = packageObj.packageCardList;
                     
+                    if ([LTDataShare sharedService].searchModel.packageCardList.count>0) {
+                        [self setTableFooter];
+                    }
+                    
                 }else if (self.orderType == OrderTypeSvCard){
                     SvCardOrderModel *svObj = [[SvCardOrderModel alloc]init];
                     [svObj mts_setValuesForKeysWithDictionary:dictionary];
@@ -314,31 +318,41 @@ static WYPopoverController *popVC;
                     [LTDataShare sharedService].searchModel.discountCardList = discountObj.discountCardList;
                 }
                 if (self.isRefreshing==NO) {
-                    UIButton *btn2 = (UIButton *)[self viewWithTag:(_orderType+OrderClassifyButtomTag)];
                     btn2.selected = NO;
                     btn.selected = YES;
                     
                     self.customerModel.orderType = self.orderType;
-                    [[LTDataShare sharedService].searchModel.customerList replaceObjectAtIndex:self.pageIndex withObject:self.customerModel];
                 }
+                [[LTDataShare sharedService].searchModel.customerList replaceObjectAtIndex:self.pageIndex withObject:self.customerModel];
+                [self.orderTable reloadData];
+                self.isRefreshing = NO;
             });
         } errorBlock:^(NSString *notice) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self animated:YES];
                 [Utility errorAlert:notice dismiss:YES];
-                
+                self.isRefreshing = NO;
                 self.orderType = self.customerModel.orderType;
             });
         }];
     }
 }
 
--(void)checkArray:(NSMutableArray *)mutableArray withBtn:(UIButton *)btn
+-(void)checkArray:(NSMutableArray *)mutableArray withBtn:(UIButton *)btn Btn2:(UIButton *)btn2
 {
     if (mutableArray.count>0) {
+        btn2.selected = NO;
+        btn.selected = YES;
+        self.customerModel.orderType = self.orderType;
+        [[LTDataShare sharedService].searchModel.customerList replaceObjectAtIndex:self.pageIndex withObject:self.customerModel];
         
+        [self.orderTable reloadData];
+        
+        if (self.orderType == OrderTypePackage) {
+            [self setTableFooter];
+        }
     }else {
-        [self getOrderInfoWithButton:btn];
+        [self getOrderInfoWithButton:btn Btn2:btn2];
     }
 }
 
@@ -348,14 +362,16 @@ static WYPopoverController *popVC;
     if ((btn.tag-OrderClassifyButtomTag)==self.orderType) {
         //点击相同分类，不做操作
     }else {
+        UIButton *btn2 = (UIButton *)[self viewWithTag:(self.orderType+OrderClassifyButtomTag)];
+        
         self.orderType = btn.tag-OrderClassifyButtomTag;
         
         [self.orderTable setTableFooterView:nil];
         
         if (self.orderType == OrderTypeWorking) {
-            [self checkArray:self.customerModel.workingOrderList withBtn:btn];
+            [self checkArray:self.customerModel.workingOrderList withBtn:btn Btn2:btn2];
         }else if (self.orderType == OrderTypeOld){
-            [self checkArray:self.customerModel.oldOrderList withBtn:btn];
+            [self checkArray:self.customerModel.oldOrderList withBtn:btn Btn2:btn2];
         }else if (self.orderType == OrderTypePackage){
             //清空套餐卡的选择
             if ([LTDataShare sharedService].packageOrderArray.count>0){
@@ -377,18 +393,14 @@ static WYPopoverController *popVC;
             
             [LTDataShare sharedService].packageOrderArray = nil;
             
-            [self setTableFooter];
-            
-            [self checkArray:[LTDataShare sharedService].searchModel.packageCardList withBtn:btn];
+            [self checkArray:[LTDataShare sharedService].searchModel.packageCardList withBtn:btn Btn2:btn2];
             
         }else if (self.orderType == OrderTypeSvCard){
-            [self checkArray:[LTDataShare sharedService].searchModel.svCardList withBtn:btn];
+            [self checkArray:[LTDataShare sharedService].searchModel.svCardList withBtn:btn Btn2:btn2];
         }else if (self.orderType == OrderTypeDiscountCard){
-            [self checkArray:[LTDataShare sharedService].searchModel.discountCardList withBtn:btn];
+            [self checkArray:[LTDataShare sharedService].searchModel.discountCardList withBtn:btn Btn2:btn2];
         }
-        [self.orderTable reloadData];
     }
-    
 }
 -(void)setTableFooter {
     UIView *footerView = [[UIView alloc]initWithFrame:(CGRect){0,0,648,44}];
@@ -513,13 +525,25 @@ static WYPopoverController *popVC;
         SvCardModel *svCard = (SvCardModel *)[LTDataShare sharedService].searchModel.svCardList[indexPath.row];
         return 81+svCard.recordList.count*30;
     }else if (self.orderType==OrderTypeDiscountCard){
+        
         DiscountCardModel *disCard = (DiscountCardModel *)[LTDataShare sharedService].searchModel.discountCardList[indexPath.row];
-        return 81+disCard.productList.count*30;
+        NSString *content = [NSString stringWithFormat:@"适用:%@",disCard.apply_content];
+        NSString *total_content = [NSString stringWithFormat:@"%@ %.1f折",content,[disCard.discount floatValue]/10];
+        
+        CGSize size = [self getSizeWithString:total_content];
+        
+        return 70 +size.height;
     }else
         return 1;
 }
-
+-(CGSize)getSizeWithString:(NSString *)str{
+    UIFont *aFont = [UIFont fontWithName:@"HiraginoSansGB-W6" size:17];
+    CGSize size = [str sizeWithFont:aFont constrainedToSize:CGSizeMake(616, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+    return size;
+}
 #pragma mark - 正在进行中的订单的代理
+
+#pragma mark - 取消订单
 -(void)cancelWorkingOrder:(WorkingOrderCell *)cell
 {
     BlockAlertView *alert = [BlockAlertView alertWithTitle:kTitle message:@"确定取消订单?"];
@@ -527,16 +551,190 @@ static WYPopoverController *popVC;
     [alert setCancelButtonWithTitle:@"" block:nil];
     [alert addButtonWithTitle:@"" block:^{
         SearchOrder *productObj = (SearchOrder *)self.customerModel.workingOrderList[cell.idxPath.row];
-        
-        if ([self.delegate respondsToSelector:@selector(cancelOrderWithOrderId:)]) {
-            [self.delegate cancelOrderWithOrderId:productObj.order_id];
+        if (self.appDel.isReachable==NO) {
+            BOOL success = NO;//记录添加本地是否成功
+            LTDB *db = [[LTDB alloc]init];
+            OrderModel *orderModel = [db getLocalOrderInfoWhereOid:productObj.order_id];
+            if (orderModel != nil){
+                orderModel.order_status = [NSString stringWithFormat:@"%d",7];//7:取消订单
+                
+                success = [db updateOrderInfoWithOrder:orderModel WhereOid:productObj.order_id];
+            }else {
+                orderModel = [[OrderModel alloc]init];
+                orderModel.store_id = [LTDataShare sharedService].user.store_id;
+                orderModel.order_id =[NSString stringWithFormat:@"%@",productObj.order_id];
+                orderModel.order_status = [NSString stringWithFormat:@"%d",7];
+                
+                success = [db saveOrderDataToLocal:orderModel];
+            }
+            
+            if (success) {
+                [self.customerModel.workingOrderList removeObjectAtIndex:cell.idxPath.row];
+                
+                [[LTDataShare sharedService].searchModel.customerList replaceObjectAtIndex:self.pageIndex withObject:self.customerModel];
+                
+                [self.orderTable beginUpdates];
+                [self.orderTable deleteRowsAtIndexPaths:@[cell.idxPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.orderTable endUpdates];
+                
+                [Utility errorAlert:@"订单已取消" dismiss:YES];
+                
+            }else {
+                [Utility errorAlert:@"订单取消失败" dismiss:NO];
+            }
+        }else{
+            [MBProgressHUD showHUDAddedTo:self animated:YES];
+            NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kSearchCancelOrder];
+            
+            NSMutableDictionary *paramas = [[NSMutableDictionary alloc] init];
+            
+            [paramas setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
+            [paramas setObject:productObj.order_id forKey:@"order_id"];
+            
+            [LTInterfaceBase request:paramas requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary) {
+                NSDictionary *stationDic = [dictionary objectForKey:@"work_orders"];
+                [LTDataShare sharedService].stationDic = [NSMutableDictionary dictionaryWithDictionary:stationDic];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self animated:YES];
+                    
+                    [self.customerModel.workingOrderList removeObjectAtIndex:cell.idxPath.row];
+                    
+                    [[LTDataShare sharedService].searchModel.customerList replaceObjectAtIndex:self.pageIndex withObject:self.customerModel];
+                    
+                    [self.orderTable beginUpdates];
+                    [self.orderTable deleteRowsAtIndexPaths:@[cell.idxPath] withRowAnimation:UITableViewRowAnimationFade];
+                    [self.orderTable endUpdates];
+                    
+                    [Utility errorAlert:@"订单已取消" dismiss:YES];
+                });
+            } errorBlock:^(NSString *notice) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self animated:YES];
+                    [Utility errorAlert:notice dismiss:YES];
+                });
+            }];
         }
     }];
     [alert show];
 }
--(void)confirmWorkingOrder:(WorkingOrderCell *)cell
+#pragma mark - 付款
+-(void)payWorkingOrder:(WorkingOrderCell *)cell
 {
+    if (self.appDel.isReachable==NO) {
+        [Utility errorAlert:@"请检查网络" dismiss:NO];
+    }else {
+        [MBProgressHUD showHUDAddedTo:self animated:YES];
+        SearchOrder *productObj = (SearchOrder *)self.customerModel.workingOrderList[cell.idxPath.row];
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kSearchCancelOrder];
+        
+        NSMutableDictionary *paramas = [[NSMutableDictionary alloc] init];
+        
+        [paramas setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
+        [paramas setObject:productObj.order_id forKey:@"order_id"];
+        
+        [LTInterfaceBase request:paramas requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary) {
+            NSDictionary *stationDic = [dictionary objectForKey:@"work_orders"];
+            [LTDataShare sharedService].stationDic = [NSMutableDictionary dictionaryWithDictionary:stationDic];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self animated:YES];
     
+                [self.delegate payOrderWithDic:nil finishBlock:^(BOOL isFinish){
+                    if (isFinish) {
+                        [self.customerModel.workingOrderList removeObjectAtIndex:cell.idxPath.row];
+                        [[LTDataShare sharedService].searchModel.customerList replaceObjectAtIndex:self.pageIndex withObject:self.customerModel];
+                        
+                        [self.orderTable beginUpdates];
+                        [self.orderTable deleteRowsAtIndexPaths:@[cell.idxPath] withRowAnimation:UITableViewRowAnimationFade];
+                        [self.orderTable endUpdates];
+
+                    }
+                }];
+            });
+        } errorBlock:^(NSString *notice) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self animated:YES];
+                [Utility errorAlert:notice dismiss:YES];
+            });
+        }];
+    }
+}
+#pragma mark - 退单
+-(void)returnBackOrder:(WorkingOrderCell *)cell
+{
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:kTitle message:@"确定取消退单?"];
+    
+    [alert setCancelButtonWithTitle:@"" block:nil];
+    [alert addButtonWithTitle:@"" block:^{
+        SearchOrder *productObj = (SearchOrder *)self.customerModel.workingOrderList[cell.idxPath.row];
+        if (self.appDel.isReachable==NO) {
+            BOOL success = NO;//记录添加本地是否成功
+            LTDB *db = [[LTDB alloc]init];
+            OrderModel *orderModel = [db getLocalOrderInfoWhereOid:productObj.order_id];
+            if (orderModel != nil){
+                orderModel.order_status = [NSString stringWithFormat:@"%d",7];//7:取消订单
+                
+                success = [db updateOrderInfoWithOrder:orderModel WhereOid:productObj.order_id];
+            }else {
+                orderModel = [[OrderModel alloc]init];
+                orderModel.store_id = [LTDataShare sharedService].user.store_id;
+                orderModel.order_id =[NSString stringWithFormat:@"%@",productObj.order_id];
+                orderModel.order_status = [NSString stringWithFormat:@"%d",7];
+                
+                success = [db saveOrderDataToLocal:orderModel];
+            }
+            
+            if (success) {
+                [self.customerModel.workingOrderList removeObjectAtIndex:cell.idxPath.row];
+                
+                [[LTDataShare sharedService].searchModel.customerList replaceObjectAtIndex:self.pageIndex withObject:self.customerModel];
+                
+                [self.orderTable beginUpdates];
+                [self.orderTable deleteRowsAtIndexPaths:@[cell.idxPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.orderTable endUpdates];
+                
+                [Utility errorAlert:@"订单已取消" dismiss:YES];
+                
+            }else {
+                [Utility errorAlert:@"订单取消失败" dismiss:NO];
+            }
+        }else{
+            [MBProgressHUD showHUDAddedTo:self animated:YES];
+            NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kSearchCancelOrder];
+            
+            NSMutableDictionary *paramas = [[NSMutableDictionary alloc] init];
+            
+            [paramas setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
+            [paramas setObject:productObj.order_id forKey:@"order_id"];
+            
+            [LTInterfaceBase request:paramas requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary) {
+                NSDictionary *stationDic = [dictionary objectForKey:@"work_orders"];
+                [LTDataShare sharedService].stationDic = [NSMutableDictionary dictionaryWithDictionary:stationDic];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self animated:YES];
+                    
+                    [self.customerModel.workingOrderList removeObjectAtIndex:cell.idxPath.row];
+                    
+                    [[LTDataShare sharedService].searchModel.customerList replaceObjectAtIndex:self.pageIndex withObject:self.customerModel];
+                    
+                    [self.orderTable beginUpdates];
+                    [self.orderTable deleteRowsAtIndexPaths:@[cell.idxPath] withRowAnimation:UITableViewRowAnimationFade];
+                    [self.orderTable endUpdates];
+                    
+                    [Utility errorAlert:@"订单已取消" dismiss:YES];
+                });
+            } errorBlock:^(NSString *notice) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self animated:YES];
+                    [Utility errorAlert:notice dismiss:YES];
+                });
+            }];
+        }
+    }];
+    [alert show];
 }
 #pragma mark - 消费记录的订单的代理
 -(void)ComplaintOldOrder:(OldOrderCell *)cell

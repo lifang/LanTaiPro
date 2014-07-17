@@ -31,6 +31,7 @@
     UILabel *label = [[UILabel alloc]init];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
+    
     return label;
 }
 
@@ -52,7 +53,7 @@
         self.timeLabel.text = [NSString stringWithFormat:@"截止时间:%@",package.ended_at];
         
         
-        CGRect frame = CGRectMake(0, 58, 0, 30);
+        CGRect frame = CGRectMake(0, 54, 0, 30);
         for (int i=0; i<package.productList.count; i++) {
             frame.size.height = 30;
             PackageCardProductModel *packageProduct = (PackageCardProductModel *)package.productList[i];
@@ -72,8 +73,9 @@
             
             frame.origin.x = 10;
             frame.size.width = 126;
-            frame.origin.y = 58+30*i;
+            frame.origin.y = 54+30*i;
             leftLab.frame = frame;
+            [leftLab setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin];
             
             [self.contentView addSubview:leftLab];
             //右边---------------------
@@ -82,10 +84,11 @@
             nameLab.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:20];
             nameLab.textColor = [UIColor whiteColor];
             nameLab.text = packageProduct.name;
+            [nameLab setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
             
             frame.origin.x = 137;
             frame.size.width = 120;
-            frame.origin.y = 78+30*i;
+            frame.origin.y = 74+30*i;
             nameLab.frame = frame;
             [self.contentView addSubview:nameLab];
             //已使用
@@ -93,10 +96,11 @@
             useLab.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:20];
             useLab.textColor = [UIColor whiteColor];
             useLab.text = [NSString stringWithFormat:@"%d",[packageProduct.product_num integerValue]-[packageProduct.unused_num integerValue]];
+            [useLab setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
             
             frame.origin.x = 257;
             frame.size.width = 80;
-            frame.origin.y = 78+30*i;
+            frame.origin.y = 74+30*i;
             useLab.frame = frame;
             [self.contentView addSubview:useLab];
             //剩余
@@ -104,10 +108,11 @@
             unuseLab.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:20];
             unuseLab.textColor = [UIColor whiteColor];
             unuseLab.text = packageProduct.unused_num;
+            [unuseLab setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin];
             
             frame.origin.x = 337;
             frame.size.width = 80;
-            frame.origin.y = 78+30*i;
+            frame.origin.y = 74+30*i;
             unuseLab.frame = frame;
             [self.contentView addSubview:unuseLab];
             
@@ -116,13 +121,14 @@
                 frame.origin.x = 417;
                 frame.size.width = 30;
                 frame.size.height = 30;
-                frame.origin.y = 78+30*i;
+                frame.origin.y = 74+30*i;
                 
                 UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 leftBtn.frame =frame;
                 leftBtn.tag = LeftBtnTag+i;
                 [leftBtn setImage:[UIImage imageNamed:@"product-add.png"] forState:UIControlStateNormal];
                 [leftBtn addTarget:self action:@selector(leftButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [leftBtn setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin];
                 [self.contentView addSubview:leftBtn];
                 
                 frame.origin.x = 447;
@@ -132,6 +138,7 @@
                 label.frame = frame;
                 label.tag = LabelTag +i;
                 label.text = [NSString stringWithFormat:@"%@",packageProduct.selected_num];
+                [label setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin];
                 [self.contentView addSubview:label];
                 
                 frame.origin.x = 477;
@@ -140,18 +147,22 @@
                 rightBtn.tag = RightBtnTag+i;
                 [rightBtn setImage:[UIImage imageNamed:@"product-reduce"] forState:UIControlStateNormal];
                 [rightBtn addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [rightBtn setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin];
                 [self.contentView addSubview:rightBtn];
             }
         }
     }
     return self;
 }
-
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+}
 //row_btnTag_套餐卡id_产品id_数量
 -(NSString *)returnStringWith:(int)btnTag
 {
     PackageCardProductModel *packageProduct = (PackageCardProductModel *)self.packageModel.productList[btnTag];
-    NSString *string = [NSString stringWithFormat:@"%d_%d_%@_%@_%@",self.idxPath.row,btnTag,self.packageModel.packageId,packageProduct.productId,packageProduct.selected_num];
+    NSString *string = [NSString stringWithFormat:@"%d_%d_%@_%@_%@",self.idxPath.row,btnTag,self.packageModel.cus_card_id,packageProduct.productId,packageProduct.selected_num];
     return string;
 }
 
@@ -171,7 +182,7 @@
     else
     {
         if ((count+1)>[packageProduct.unused_num intValue]) {
-            NSString *message = [NSString stringWithFormat:@"最多只能选择:%@",packageProduct.unused_num];
+            NSString *message = [NSString stringWithFormat:@"套餐卡最多只能选择:%@",packageProduct.unused_num];
             [Utility errorAlert:message dismiss:YES];
         }
         else
@@ -192,7 +203,7 @@
                     for (int i=0; i<[LTDataShare sharedService].packageOrderArray.count; i++) {
                         NSString *string = [LTDataShare sharedService].packageOrderArray[i];
                         NSArray *array = [string componentsSeparatedByString:@"_"];
-                        if ([array[2] intValue]==[self.packageModel.packageId intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
+                        if ([array[2] intValue]==[self.packageModel.cus_card_id intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
                             NSString *string2 = [self returnStringWith:(btn.tag-LeftBtnTag)];
                             [[LTDataShare sharedService].packageOrderArray replaceObjectAtIndex:i withObject:string2];
                             isExit = YES;
@@ -232,7 +243,7 @@
         for (int i=0; i<[LTDataShare sharedService].packageOrderArray.count; i++) {
             NSString *string = [LTDataShare sharedService].packageOrderArray[i];
             NSArray *array = [string componentsSeparatedByString:@"_"];
-            if ([array[2] intValue]==[self.packageModel.packageId intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
+            if ([array[2] intValue]==[self.packageModel.cus_card_id intValue] && [array[3] intValue]==[packageProduct.productId intValue]) {
                 if ((count-1)==0) {
                     [[LTDataShare sharedService].packageOrderArray removeObject:string];
                 }else {

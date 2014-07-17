@@ -31,6 +31,9 @@
 
 #import "LTMainViewController.h"
 
+#import "CustomerListModel.h"
+#import "PackageOrderModel.h"
+
 @interface LTServiceBillingViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,ServiceBillingPackageCellDelegate,KeyViewControllerDelegate,OrderViewControllerDelegate>
 
 @property (nonatomic, strong) AppDelegate *appDel;
@@ -76,4 +79,11 @@
 @property (nonatomic, strong) KeyViewController *keyViewController;
 
 @property (nonatomic, strong) LTMainViewController *mainViewControl;
+
+///滚动视图
+@property (nonatomic, strong) UIView *rollView;
+///滚动的按钮
+@property (nonatomic, strong) UILabel *rollLabel;
+///小按钮的滚动尺寸差值
+@property (nonatomic, assign) float rollSize;
 @end

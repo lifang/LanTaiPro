@@ -25,6 +25,19 @@
 {
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
+-(NSMutableArray *)popupedControllerArray{
+    if (!_popupedControllerArray) {
+        _popupedControllerArray = [NSMutableArray array];
+    }
+    return _popupedControllerArray;
+}
+
+-(NSMutableArray *)popupedWidthArray{
+    if (!_popupedWidthArray) {
+        _popupedWidthArray = [NSMutableArray array];
+    }
+    return _popupedWidthArray;
+}
 //登录页面
 - (void)showLogViewController
 {

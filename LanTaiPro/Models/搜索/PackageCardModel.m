@@ -17,6 +17,8 @@
               @"ended_at": mts_key(ended_at),
               @"is_new": mts_key(isNew),
               @"products": mts_key(productList),
+              @"cus_card_id": mts_key(cus_card_id),
+              
               };
 }
 

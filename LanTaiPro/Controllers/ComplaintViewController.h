@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblCarNum,*lblCode,*lblProduct;
 @property (nonatomic, weak) IBOutlet UITextView *reasonView,*requestView;
 @property (nonatomic, weak) IBOutlet UIButton *sureBtn,*cancleBtn;
+@property (nonatomic, assign) BOOL success;
 
 @property (nonatomic, strong) NSDictionary *infoDic;
 @end

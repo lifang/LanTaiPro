@@ -93,23 +93,21 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 50;
+    return 40;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc]initWithFrame:(CGRect){0,0,CGRectGetWidth(tableView.bounds),50}];
-    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"log-background.jpg"]];
+    UIView *headerView = [[UIView alloc]initWithFrame:(CGRect){0,0,CGRectGetWidth(tableView.bounds),40}];
+
+    UIImageView *ImgView = [[UIImageView alloc]initWithFrame:(CGRect){10,5,30,30}];
     
-    UIImageView *ImgView = [[UIImageView alloc]initWithFrame:(CGRect){10,10,30,30}];
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:(CGRect){50,10,200,30}];
-    label.textColor = [UIColor whiteColor];
+    UILabel *label = [[UILabel alloc]initWithFrame:(CGRect){50,0,200,40}];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HiraginoSansGB-W3" size:20];
+    label.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:20];
+    label.textColor = [UIColor colorWithRed:91./255 green:223./255 blue:243./255 alpha:1];
     
     UIButton *coverBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     coverBtn.frame = headerView.frame;
-    
     if (self.isAccept) {
         ImgView.image = [UIImage imageNamed:@"appoint-accept"];
         label.text = @"已受理预约单";
@@ -128,6 +126,8 @@
     
     [headerView addSubview:coverBtn];
     coverBtn = nil;
+    
+    [Utility setRoundcornerWithView:headerView];
     
     return headerView;
 }

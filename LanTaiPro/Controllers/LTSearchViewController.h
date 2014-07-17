@@ -19,7 +19,9 @@
 #import "WorkingOrderModel.h"
 #import "CustomerModel.h"
 
-@interface LTSearchViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate,SearchCustomViewDelegate,ComplaintDelegate>
+#import "OrderViewController.h"//订单确认 付款页面
+
+@interface LTSearchViewController : UIViewController<UITextFieldDelegate,XLCycleScrollViewDatasource,XLCycleScrollViewDelegate,SearchCustomViewDelegate,ComplaintDelegate,OrderViewControllerDelegate>
 
 @property (nonatomic, strong) LTMainViewController *mainViewControl;
 @property (nonatomic, strong) LTServiceBillingViewController *serviceViewControl;
@@ -40,8 +42,9 @@
 @property (nonatomic, strong) UIView *rollView;
 ///滚动的按钮
 @property (nonatomic, strong) UILabel *rollLabel;
-///滚动试图的高度
-@property (nonatomic, assign) float scrollHeight;
 ///小按钮的滚动尺寸差值
 @property (nonatomic, assign) float rollSize;
+
+
+@property(nonatomic,strong) void (^payFinish)(BOOL isFinish);
 @end

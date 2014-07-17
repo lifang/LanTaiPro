@@ -2942,28 +2942,28 @@ static WYPopoverTheme *defaultTheme_ = nil;
 
 #pragma mark Inline functions
 
-static NSString* WYStringFromOrientation(NSInteger orientation) {
-    NSString *result = @"Unknown";
-    
-    switch (orientation) {
-        case UIInterfaceOrientationPortrait:
-            result = @"Portrait";
-            break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-            result = @"Portrait UpsideDown";
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            result = @"Landscape Left";
-            break;
-        case UIInterfaceOrientationLandscapeRight:
-            result = @"Landscape Right";
-            break;
-        default:
-            break;
-    }
-    
-    return result;
-}
+//static NSString* WYStringFromOrientation(NSInteger orientation) {
+//    NSString *result = @"Unknown";
+//    
+//    switch (orientation) {
+//        case UIInterfaceOrientationPortrait:
+//            result = @"Portrait";
+//            break;
+//        case UIInterfaceOrientationPortraitUpsideDown:
+//            result = @"Portrait UpsideDown";
+//            break;
+//        case UIInterfaceOrientationLandscapeLeft:
+//            result = @"Landscape Left";
+//            break;
+//        case UIInterfaceOrientationLandscapeRight:
+//            result = @"Landscape Right";
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    return result;
+//}
 
 static float WYStatusBarHeight() {
     UIInterfaceOrientation orienation = [[UIApplication sharedApplication] statusBarOrientation];

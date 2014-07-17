@@ -9,8 +9,6 @@
 #import "LTSearchViewController.h"
 #import "UIViewController+MJPopupViewController.h"
 
-
-
 @interface LTSearchViewController ()
 
 @end
@@ -81,6 +79,11 @@
     self.searchView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.searchView.layer.borderWidth = 1;
     
+    [self.view addSubview:self.scrollView];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     //输入框添加观察者
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -93,12 +96,15 @@
     //监听键盘
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
-    [self.view addSubview:self.scrollView];
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.searchTextField];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"shaixuanFromSearchViewControl" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 //出现车牌选择框
 -(void)selectCarNumber {
@@ -201,7 +207,7 @@
         [Utility errorAlert:@"请输入车牌号码或者手机号码" dismiss:YES];
     }else {
         [self.searchTextField resignFirstResponder];
-        if (self.searchTextField.text != self.searchText){
+        if (![self.searchTextField.text isEqualToString:self.searchText]){
             if (self.appDel.isReachable==NO) {
                 [Utility errorAlert:@"请检查网络" dismiss:NO];
             }else{
@@ -211,7 +217,7 @@
                 NSString *carNumRegex = @"[\u4E00-\u9FFF]+[A-Za-z]{1}+[A-Z0-9a-z]{5}";
                 NSPredicate *carNumTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", carNumRegex];
                 if (![carNumTest evaluateWithObject:self.searchTextField.text]) {
-                    NSString *phoneRegex = @"((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))|(((\\+86)|(86))?+\\d{11})$)";
+                    NSString *phoneRegex = @"1[0-9]{10}";
                     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
                     if (![phoneTest evaluateWithObject:self.searchTextField.text]){
                         [Utility errorAlert:@"请输入正确的车牌号码或者手机号码!" dismiss:YES];
@@ -235,6 +241,7 @@
                     [params setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
                     [params setObject:self.searchTextField.text forKey:@"car_num"];
                     [params setObject:is_car_num forKey:@"is_car_num"];
+                    [params setObject:@"0" forKey:@"type"];//有进行中的订单
                     
                     [LTInterfaceBase request:params requestUrl:urlString method:@"GET" completeBlock:^(NSDictionary *dictionary){
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -311,7 +318,7 @@
 }
 
 #pragma mark - SearchCustomView代理
-
+//套餐卡下单
 - (void)dismisSearchCustomView:(SearchCustomView *)searchView
 {
     self.serviceViewControl = (LTServiceBillingViewController *)self.mainViewControl.childViewControllers[2];
@@ -341,7 +348,7 @@
     self.serviceViewControl.orderArray = orderArray;
     [self.serviceViewControl setPackageCardList:[LTDataShare sharedService].searchModel.packageCardList];
 }
-
+//投诉
 - (void)presentCompliantViewControlWithDictionary:(NSDictionary *)aDic
 {
     ComplaintViewController *complaintViewControl = [[ComplaintViewController alloc] initWithNibName:@"ComplaintViewController" bundle:nil];
@@ -349,69 +356,65 @@
     complaintViewControl.delegate = self;
     [complaintViewControl setInfoDic:aDic];
     
-    [complaintViewControl willMoveToParentViewController:self.mainViewControl];
     [self.mainViewControl addChildViewController:complaintViewControl];
     [complaintViewControl didMoveToParentViewController:self.mainViewControl];
     
-    [self presentPopupViewController:complaintViewControl animationType:MJPopupViewAnimationSlideBottomBottom width:80 ];
+    [self.mainViewControl presentPopupViewController:complaintViewControl animationType:MJPopupViewAnimationSlideBottomBottom width:80 ];
     
     complaintViewControl = nil;
 }
 
-//取消订单
--(void)cancelOrderWithOrderId:(NSString *)orderId
+//付款
+-(void)payOrderWithDic:(NSDictionary *)aDic finishBlock:(FinishCallBack)finishBlock
 {
-    if (self.appDel.isReachable==NO) {
-        BOOL success = NO;//记录添加本地是否成功
-        LTDB *db = [[LTDB alloc]init];
-        OrderModel *orderModel = [db getLocalOrderInfoWhereOid:orderId];
-        if (orderModel != nil){
-            orderModel.order_status = [NSString stringWithFormat:@"%d",0];
-            
-            success = [db updateOrderInfoWithOrder:orderModel WhereOid:orderId];
-        }else {
-             orderModel = [[OrderModel alloc]init];
-            orderModel.store_id = [LTDataShare sharedService].user.store_id;
-            orderModel.order_id =[NSString stringWithFormat:@"%@",orderId];
-            orderModel.order_status = [NSString stringWithFormat:@"%d",0];
-            
-            success = [db saveOrderDataToLocal:orderModel];
-        }
-        
-        if (success) {
-            [Utility errorAlert:@"订单已取消" dismiss:NO];
-        }else {
-            [Utility errorAlert:@"订单取消失败" dismiss:NO];
-        }
-    }else{
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        NSString *urlString = [NSString stringWithFormat:@"%@%@",[LTDataShare sharedService].user.kHost,kServiceBillingMakeOrder];
-        
-        NSMutableDictionary *paramas = [[NSMutableDictionary alloc] init];
-
-        [paramas setObject:[LTDataShare sharedService].user.store_id forKey:@"store_id"];
-        [paramas setObject:orderId forKey:@"order_id"];
-        
-        [LTInterfaceBase request:paramas requestUrl:urlString method:@"POST" completeBlock:^(NSDictionary *dictionary) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:NO];
-            });
-        } errorBlock:^(NSString *notice) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:NO];
-                [Utility errorAlert:notice dismiss:YES];
-            });
-        }];
-    }
+    self.payFinish = finishBlock;
+    
+    OrderViewController *orderViewControl = [[OrderViewController alloc]initWithNibName:@"OrderViewController" bundle:nil];
+    
+    orderViewControl.delegate = self;
+    
+    [orderViewControl loadData:aDic];
+    
+    [self.mainViewControl addChildViewController:orderViewControl];
+    [orderViewControl didMoveToParentViewController:self.mainViewControl];
+    
+    [self.mainViewControl presentPopupViewController:orderViewControl animationType:MJPopupViewAnimationSlideBottomTop width:80];
 }
+
 #pragma mark - 投诉页面代理
 -(void)dismissComplaintViewControl:(ComplaintViewController *)complaintViewController
 {
     __block ComplaintViewController *viewControl = complaintViewController;
     [self.mainViewControl dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop dismissBlock:^(BOOL isFinish){
         
+        [viewControl willMoveToParentViewController:nil];
         [viewControl removeFromParentViewController];
         viewControl = nil;
+    }];
+}
+
+#pragma mark - 订单页面代理
+-(void)dismissOrderViewController:(OrderViewController *)orderViewController
+{
+    __block OrderViewController *orderViewControl = orderViewController;
+    [self.mainViewControl dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop dismissBlock:^(BOOL isFinish){
+        if (orderViewControl.order_type == 0) {
+            if (self.payFinish) {
+                self.payFinish(YES);
+            }
+            [Utility errorAlert:@"订单已取消" dismiss:YES];
+        }else if (orderViewControl.order_type == 1){
+            [Utility errorAlert:@"订单已确认，请到收银台付款" dismiss:NO];
+        }else if (orderViewControl.order_type == 2){
+            if (self.payFinish) {
+                self.payFinish(YES);
+            }
+            [Utility errorAlert:@"订单付款成功" dismiss:YES];
+        }
+        
+        [orderViewControl willMoveToParentViewController:nil];
+        [orderViewControl removeFromParentViewController];
+        orderViewControl = nil;
     }];
 }
 @end

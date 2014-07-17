@@ -18,4 +18,7 @@
 +(void)shakeViewHorizontal:(UIView*)viewToShake;
 +(void)shakeViewVertical:(UIView*)viewToShake;
 +(void)setLogoImageWithTable:(UITableView *)table;
++(CGSize)getSizeWithString:(NSString *)str withWidth:(int)width;
+
++(void)setRoundcornerWithView:(UIView *)view;
 @end

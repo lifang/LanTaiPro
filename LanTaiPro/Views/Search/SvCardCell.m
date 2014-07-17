@@ -26,6 +26,8 @@
 {
     UILabel *label = [[UILabel alloc]init];
     label.textAlignment = NSTextAlignmentCenter;
+    label.numberOfLines = 0;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor colorWithRed:91./255 green:223./255 blue:243./255 alpha:1];
     label.font = [UIFont fontWithName:@"HiraginoSansGB-W6" size:15];
@@ -67,7 +69,7 @@
             SvCardProductModel *svProduct = (SvCardProductModel *)svCard.recordList[i];
             //卡内金额
             UILabel *totalPriceLab = [self returnlabel];
-            totalPriceLab.text = [NSString stringWithFormat:@"%.2f",[svProduct.origin_price floatValue]];
+            totalPriceLab.text = [NSString stringWithFormat:@"%.2f",[svProduct.use_price floatValue]+[svProduct.left_price floatValue]];
             
             frame.origin.x = 151;
             frame.size.width =90;

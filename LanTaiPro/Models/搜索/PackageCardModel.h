@@ -16,5 +16,5 @@
 @property (nonatomic, strong) NSString *ended_at;
 @property (nonatomic, strong) NSString *isNew;
 @property (nonatomic, strong) NSMutableArray *productList;
-
+@property (nonatomic, strong) NSString *cus_card_id;//套餐卡与客户关联id
 @end

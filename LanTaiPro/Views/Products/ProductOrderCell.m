@@ -35,7 +35,6 @@
         
         self.backgroundColor = [UIColor clearColor];
         
-        
         self.objectModel = object;
         self.type = type;
         if (type==0 || type==1) {

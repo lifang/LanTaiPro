@@ -32,8 +32,10 @@
 
 ///车品牌
 @property (nonatomic, strong) NSString * customer_brandName;//
+@property (nonatomic, strong) NSString * customer_brandId;
 ///车型号
 @property (nonatomic, strong) NSString * customer_modelName;//
+@property (nonatomic, strong) NSString * customer_modelId;
 ///车id
 @property (nonatomic, strong) NSString * customer_carNumId;//
 ///车牌

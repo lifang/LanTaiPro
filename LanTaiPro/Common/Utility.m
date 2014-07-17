@@ -131,4 +131,24 @@
     imgView = nil;view=nil;
 }
 
+#pragma mark - 获取文本高度
++(CGSize)getSizeWithString:(NSString *)str withWidth:(int)width
+{
+    UIFont *aFont = [UIFont fontWithName:@"HiraginoSansGB-W6" size:15];
+    CGSize size = [str sizeWithFont:aFont constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+    return size;
+}
+
+#pragma mark - TableView的section header 左上角和右上角变圆角
++(void)setRoundcornerWithView:(UIView *)view
+{
+    view.backgroundColor = [UIColor colorWithRed:102/255.0 green:117/255.0 blue:155/255.0 alpha:1];
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(4, 4)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = view.bounds;
+    maskLayer.path = maskPath.CGPath;
+    view.layer.mask = maskLayer;
+}
+
 @end
